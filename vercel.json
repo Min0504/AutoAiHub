@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "vite build && esbuild api/index.src.ts --bundle --platform=node --format=cjs --external:@google/genai --external:express --external:dotenv --external:uuid --outfile=api/index.js",
+  "buildCommand": "vite build && esbuild api/index.src.ts --bundle --platform=node --format=cjs --outfile=api/index.js",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
