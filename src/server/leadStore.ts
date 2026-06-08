@@ -12,7 +12,9 @@ export type LeadRecord = {
   readonly payload: Readonly<Record<string, unknown>>;
 };
 
-const leadsDirectory = process.env.LEADS_DIR ?? path.join(process.cwd(), "data");
+// Serverless runtimes (Vercel lambda) have a read-only filesystem except /tmp
+const defaultLeadsDir = process.env.VERCEL ? "/tmp/autohub-leads" : path.join(process.cwd(), "data");
+const leadsDirectory = process.env.LEADS_DIR ?? defaultLeadsDir;
 const leadsFile = process.env.LEADS_FILE ?? path.join(leadsDirectory, "leads.jsonl");
 
 function isSupabaseConfigured(): boolean {
