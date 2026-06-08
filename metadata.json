@@ -1,0 +1,8 @@
+{
+  "name": "AutoHub AI",
+  "description": "업무 자동화 및 AI 에이전트 툴 비교 포털 - 1:1 비교, 비용 절감 및 ROI 계산기, Gemini API 기반 워크플로우 설계와 B2B 견적 리드 저장 제공",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
