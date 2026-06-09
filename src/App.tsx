@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TOOLS, CATEGORIES, Tool } from "./data/tools";
 import Header from "./components/Header";
 import ToolCard from "./components/ToolCard";
@@ -12,6 +12,7 @@ import { Search, SlidersHorizontal, Check, Trash2, ArrowRight, Stars, Globe, Awa
 import PrivacyPolicyModal from "./components/PrivacyPolicyModal";
 import AffiliateBanner from "./components/AffiliateBanner";
 import { ToastProvider, useToast } from "./components/Toast";
+import { useSeoMeta } from "./hooks/useSeoMeta";
 
 function AppInner() {
   const { showToast } = useToast();
@@ -25,6 +26,25 @@ function AppInner() {
   const [activeModalTool, setActiveModalTool] = useState<Tool | null>(null);
   const [compareShelf, setCompareShelf] = useState<Tool[]>([]);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState<boolean>(false);
+
+  // URL 파라미터로 접속 시 해당 툴 자동 오픈 (?tool=n8n 등)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const slugFromUrl = params.get("tool");
+    if (slugFromUrl) {
+      const found = TOOLS.find((t) => t.slug === slugFromUrl);
+      if (found) setActiveModalTool(found);
+    }
+  }, []);
+
+  // SEO 메타 자동 업데이트
+  useSeoMeta({
+    toolSlug: activeModalTool?.slug ?? null,
+    toolName: activeModalTool?.name ?? null,
+    toolSlogan: activeModalTool?.slogan ?? null,
+    toolBestFor: activeModalTool?.bestFor ?? null,
+    activeTab,
+  });
 
   // Category change wrapper
   const handleCategoryChange = (catId: string) => {
