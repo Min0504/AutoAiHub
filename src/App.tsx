@@ -6,10 +6,11 @@ import ToolDetailModal from "./components/ToolDetailModal";
 import CompareSection from "./components/CompareSection";
 import CalculatorSection from "./components/CalculatorSection";
 import AIScenarioBuilder from "./components/AIScenarioBuilder";
-import AIChatBot from "./components/AIChatBot";
 import ConsultingSection from "./components/ConsultingSection";
+import AIChatBot from "./components/AIChatBot";
 import { Search, SlidersHorizontal, Check, Trash2, ArrowRight, Stars, Globe, Award, ShieldCheck, Cpu, ArrowUpDown } from "lucide-react";
 import PrivacyPolicyModal from "./components/PrivacyPolicyModal";
+import AffiliateBanner from "./components/AffiliateBanner";
 import { ToastProvider, useToast } from "./components/Toast";
 
 function AppInner() {
@@ -152,7 +153,7 @@ function AppInner() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
               {/* Left Sidebar Categories (from Sleek Interface Theme) */}
-              <aside className="lg:col-span-3 bg-white border border-slate-200 rounded-3xl p-6 flex flex-col gap-8 shadow-sm lg:sticky lg:top-20">
+              <aside className="lg:col-span-3 bg-white border border-slate-200 rounded-3xl p-6 flex flex-col gap-8 shadow-sm">
                 <div>
                   <h3 className="text-xs uppercase tracking-wider text-slate-400 font-black mb-4">Categories</h3>
                   <ul className="space-y-3.5">
@@ -179,6 +180,9 @@ function AppInner() {
                     })}
                   </ul>
                 </div>
+
+                {/* 제휴 배너 */}
+                <AffiliateBanner />
 
                 {/* Nice launch recommendation box */}
                 <div className="border-t border-slate-150 pt-5">
@@ -207,10 +211,11 @@ function AppInner() {
                       원하는 도구 2개를 담아 1:1 라이벌 비교를 시작해 보세요!
                     </p>
                     <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
-                      각 AI 툴 카드 우측 상단의 <strong>‘비교 추가’</strong> 버튼을 선택하면 대기 분석함에 자동 저장되며, 언제든지 정밀 비교 및 ROI 분석 혜택을 체감하실 수 있습니다.
+                      각 AI 툴 카드 우측 상단의 <strong>’비교 추가’</strong> 버튼을 선택하면 대기 분석함에 자동 저장되며, 언제든지 정밀 비교 및 ROI 분석 혜택을 체감하실 수 있습니다.
                     </p>
                   </div>
                 </div>
+
               </aside>
 
               {/* Right Content Area containing Search, active description and tool cards */}

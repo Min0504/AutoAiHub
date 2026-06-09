@@ -32,7 +32,7 @@ export function registerSitemapRoute(app: Express): void {
   app.get("/sitemap.xml", (req, res) => {
     const siteUrl =
       process.env.APP_URL ||
-      `${req.protocol}://${req.get("host")}`;
+      `https://${req.get("host")}`;
 
     res.setHeader("Content-Type", "application/xml; charset=utf-8");
     res.setHeader("Cache-Control", "public, max-age=86400");
