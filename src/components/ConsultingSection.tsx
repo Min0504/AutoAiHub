@@ -3,7 +3,6 @@ import { useState } from "react";
 import { DollarSign, FileText, Sparkles, Building2, User2, MessageSquare } from "lucide-react";
 import { trackProposalSubmit } from "../lib/analytics";
 import { TOOLS } from "../data/tools";
-import { PartnerProgramsPanel } from "./consulting/PartnerProgramsPanel";
 import { ProposalActions } from "./consulting/ProposalActions";
 import { isProposal, type Proposal } from "./consulting/types";
 
@@ -393,8 +392,6 @@ export default function ConsultingSection() {
                   Gemini 브레인이 구축 난이도, 일정, 설계 단계, 개발 인건비 견적을 시뮬레이션합니다.
                 </p>
               </div>
-
-              <PartnerProgramsPanel />
 
             </div>
           )}

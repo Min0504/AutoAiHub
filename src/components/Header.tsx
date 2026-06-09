@@ -26,7 +26,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
   return (
     <>
       <header id="app-header" className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm">
-        <div className="mx-auto flex max-w-7xl h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Logo */}
           <div
@@ -45,7 +45,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
           </div>
 
           {/* Desktop Tabs */}
-          <nav id="nav-tabs" className="hidden lg:flex items-center gap-1 h-full text-sm font-medium text-slate-500 overflow-x-auto">
+          <nav id="nav-tabs" className="hidden lg:flex items-center gap-1 h-full font-medium text-slate-500 overflow-x-auto">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -53,7 +53,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                   key={tab.id}
                   id={`tab-button-${tab.id}`}
                   onClick={() => handleTabClick(tab.id)}
-                  className={`h-full border-b-2 py-4 px-3 font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap text-xs ${
+                  className={`h-full border-b-2 py-4 px-4 font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap text-sm ${
                     isActive
                       ? "border-indigo-600 text-indigo-600 font-bold"
                       : "border-transparent hover:text-slate-900 hover:border-slate-200"

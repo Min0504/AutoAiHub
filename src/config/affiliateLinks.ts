@@ -3,8 +3,8 @@
  *
  * 실제 제휴 코드 발급 후 아래 TODO 주석을 실제 링크로 교체하세요.
  *
- * Make 제휴 신청: https://www.make.com/en/affiliate-program  (커미션 35%, 12개월)
- * n8n 제휴 신청:  https://n8n.io/affiliates/                  (커미션 30%, 12개월)
+ * Make 제휴 신청: https://www.make.com/en/affiliate  (커미션 35%, 12개월 / Make 계정 있으면 바로 신청 가능)
+ * n8n 제휴:      ❌ 거절됨 (2026-06-09) — 재신청 또는 다른 제휴사 검토
  * Zapier 파트너:  https://zapier.com/l/partners/
  */
 
@@ -16,12 +16,10 @@ function utm(base: string): string {
 }
 
 export const AFFILIATE_LINKS: Record<string, string> = {
-  // ✅ UTM 추적 활성 — 제휴 코드 발급 후 URL을 아래 TODO로 교체
+  // ❌ n8n 제휴 거절됨 — 배너에서 제외, 일반 UTM 링크만 유지
   n8n: utm("https://n8n.io/"),
-  // TODO n8n: utm("https://n8n.partnerlinks.io/YOUR_CODE"),
 
-  make: utm("https://www.make.com/"),
-  // TODO make: utm("https://www.make.com/en/register?pc=YOUR_CODE"),
+  make: utm("https://www.make.com/?pc=autohubai"),
 
   zapier: utm("https://zapier.com/"),
   // TODO zapier: utm("https://zapier.com/?referral=YOUR_CODE"),

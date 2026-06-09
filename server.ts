@@ -3,22 +3,21 @@
  * Handles: /api/*, /sitemap.xml
  * Static frontend is served by Vercel CDN from dist/
  */
-import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import dotenv from "dotenv";
 import express from "express";
-import { registerGeminiRoutes } from "./src/server/geminiRoutes";
+import { registerAiRoutes } from "./src/server/aiRoutes";
 import { registerLeadRoutes } from "./src/server/leadRoutes";
 import { registerSitemapRoute } from "./src/server/sitemapRoute";
 
+// Load .env.local first (local dev), then .env as fallback
+dotenv.config({ path: ".env.local" });
 dotenv.config();
 
-const geminiModel = process.env.GEMINI_MODEL ?? "gemini-2.0-flash";
+const groqModel = process.env.GROQ_MODEL ?? "llama-3.3-70b-versatile";
 
-const ai = process.env.GEMINI_API_KEY
-  ? new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY,
-      httpOptions: { headers: { "User-Agent": "autohub-ai" } },
-    })
+const groq = process.env.GROQ_API_KEY
+  ? new Groq({ apiKey: process.env.GROQ_API_KEY })
   : null;
 
 const app = express();
@@ -26,7 +25,15 @@ app.use(express.json({ limit: "64kb" }));
 
 registerSitemapRoute(app);
 registerLeadRoutes(app);
-registerGeminiRoutes(app, ai, geminiModel);
+registerAiRoutes(app, groq, groqModel);
 
 // Export for Vercel serverless runtime (no app.listen)
 export default app;
+
+// Local dev: listen when not running inside Vercel
+if (!process.env.VERCEL) {
+  const PORT = Number(process.env.PORT ?? 3001);
+  app.listen(PORT, () => {
+    console.log(`[dev] API server → http://localhost:${PORT}`);
+  });
+}
