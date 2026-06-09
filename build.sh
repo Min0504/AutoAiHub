@@ -36,7 +36,6 @@ cat > ".vercel/output/config.json" << 'EOF'
   "version": 3,
   "routes": [
     { "src": "^/api(/.*)?$", "dest": "/api/index" },
-    { "src": "^/sitemap\\.xml$", "dest": "/api/index" },
     { "handle": "filesystem" },
     { "src": "^/(.*)$", "dest": "/index.html" }
   ]
