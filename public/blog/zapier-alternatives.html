@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://autohub-ai.vercel.app/blog/zapier-alternatives.html" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Zapier 무료 대안 TOP 5 — 돈 안 쓰고 업무 자동화하는 법 (2025)" />
-  <meta property="og:description" content="Make, n8n, Activepieces 등 Zapier 대안 5가지를 비교합니다. 비용 0원으로 자동화 시작하세요." />
+  <meta property="og:description" content="Make, n8n, Activepieces 등 Zapier 대안 5가지를 비교합니다." />
   <meta property="og:url" content="https://autohub-ai.vercel.app/blog/zapier-alternatives.html" />
   <meta property="og:image" content="https://autohub-ai.vercel.app/og-image.png" />
   <meta property="og:site_name" content="AutoHub AI" />
@@ -36,455 +36,329 @@
   </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
     body {
-      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0f0f23;
-      color: #e2e8f0;
-      line-height: 1.8;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      line-height: 1.85;
     }
-    a { color: #818cf8; text-decoration: none; }
+    a { color: #2563eb; text-decoration: none; }
     a:hover { text-decoration: underline; }
     nav {
-      background: rgba(15,15,35,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #1e1b4b;
+      border-bottom: 1px solid #e5e7eb;
       padding: 0 24px;
-      height: 60px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: #fff;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    .nav-logo { font-weight: 800; font-size: 18px; color: #fff; display: flex; align-items: center; gap: 8px; }
-    .nav-logo span { color: #818cf8; }
-    .nav-links { display: flex; gap: 24px; font-size: 14px; color: #94a3b8; }
-    .nav-links a { color: #94a3b8; }
-    .nav-cta {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: #fff !important;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 13px;
-    }
-    .hero { max-width: 800px; margin: 0 auto; padding: 60px 24px 40px; }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(99,102,241,0.15);
-      border: 1px solid rgba(99,102,241,0.3);
-      color: #818cf8;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 16px; }
-    .subtitle { font-size: 17px; color: #94a3b8; margin-bottom: 28px; }
-    .meta { display: flex; gap: 20px; font-size: 13px; color: #64748b; padding-bottom: 28px; border-bottom: 1px solid #1e1b4b; }
-    .content { max-width: 800px; margin: 0 auto; padding: 40px 24px 80px; }
-    h2 { font-size: 24px; font-weight: 700; color: #fff; margin: 48px 0 16px; padding-left: 14px; border-left: 4px solid #6366f1; }
-    h3 { font-size: 18px; font-weight: 700; color: #c7d2fe; margin: 28px 0 10px; }
-    p { margin-bottom: 16px; color: #cbd5e1; }
-    ul, ol { margin: 12px 0 20px 20px; color: #cbd5e1; }
-    li { margin-bottom: 8px; }
-    strong { color: #e2e8f0; font-weight: 700; }
-    .table-wrap { overflow-x: auto; margin: 24px 0 32px; border-radius: 16px; border: 1px solid #1e1b4b; }
+    .nav-logo { font-weight: 800; font-size: 17px; color: #111; display: flex; align-items: center; gap: 6px; }
+    .nav-logo .dot { color: #2563eb; }
+    .nav-links { display: flex; gap: 28px; font-size: 14px; }
+    .nav-links a { color: #6b7280; }
+    .nav-links a:hover { color: #111; text-decoration: none; }
+    .nav-cta { background: #111; color: #fff !important; padding: 7px 16px; border-radius: 7px; font-weight: 600; font-size: 13px; }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 56px 24px 100px; }
+    .article-category { font-size: 13px; font-weight: 600; color: #2563eb; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; color: #111; line-height: 1.25; letter-spacing: -0.5px; margin-bottom: 18px; }
+    .lead { font-size: 18px; color: #4b5563; line-height: 1.7; margin-bottom: 24px; }
+    .article-meta { display: flex; gap: 16px; font-size: 13px; color: #9ca3af; padding-bottom: 32px; border-bottom: 1px solid #e5e7eb; margin-bottom: 40px; }
+    h2 { font-size: 22px; font-weight: 700; color: #111; margin: 52px 0 14px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; color: #374151; margin: 32px 0 10px; }
+    p { margin-bottom: 20px; color: #374151; font-size: 16px; }
+    ul, ol { margin: 12px 0 24px 20px; color: #374151; font-size: 16px; }
+    li { margin-bottom: 10px; line-height: 1.7; }
+    strong { color: #111; font-weight: 700; }
+    .table-wrap { overflow-x: auto; margin: 28px 0 36px; border-radius: 10px; border: 1px solid #e5e7eb; }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    thead { background: #1e1b4b; }
-    th { padding: 14px 16px; text-align: left; color: #a5b4fc; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-    td { padding: 14px 16px; border-top: 1px solid #1e1b4b; vertical-align: top; }
-    tr:hover td { background: rgba(99,102,241,0.05); }
-    .win { color: #4ade80; font-weight: 600; }
-    .mid { color: #fbbf24; font-weight: 600; }
-    .low { color: #f87171; font-weight: 600; }
+    thead { background: #f9fafb; }
+    th { padding: 12px 16px; text-align: left; color: #6b7280; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 13px 16px; border-top: 1px solid #f3f4f6; color: #374151; font-size: 14px; vertical-align: top; }
+    tr:hover td { background: #f9fafb; }
+    .g { color: #16a34a; font-weight: 600; }
+    .y { color: #d97706; font-weight: 600; }
+    .r { color: #dc2626; font-weight: 600; }
+    .callout { background: #f0f9ff; border-left: 3px solid #2563eb; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 28px 0; }
+    .callout p { color: #1e40af; margin: 0; font-size: 15px; }
 
-    /* Tool Card */
-    .tool-card {
-      background: #1a1733;
-      border: 1px solid #312e81;
-      border-radius: 20px;
+    /* Tool section */
+    .tool-section {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
       padding: 28px;
-      margin: 28px 0;
+      margin: 32px 0;
     }
-    .tool-card-header {
+    .tool-header {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 8px;
     }
-    .tool-name { font-size: 22px; font-weight: 800; color: #fff; }
-    .rank-badge {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: #fff;
-      padding: 4px 14px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .free-badge {
-      background: rgba(74,222,128,0.15);
-      border: 1px solid rgba(74,222,128,0.3);
-      color: #4ade80;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .tool-desc { color: #94a3b8; margin-bottom: 16px; font-size: 15px; }
-    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-    @media (max-width: 600px) { .pros-cons { grid-template-columns: 1fr; } }
-    .pros h4 { color: #4ade80; font-size: 13px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .cons h4 { color: #f87171; font-size: 13px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .tool-title { font-size: 20px; font-weight: 800; color: #111; }
+    .tool-price-tag { font-size: 13px; font-weight: 600; color: #16a34a; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 3px 10px; border-radius: 20px; }
+    .tool-summary { font-size: 15px; color: #4b5563; margin-bottom: 16px; line-height: 1.7; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #f3f4f6; }
+    @media (max-width: 560px) { .pros-cons { grid-template-columns: 1fr; } }
+    .pros-label { font-size: 12px; font-weight: 700; color: #16a34a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .cons-label { font-size: 12px; font-weight: 700; color: #dc2626; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
     .pros ul, .cons ul { margin: 0; padding-left: 16px; }
-    .pros li, .cons li { font-size: 13px; color: #cbd5e1; margin-bottom: 4px; }
-    .tool-price { margin-top: 16px; padding-top: 14px; border-top: 1px solid #1e1b4b; font-size: 14px; color: #a5b4fc; font-weight: 600; }
-    .tool-link-btn {
-      display: inline-block;
-      margin-top: 14px;
-      background: rgba(99,102,241,0.15);
-      border: 1px solid rgba(99,102,241,0.3);
-      color: #a5b4fc !important;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none !important;
-    }
-    .highlight {
-      background: rgba(79,70,229,0.12);
-      border-left: 4px solid #6366f1;
-      padding: 16px 20px;
-      border-radius: 0 12px 12px 0;
-      margin: 20px 0;
-    }
-    .highlight p { color: #c7d2fe; margin: 0; }
-    .cta-box {
-      background: linear-gradient(135deg, rgba(79,70,229,0.2), rgba(124,58,237,0.2));
-      border: 1px solid rgba(99,102,241,0.4);
-      border-radius: 16px;
-      padding: 28px;
-      margin: 36px 0;
-      text-align: center;
-    }
-    .cta-box p { color: #c7d2fe; margin-bottom: 16px; }
-    .cta-btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: #fff !important;
-      padding: 12px 28px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none !important;
-    }
-    footer { border-top: 1px solid #1e1b4b; padding: 40px 24px; text-align: center; color: #475569; font-size: 13px; }
-    footer a { color: #6366f1; }
+    .pros li, .cons li { font-size: 14px; color: #374151; margin-bottom: 5px; }
+
+    blockquote { border-left: 3px solid #e5e7eb; padding: 4px 20px; margin: 24px 0; color: #6b7280; font-style: italic; font-size: 15px; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 44px 0; }
+    .bottom-cta { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 28px 32px; margin: 48px 0 0; text-align: center; }
+    .bottom-cta p { color: #374151; margin-bottom: 16px; font-size: 15px; }
+    .bottom-cta a { display: inline-block; background: #111; color: #fff !important; padding: 11px 24px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none !important; }
+    .related { margin-top: 48px; padding-top: 32px; border-top: 1px solid #e5e7eb; font-size: 14px; color: #6b7280; }
+    .related a { color: #2563eb; }
+    footer { border-top: 1px solid #e5e7eb; padding: 32px 24px; text-align: center; color: #9ca3af; font-size: 13px; }
+    footer a { color: #6b7280; }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="https://autohub-ai.vercel.app" class="nav-logo">⚡ AutoHub <span>AI</span></a>
+  <a href="https://autohub-ai.vercel.app" class="nav-logo">AutoHub<span class="dot">.</span>AI</a>
   <div class="nav-links">
     <a href="https://autohub-ai.vercel.app">툴 비교</a>
-    <a href="https://autohub-ai.vercel.app/blog/">블로그</a>
-    <a href="https://autohub-ai.vercel.app" class="nav-cta">ROI 계산기 →</a>
+    <a href="/blog/">블로그</a>
+    <a href="https://autohub-ai.vercel.app" class="nav-cta">ROI 계산기</a>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="badge">💸 비용 절감 가이드</div>
-  <h1>Zapier 무료 대안 TOP 5<br>돈 안 쓰고 업무 자동화하는 법 (2025)</h1>
-  <p class="subtitle">Zapier 요금이 부담스럽거나 더 저렴한 대안을 찾고 있다면? 실제로 Zapier를 대체할 수 있는 5가지 툴을 상세하게 비교합니다.</p>
-  <div class="meta">
-    <span>✍️ AutoHub AI</span>
-    <span>📅 2025년 6월 업데이트</span>
-    <span>⏱️ 읽기 약 7분</span>
-  </div>
-</div>
+<div class="wrap">
 
-<div class="content">
-
-  <p>Zapier는 2011년 출시 이후 업무 자동화의 대명사가 됐지만, 가격이 문제입니다. 월 750개 작업에 $19.99, 2,000개 작업에 $49 — 대부분의 SMB에게는 부담스러운 수준입니다. 더군다나 한국어 지원도 없습니다.</p>
-
-  <p>다행히 Zapier를 충분히 대체하거나 오히려 능가하는 무료·저가 툴들이 있습니다. 이 글에서 실제로 써본 5가지 대안을 순위별로 정리합니다.</p>
-
-  <div class="highlight">
-    <p>💡 <strong>결론 먼저:</strong> 일반 자동화는 <strong>Make</strong>가 최고의 Zapier 대안입니다. 개발 경험이 있고 완전 무료를 원한다면 <strong>n8n 셀프호스팅</strong>이 정답입니다.</p>
+  <div class="article-category">비용 절감 가이드</div>
+  <h1>Zapier 무료 대안 TOP 5<br>돈 안 쓰고 자동화하는 법 (2025)</h1>
+  <p class="lead">Zapier는 훌륭한 툴이지만 가격이 문제입니다. 같은 일을 훨씬 저렴하게, 혹은 완전 무료로 할 수 있는 대안들을 실제 사용 경험 기반으로 정리했습니다.</p>
+  <div class="article-meta">
+    <span>AutoHub AI</span>
+    <span>2025년 6월</span>
+    <span>읽기 약 7분</span>
   </div>
 
-  <h2>한눈에 비교</h2>
+  <p>Zapier를 쓰다 보면 어느 순간 요금 고지서가 부담스러워지는 순간이 옵니다. 자동화가 잘 돌아가기 시작하면 그만큼 작업 수가 늘어나고, 슬그머니 $49, $99/월로 올라갑니다. 한국 사용자라면 여기에 환율까지 더해집니다.</p>
+
+  <p>Zapier를 대체할 수 있는 툴은 생각보다 많습니다. 그중에서 실제로 써봤거나, 검증된 사용자 후기가 충분한 5가지를 추렸습니다. 단순히 "싸다"는 기준이 아니라, 실제로 Zapier가 하는 일을 대부분 커버할 수 있는지를 기준으로 골랐습니다.</p>
+
+  <h2>요약 비교표</h2>
 
   <div class="table-wrap">
     <table>
       <thead>
-        <tr>
-          <th>툴</th>
-          <th>무료 한도</th>
-          <th>유료 시작가</th>
-          <th>코딩 필요</th>
-          <th>Zapier 대비</th>
-        </tr>
+        <tr><th>툴</th><th>무료 한도</th><th>유료 시작가</th><th>코딩 필요</th><th>추천 대상</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>Make</strong></td>
-          <td class="win">월 1,000 오퍼레이션</td>
-          <td class="win">$9/월</td>
-          <td class="win">불필요</td>
-          <td class="win">5~10배 저렴</td>
-        </tr>
-        <tr>
-          <td><strong>n8n</strong></td>
-          <td class="win">셀프호스팅 무제한</td>
-          <td class="win">$20/월 (클라우드)</td>
-          <td class="mid">권장</td>
-          <td class="win">사실상 무료</td>
-        </tr>
-        <tr>
-          <td><strong>Activepieces</strong></td>
-          <td class="win">오픈소스 무제한</td>
-          <td class="win">$9/월</td>
-          <td class="win">불필요</td>
-          <td class="win">유사 UI, 훨씬 저렴</td>
-        </tr>
-        <tr>
-          <td><strong>Pipedream</strong></td>
-          <td class="mid">월 333 워크플로우</td>
-          <td class="win">$29/월</td>
-          <td class="low">코딩 위주</td>
-          <td class="mid">개발자 특화</td>
-        </tr>
-        <tr>
-          <td><strong>Power Automate</strong></td>
-          <td class="mid">Microsoft 365 포함</td>
-          <td class="mid">$15/월</td>
-          <td class="win">불필요</td>
-          <td class="mid">MS 생태계 특화</td>
-        </tr>
+        <tr><td><strong>Make</strong></td><td class="g">월 1,000 오퍼레이션</td><td class="g">$9/월</td><td class="g">불필요</td><td>대부분의 팀</td></tr>
+        <tr><td><strong>n8n</strong></td><td class="g">셀프호스팅 무제한</td><td class="g">$20/월</td><td class="y">권장</td><td>개발자, 스타트업</td></tr>
+        <tr><td><strong>Activepieces</strong></td><td class="g">오픈소스 무제한</td><td class="g">$9/월</td><td class="g">불필요</td><td>Zapier UI 선호</td></tr>
+        <tr><td><strong>Pipedream</strong></td><td class="y">월 333 실행</td><td class="y">$29/월</td><td class="r">코딩 위주</td><td>개발자</td></tr>
+        <tr><td><strong>Power Automate</strong></td><td class="y">M365 포함</td><td class="y">$15/월</td><td class="g">불필요</td><td>Microsoft 사용자</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h2>1위 — Make (구 Integromat)</h2>
+  <h2>1. Make — 가장 현실적인 Zapier 대안</h2>
 
-  <div class="tool-card">
-    <div class="tool-card-header">
-      <div class="tool-name">⚙️ Make</div>
-      <div style="display:flex;gap:8px">
-        <span class="rank-badge"># 1 추천</span>
-        <span class="free-badge">무료 플랜</span>
-      </div>
+  <div class="tool-section">
+    <div class="tool-header">
+      <div class="tool-title">Make (구 Integromat)</div>
+      <span class="tool-price-tag">무료 플랜 · 유료 $9/월~</span>
     </div>
-    <p class="tool-desc">Zapier를 대체하는 가장 현실적인 선택지. 버블(Bubble) 형태의 직관적인 UI로 비개발자도 쉽게 사용할 수 있으며, 데이터 변환 기능이 특히 강력합니다.</p>
+    <p class="tool-summary">Zapier에서 넘어오는 사람들이 가장 많이 선택하는 툴입니다. 비슷한 기능을 5~10배 저렴하게 쓸 수 있고, 비개발자도 30분이면 첫 자동화를 만들 수 있습니다.</p>
     <div class="pros-cons">
       <div class="pros">
-        <h4>✅ 장점</h4>
+        <div class="pros-label">좋은 점</div>
         <ul>
           <li>Zapier 대비 5~10배 저렴</li>
           <li>1,500개+ 앱 연동</li>
-          <li>무료 플랜 월 1,000 오퍼레이션</li>
-          <li>데이터 변환·필터 기능 강력</li>
+          <li>무료 월 1,000 오퍼레이션</li>
+          <li>데이터 변환 기능 강력</li>
           <li>조건 분기, 루프 지원</li>
         </ul>
       </div>
       <div class="cons">
-        <h4>❌ 단점</h4>
+        <div class="cons-label">아쉬운 점</div>
         <ul>
-          <li>오퍼레이션 카운팅 방식이 복잡</li>
+          <li>오퍼레이션 계산 방식 복잡</li>
           <li>셀프호스팅 불가</li>
           <li>처음엔 UI가 낯설 수 있음</li>
         </ul>
       </div>
     </div>
-    <div class="tool-price">💰 무료: 월 1,000 오퍼레이션 | 유료: $9/월부터 (10,000 오퍼레이션)</div>
-    <a href="https://www.make.com/?pc=autohubai" target="_blank" rel="noopener" class="tool-link-btn">Make 무료로 시작하기 →</a>
-    <a href="https://autohub-ai.vercel.app/?tool=make" class="tool-link-btn" style="margin-left:8px">Make 상세 리뷰 →</a>
   </div>
 
-  <p>Make는 2024년 기준 월간 활성 사용자 500만 명을 넘긴 플랫폼입니다. Zapier에서 Make로 전환하는 사례가 많아지면서 공식 마이그레이션 가이드도 제공하고 있습니다.</p>
+  <p>Make의 시나리오 빌더는 버블(원)을 선으로 연결하는 방식인데, 처음엔 낯설지만 익숙해지면 Zapier보다 오히려 한눈에 파악하기 쉽습니다. 특히 하나의 트리거에서 여러 경로로 분기하거나, 반복 처리(iterator)가 필요한 작업에서 Make의 강점이 두드러집니다.</p>
 
-  <h2>2위 — n8n (셀프호스팅)</h2>
+  <p><a href="https://www.make.com/?pc=autohubai" target="_blank" rel="noopener">Make 무료로 시작하기 →</a></p>
 
-  <div class="tool-card">
-    <div class="tool-card-header">
-      <div class="tool-name">🔧 n8n</div>
-      <div style="display:flex;gap:8px">
-        <span class="rank-badge"># 2 추천</span>
-        <span class="free-badge">완전 무료 가능</span>
-      </div>
+  <h2>2. n8n — 완전 무료를 원한다면</h2>
+
+  <div class="tool-section">
+    <div class="tool-header">
+      <div class="tool-title">n8n</div>
+      <span class="tool-price-tag">셀프호스팅 무료</span>
     </div>
-    <p class="tool-desc">오픈소스 자동화 플랫폼. 자체 서버에 설치하면 비용이 사실상 0원이며, AI 에이전트 구축 기능이 가장 강력합니다. 개발 경험이 있는 분에게 최적의 선택입니다.</p>
+    <p class="tool-summary">오픈소스라 직접 서버에 설치하면 작업 수 제한이 없고 비용은 서버비 외에 0원입니다. 개발 경험이 있다면 가장 강력한 선택지입니다.</p>
     <div class="pros-cons">
       <div class="pros">
-        <h4>✅ 장점</h4>
+        <div class="pros-label">좋은 점</div>
         <ul>
-          <li>셀프호스팅 시 완전 무료</li>
+          <li>셀프호스팅 시 실질적으로 무료</li>
           <li>작업 수 제한 없음</li>
           <li>AI/LLM 에이전트 빌더 내장</li>
-          <li>JavaScript/Python 코드 노드</li>
+          <li>JS·Python 코드 노드 지원</li>
           <li>데이터가 외부로 나가지 않음</li>
         </ul>
       </div>
       <div class="cons">
-        <h4>❌ 단점</h4>
+        <div class="cons-label">아쉬운 점</div>
         <ul>
-          <li>서버 설치·유지 관리 필요</li>
-          <li>비개발자에게 진입장벽 높음</li>
-          <li>연동 앱 수 400개로 상대적으로 적음</li>
+          <li>서버 설치·관리 필요</li>
+          <li>비개발자 진입장벽 높음</li>
+          <li>연동 앱 수 400개 수준</li>
         </ul>
       </div>
     </div>
-    <div class="tool-price">💰 셀프호스팅: 서버 비용만 ($5~10/월) | 클라우드: $20/월부터</div>
-    <a href="https://autohub-ai.vercel.app/?tool=n8n" class="tool-link-btn">n8n 상세 리뷰 →</a>
   </div>
 
-  <p>n8n을 Oracle Cloud Free Tier에 설치하면 서버 비용도 0원입니다. GitHub에 20만 개 이상의 스타를 보유한 가장 인기 있는 오픈소스 자동화 툴입니다.</p>
+  <p>Oracle Cloud의 Always Free 인스턴스에 Docker로 n8n을 올리면 서버 비용도 0원입니다. GitHub에서 star 20만 개를 넘긴 검증된 오픈소스이고, 커뮤니티가 활발해서 막히는 부분이 있으면 대부분 해결 방법을 찾을 수 있습니다.</p>
 
-  <h2>3위 — Activepieces</h2>
+  <p>AI 워크플로우 구축을 생각한다면 n8n이 현재 가장 앞서 있습니다. LangChain 연동, 벡터 스토어, 자체 AI 에이전트 노드가 기본 탑재되어 있어서 "이메일 읽고 요약해서 Notion에 저장"같은 LLM 기반 자동화를 코드 최소화로 구현할 수 있습니다.</p>
 
-  <div class="tool-card">
-    <div class="tool-card-header">
-      <div class="tool-name">🧩 Activepieces</div>
-      <div style="display:flex;gap:8px">
-        <span class="rank-badge"># 3 추천</span>
-        <span class="free-badge">오픈소스</span>
-      </div>
+  <p><a href="https://autohub-ai.vercel.app/?tool=n8n">n8n 상세 정보 →</a></p>
+
+  <h2>3. Activepieces — Zapier UI가 익숙한 분께</h2>
+
+  <div class="tool-section">
+    <div class="tool-header">
+      <div class="tool-title">Activepieces</div>
+      <span class="tool-price-tag">오픈소스 · 클라우드 무료 플랜</span>
     </div>
-    <p class="tool-desc">Zapier와 가장 유사한 UI를 가진 오픈소스 대안. Zapier 사용자라면 전환 비용이 가장 낮습니다. 셀프호스팅도 가능해 데이터 보안이 중요한 팀에 적합합니다.</p>
+    <p class="tool-summary">Zapier와 가장 유사한 UX를 가진 오픈소스 대안입니다. 기존 Zapier 사용자라면 전환 비용이 가장 낮습니다.</p>
     <div class="pros-cons">
       <div class="pros">
-        <h4>✅ 장점</h4>
+        <div class="pros-label">좋은 점</div>
         <ul>
-          <li>Zapier와 거의 동일한 UI</li>
+          <li>Zapier UI와 거의 동일</li>
           <li>셀프호스팅 가능 (무료)</li>
-          <li>오픈소스 (커뮤니티 활발)</li>
-          <li>AI 기반 자동화 기능 탑재</li>
+          <li>오픈소스, 활발한 커뮤니티</li>
+          <li>AI 자동화 기능 추가 중</li>
         </ul>
       </div>
       <div class="cons">
-        <h4>❌ 단점</h4>
+        <div class="cons-label">아쉬운 점</div>
         <ul>
           <li>연동 앱 수 상대적으로 적음</li>
-          <li>한국 사용자 커뮤니티 작음</li>
-          <li>Make 대비 기능이 제한적</li>
+          <li>Make 대비 기능 제한</li>
+          <li>한국어 자료 부족</li>
         </ul>
       </div>
     </div>
-    <div class="tool-price">💰 클라우드 무료 플랜 제공 | 유료: $9/월부터 | 셀프호스팅: 무료</div>
-    <a href="https://autohub-ai.vercel.app/?tool=activepieces" class="tool-link-btn">Activepieces 상세 리뷰 →</a>
   </div>
 
-  <h2>4위 — Pipedream</h2>
+  <p><a href="https://autohub-ai.vercel.app/?tool=activepieces">Activepieces 상세 정보 →</a></p>
 
-  <div class="tool-card">
-    <div class="tool-card-header">
-      <div class="tool-name">🔗 Pipedream</div>
-      <div style="display:flex;gap:8px">
-        <span class="rank-badge"># 4 추천</span>
-        <span class="free-badge">무료 플랜</span>
-      </div>
+  <h2>4. Pipedream — 개발자 전용</h2>
+
+  <div class="tool-section">
+    <div class="tool-header">
+      <div class="tool-title">Pipedream</div>
+      <span class="tool-price-tag">무료 플랜 · 유료 $29/월~</span>
     </div>
-    <p class="tool-desc">개발자를 위한 자동화 플랫폼. 코드 기반 워크플로우를 선호하는 개발자에게 최적. Node.js, Python으로 자유롭게 로직을 구성할 수 있습니다.</p>
+    <p class="tool-summary">Node.js, Python으로 직접 코드를 짜는 방식의 자동화 플랫폼입니다. 개발자라면 다른 어떤 툴보다 자유도가 높습니다.</p>
     <div class="pros-cons">
       <div class="pros">
-        <h4>✅ 장점</h4>
+        <div class="pros-label">좋은 점</div>
         <ul>
-          <li>코드 기반 자유도 높음</li>
+          <li>코드 기반 자유도 최고</li>
           <li>10,000개+ 앱 트리거/액션</li>
-          <li>무료 플랜 넉넉함</li>
           <li>버전 관리, 디버깅 도구 강력</li>
         </ul>
       </div>
       <div class="cons">
-        <h4>❌ 단점</h4>
+        <div class="cons-label">아쉬운 점</div>
         <ul>
           <li>비개발자에게는 어려움</li>
-          <li>노코드 UI가 약함</li>
+          <li>노코드 UI 약함</li>
         </ul>
       </div>
     </div>
-    <div class="tool-price">💰 무료: 월 333 워크플로우 실행 | 유료: $29/월부터</div>
-    <a href="https://autohub-ai.vercel.app/?tool=pipedream" class="tool-link-btn">Pipedream 상세 리뷰 →</a>
   </div>
 
-  <h2>5위 — Microsoft Power Automate</h2>
+  <p><a href="https://autohub-ai.vercel.app/?tool=pipedream">Pipedream 상세 정보 →</a></p>
 
-  <div class="tool-card">
-    <div class="tool-card-header">
-      <div class="tool-name">🪟 Power Automate</div>
-      <div style="display:flex;gap:8px">
-        <span class="rank-badge"># 5 추천</span>
-      </div>
+  <h2>5. Microsoft Power Automate — MS 365 쓴다면 이미 있다</h2>
+
+  <div class="tool-section">
+    <div class="tool-header">
+      <div class="tool-title">Power Automate</div>
+      <span class="tool-price-tag">Microsoft 365 포함</span>
     </div>
-    <p class="tool-desc">Microsoft 365를 사용하는 기업이라면 이미 포함된 자동화 툴. Teams, Outlook, SharePoint, Excel 등 MS 생태계 내부 자동화에 특화되어 있습니다.</p>
+    <p class="tool-summary">Microsoft 365를 쓰는 조직이라면 이미 구독에 포함된 툴입니다. Teams, Outlook, SharePoint, Excel 등 MS 생태계 내부 자동화에 특화되어 있습니다.</p>
     <div class="pros-cons">
       <div class="pros">
-        <h4>✅ 장점</h4>
+        <div class="pros-label">좋은 점</div>
         <ul>
-          <li>Microsoft 365 구독에 포함</li>
-          <li>MS 생태계 최강 연동</li>
-          <li>RPA (데스크톱 자동화) 지원</li>
+          <li>Microsoft 365에 포함</li>
+          <li>MS 생태계 연동 최강</li>
+          <li>RPA(데스크톱 자동화) 지원</li>
           <li>한국어 지원</li>
         </ul>
       </div>
       <div class="cons">
-        <h4>❌ 단점</h4>
+        <div class="cons-label">아쉬운 점</div>
         <ul>
-          <li>MS 외 서비스 연동은 약함</li>
-          <li>UI가 복잡하고 느림</li>
-          <li>비MS 사용자에게는 별 메리트 없음</li>
+          <li>MS 외 서비스 연동 약함</li>
+          <li>UI 복잡, 속도 느림</li>
+          <li>비MS 환경엔 메리트 없음</li>
         </ul>
       </div>
     </div>
-    <div class="tool-price">💰 Microsoft 365 포함 | 독립 구매: $15/월</div>
-    <a href="https://autohub-ai.vercel.app/?tool=power-automate" class="tool-link-btn">Power Automate 상세 리뷰 →</a>
   </div>
 
-  <h2>내 상황에 맞는 대안 고르기</h2>
+  <p><a href="https://autohub-ai.vercel.app/?tool=power-automate">Power Automate 상세 정보 →</a></p>
+
+  <hr>
+
+  <h2>어떤 걸 골라야 하나</h2>
+
+  <p>상황별로 정리하면 이렇습니다.</p>
 
   <ul>
-    <li><strong>Zapier 사용 중, 비용 절감이 목표 →</strong> Make로 전환. UI 유사, 비용 1/5~1/10</li>
-    <li><strong>개발 경험 있고, 비용 0원 원함 →</strong> n8n 셀프호스팅</li>
-    <li><strong>Zapier UI가 익숙하고 오픈소스 원함 →</strong> Activepieces</li>
-    <li><strong>개발자, 코드 기반 자동화 선호 →</strong> Pipedream</li>
-    <li><strong>Microsoft 365 사용 중, MS 내부 자동화 →</strong> Power Automate</li>
+    <li><strong>지금 Zapier 쓰고 있고, 비용만 줄이고 싶다</strong> → Make. UI가 달라도 1~2시간 안에 적응됩니다.</li>
+    <li><strong>개발 경험 있고, 비용 0원 원한다</strong> → n8n 셀프호스팅. 초기 설정만 넘으면 가장 강력합니다.</li>
+    <li><strong>Zapier UI 그대로 쓰고 싶고 오픈소스도 괜찮다</strong> → Activepieces.</li>
+    <li><strong>코드로 자동화하고 싶은 개발자</strong> → Pipedream.</li>
+    <li><strong>Microsoft 365 쓰는 팀, 사내 자동화 위주</strong> → Power Automate. 추가 비용 없이 쓸 수 있습니다.</li>
   </ul>
 
-  <div class="cta-box">
-    <p><strong>어떤 툴로 시작해야 할지 아직 모르겠다면?</strong><br>AutoHub AI에서 AI 시나리오 설계 기능을 사용해보세요. 업무를 설명하면 AI가 최적 툴과 워크플로우를 추천해드립니다.</p>
-    <a href="https://autohub-ai.vercel.app" class="cta-btn">무료로 AI 추천 받기 →</a>
+  <p>Zapier에서 Make로 전환하는 가장 쉬운 방법은 현재 쓰는 Zap 중 중요한 것 2~3개를 Make에서 먼저 만들어보는 겁니다. 1주일 정도 병렬로 돌려보고 안정적이면 Zapier 구독을 끊으면 됩니다.</p>
+
+  <div class="callout">
+    <p>Make로 전환 시 예상 절감액을 계산하고 싶다면 <a href="https://autohub-ai.vercel.app">AutoHub AI ROI 계산기</a>를 써보세요.</p>
   </div>
 
-  <h2>Zapier에서 Make로 전환하는 방법</h2>
+  <div class="bottom-cta">
+    <p>어떤 툴이 내 업무에 맞는지 AI에게 직접 물어볼 수 있습니다.</p>
+    <a href="https://autohub-ai.vercel.app">AutoHub AI에서 무료 추천 받기 →</a>
+  </div>
 
-  <p>Zapier 사용자가 Make로 전환할 때 가장 걱정하는 것은 기존 Zap을 처음부터 다시 만들어야 한다는 점입니다. 실제로는 대부분의 Zap을 Make에서 30분~1시간 내에 재구성할 수 있습니다.</p>
-
-  <ol>
-    <li><strong>Make 무료 계정 생성</strong> → <a href="https://www.make.com/?pc=autohubai" target="_blank" rel="noopener">make.com</a>에서 시작</li>
-    <li>현재 사용 중인 Zap 목록 정리 (Zapier 대시보드에서 Export 가능)</li>
-    <li>가장 중요한 Zap 2~3개를 Make에서 먼저 구성해보기</li>
-    <li>1주일간 병렬 운영 후 안정성 확인</li>
-    <li>Zapier 구독 취소</li>
-  </ol>
-
-  <p>Make의 공식 <a href="https://www.make.com/?pc=autohubai" target="_blank" rel="noopener">Zapier 전환 가이드</a>를 참고하면 더 쉽게 이전할 수 있습니다.</p>
-
-  <div style="margin-top:48px; padding-top:24px; border-top:1px solid #1e1b4b; font-size:13px; color:#475569;">
-    <p>관련 글: <a href="/blog/n8n-vs-make-vs-zapier.html">n8n vs Make vs Zapier 완전 비교 가이드 (2025)</a></p>
+  <div class="related">
+    관련 글: <a href="/blog/n8n-vs-make-vs-zapier.html">n8n vs Make vs Zapier 완전 비교 가이드 (2025)</a>
   </div>
 
 </div>
 
 <footer>
-  <p>© 2025 <a href="https://autohub-ai.vercel.app">AutoHub AI</a> — AI 업무 자동화 도구 비교 포털</p>
+  © 2025 <a href="https://autohub-ai.vercel.app">AutoHub AI</a>
 </footer>
 
 </body>
