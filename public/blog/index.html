@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>블로그 — AI 업무 자동화 가이드 | AutoHub AI</title>
+  <meta name="description" content="n8n, Make, Zapier 등 AI 업무 자동화 툴 비교 가이드, 가격 분석, ROI 계산 방법을 한국어로 제공합니다." />
+  <link rel="canonical" href="https://autohub-ai.vercel.app/blog/" />
+  <meta property="og:title" content="블로그 — AI 업무 자동화 가이드 | AutoHub AI" />
+  <meta property="og:description" content="n8n, Make, Zapier 등 AI 자동화 툴 가이드를 한국어로 제공합니다." />
+  <meta property="og:url" content="https://autohub-ai.vercel.app/blog/" />
+  <meta property="og:image" content="https://autohub-ai.vercel.app/og-image.png" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W5Q885CWSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W5Q885CWSM');
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f23; color: #e2e8f0; line-height: 1.7; }
+    a { color: #818cf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav {
+      background: rgba(15,15,35,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1b4b;
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 800; font-size: 18px; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .nav-logo span { color: #818cf8; }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: #94a3b8; }
+    .nav-cta { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff !important; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; }
+    .hero { max-width: 900px; margin: 0 auto; padding: 60px 24px 40px; }
+    .hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .hero p { color: #94a3b8; font-size: 16px; }
+    .posts { max-width: 900px; margin: 0 auto; padding: 20px 24px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+    .post-card {
+      background: #1a1733;
+      border: 1px solid #312e81;
+      border-radius: 20px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-card:hover { border-color: #6366f1; transform: translateY(-2px); }
+    .post-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: #818cf8;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+    .post-card h2 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4; }
+    .post-card p { font-size: 14px; color: #94a3b8; flex: 1; margin-bottom: 20px; }
+    .post-meta { font-size: 12px; color: #475569; margin-bottom: 16px; }
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #818cf8 !important;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none !important;
+    }
+    .read-more:hover { color: #a5b4fc !important; }
+    footer { border-top: 1px solid #1e1b4b; padding: 40px 24px; text-align: center; color: #475569; font-size: 13px; }
+    footer a { color: #6366f1; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://autohub-ai.vercel.app" class="nav-logo">⚡ AutoHub <span>AI</span></a>
+  <div class="nav-links">
+    <a href="https://autohub-ai.vercel.app">툴 비교</a>
+    <a href="/blog/">블로그</a>
+    <a href="https://autohub-ai.vercel.app" class="nav-cta">ROI 계산기 →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>📝 AutoHub AI 블로그</h1>
+  <p>AI 업무 자동화 툴 비교 가이드, 가격 분석, 실전 자동화 팁을 한국어로 제공합니다.</p>
+</div>
+
+<div class="posts">
+
+  <article class="post-card">
+    <span class="post-badge">📊 비교 가이드</span>
+    <h2>n8n vs Make vs Zapier 완전 비교 가이드 (2025)</h2>
+    <p>세 가지 업무 자동화 툴의 가격·기능·난이도를 항목별로 꼼꼼히 비교합니다. 내 상황에 맞는 툴을 5분 안에 결정하세요.</p>
+    <div class="post-meta">2025년 6월 11일 · 읽기 약 8분</div>
+    <a href="/blog/n8n-vs-make-vs-zapier.html" class="read-more">읽기 →</a>
+  </article>
+
+  <article class="post-card">
+    <span class="post-badge">💸 비용 절감</span>
+    <h2>Zapier 무료 대안 TOP 5 — 돈 안 쓰고 자동화하는 법 (2025)</h2>
+    <p>Zapier 요금이 부담스럽다면? Make, n8n, Activepieces 등 실제로 대체 가능한 5가지 툴을 상세히 비교합니다.</p>
+    <div class="post-meta">2025년 6월 11일 · 읽기 약 7분</div>
+    <a href="/blog/zapier-alternatives.html" class="read-more">읽기 →</a>
+  </article>
+
+</div>
+
+<footer>
+  <p>© 2025 <a href="https://autohub-ai.vercel.app">AutoHub AI</a> — AI 업무 자동화 도구 비교 포털</p>
+</footer>
+
+</body>
+</html>
