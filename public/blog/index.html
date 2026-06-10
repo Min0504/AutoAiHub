@@ -19,109 +19,91 @@
   </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f23; color: #e2e8f0; line-height: 1.7; }
-    a { color: #818cf8; text-decoration: none; }
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      line-height: 1.8;
+    }
+    a { color: #2563eb; text-decoration: none; }
     a:hover { text-decoration: underline; }
     nav {
-      background: rgba(15,15,35,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #1e1b4b;
+      border-bottom: 1px solid #e5e7eb;
       padding: 0 24px;
-      height: 60px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: #fff;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    .nav-logo { font-weight: 800; font-size: 18px; color: #fff; display: flex; align-items: center; gap: 8px; }
-    .nav-logo span { color: #818cf8; }
-    .nav-links { display: flex; gap: 24px; font-size: 14px; }
-    .nav-links a { color: #94a3b8; }
-    .nav-cta { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff !important; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; }
-    .hero { max-width: 900px; margin: 0 auto; padding: 60px 24px 40px; }
-    .hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: #fff; margin-bottom: 12px; }
-    .hero p { color: #94a3b8; font-size: 16px; }
-    .posts { max-width: 900px; margin: 0 auto; padding: 20px 24px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
-    .post-card {
-      background: #1a1733;
-      border: 1px solid #312e81;
-      border-radius: 20px;
-      padding: 28px;
-      transition: border-color 0.2s, transform 0.2s;
+    .nav-logo { font-weight: 800; font-size: 17px; color: #111; }
+    .nav-logo .dot { color: #2563eb; }
+    .nav-links { display: flex; gap: 28px; font-size: 14px; }
+    .nav-links a { color: #6b7280; }
+    .nav-links a:hover { color: #111; text-decoration: none; }
+    .nav-cta { background: #111; color: #fff !important; padding: 7px 16px; border-radius: 7px; font-weight: 600; font-size: 13px; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px 100px; }
+    .page-header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid #e5e7eb; }
+    .page-header h1 { font-size: 32px; font-weight: 800; color: #111; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .page-header p { color: #6b7280; font-size: 16px; }
+    .post-list { display: flex; flex-direction: column; gap: 0; }
+    .post-item {
+      padding: 28px 0;
+      border-bottom: 1px solid #f3f4f6;
       display: flex;
       flex-direction: column;
+      gap: 8px;
     }
-    .post-card:hover { border-color: #6366f1; transform: translateY(-2px); }
-    .post-badge {
-      display: inline-flex;
-      align-items: center;
-      background: rgba(99,102,241,0.15);
-      border: 1px solid rgba(99,102,241,0.3);
-      color: #818cf8;
-      padding: 3px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      margin-bottom: 14px;
-      width: fit-content;
-    }
-    .post-card h2 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4; }
-    .post-card p { font-size: 14px; color: #94a3b8; flex: 1; margin-bottom: 20px; }
-    .post-meta { font-size: 12px; color: #475569; margin-bottom: 16px; }
-    .read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #818cf8 !important;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none !important;
-    }
-    .read-more:hover { color: #a5b4fc !important; }
-    footer { border-top: 1px solid #1e1b4b; padding: 40px 24px; text-align: center; color: #475569; font-size: 13px; }
-    footer a { color: #6366f1; }
+    .post-item:last-child { border-bottom: none; }
+    .post-category { font-size: 12px; font-weight: 600; color: #2563eb; text-transform: uppercase; letter-spacing: 0.5px; }
+    .post-item h2 { font-size: 20px; font-weight: 700; color: #111; letter-spacing: -0.3px; line-height: 1.35; }
+    .post-item h2 a { color: #111; }
+    .post-item h2 a:hover { color: #2563eb; text-decoration: none; }
+    .post-desc { font-size: 15px; color: #6b7280; line-height: 1.6; }
+    .post-meta { font-size: 13px; color: #9ca3af; margin-top: 4px; }
+    footer { border-top: 1px solid #e5e7eb; padding: 32px 24px; text-align: center; color: #9ca3af; font-size: 13px; }
+    footer a { color: #6b7280; }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="https://autohub-ai.vercel.app" class="nav-logo">⚡ AutoHub <span>AI</span></a>
+  <a href="https://autohub-ai.vercel.app" class="nav-logo">AutoHub<span class="dot">.</span>AI</a>
   <div class="nav-links">
     <a href="https://autohub-ai.vercel.app">툴 비교</a>
     <a href="/blog/">블로그</a>
-    <a href="https://autohub-ai.vercel.app" class="nav-cta">ROI 계산기 →</a>
+    <a href="https://autohub-ai.vercel.app" class="nav-cta">ROI 계산기</a>
   </div>
 </nav>
 
-<div class="hero">
-  <h1>📝 AutoHub AI 블로그</h1>
-  <p>AI 업무 자동화 툴 비교 가이드, 가격 분석, 실전 자동화 팁을 한국어로 제공합니다.</p>
-</div>
+<div class="wrap">
+  <div class="page-header">
+    <h1>블로그</h1>
+    <p>AI 업무 자동화 툴 비교 가이드와 실전 팁을 한국어로 씁니다.</p>
+  </div>
 
-<div class="posts">
+  <div class="post-list">
+    <div class="post-item">
+      <div class="post-category">비교 가이드</div>
+      <h2><a href="/blog/n8n-vs-make-vs-zapier.html">n8n vs Make vs Zapier — 어떤 걸 써야 할까? (2025)</a></h2>
+      <p class="post-desc">세 툴 모두 업무 자동화를 하지만 접근 방식이 전혀 다릅니다. 가격·기능·난이도를 직접 비교하고 상황별 추천을 정리했습니다.</p>
+      <div class="post-meta">2025년 6월 11일 · 읽기 약 8분</div>
+    </div>
 
-  <article class="post-card">
-    <span class="post-badge">📊 비교 가이드</span>
-    <h2>n8n vs Make vs Zapier 완전 비교 가이드 (2025)</h2>
-    <p>세 가지 업무 자동화 툴의 가격·기능·난이도를 항목별로 꼼꼼히 비교합니다. 내 상황에 맞는 툴을 5분 안에 결정하세요.</p>
-    <div class="post-meta">2025년 6월 11일 · 읽기 약 8분</div>
-    <a href="/blog/n8n-vs-make-vs-zapier.html" class="read-more">읽기 →</a>
-  </article>
-
-  <article class="post-card">
-    <span class="post-badge">💸 비용 절감</span>
-    <h2>Zapier 무료 대안 TOP 5 — 돈 안 쓰고 자동화하는 법 (2025)</h2>
-    <p>Zapier 요금이 부담스럽다면? Make, n8n, Activepieces 등 실제로 대체 가능한 5가지 툴을 상세히 비교합니다.</p>
-    <div class="post-meta">2025년 6월 11일 · 읽기 약 7분</div>
-    <a href="/blog/zapier-alternatives.html" class="read-more">읽기 →</a>
-  </article>
-
+    <div class="post-item">
+      <div class="post-category">비용 절감</div>
+      <h2><a href="/blog/zapier-alternatives.html">Zapier 무료 대안 TOP 5 — 돈 안 쓰고 자동화하는 법 (2025)</a></h2>
+      <p class="post-desc">Zapier 요금이 부담스럽다면? 실제로 대체 가능한 5가지 툴을 사용 경험 기반으로 비교합니다. Make로 전환하면 같은 일을 5분의 1 비용에 할 수 있습니다.</p>
+      <div class="post-meta">2025년 6월 11일 · 읽기 약 7분</div>
+    </div>
+  </div>
 </div>
 
 <footer>
-  <p>© 2025 <a href="https://autohub-ai.vercel.app">AutoHub AI</a> — AI 업무 자동화 도구 비교 포털</p>
+  © 2025 <a href="https://autohub-ai.vercel.app">AutoHub AI</a>
 </footer>
 
 </body>
