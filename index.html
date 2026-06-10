@@ -87,6 +87,64 @@
     }
     </script>
 
+    <!-- FAQ JSON-LD (리치 스니펫) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "n8n과 Make 중 어떤 자동화 툴을 선택해야 할까요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "워크플로우 복잡도와 기술 수준에 따라 다릅니다. n8n은 개발자 친화적이고 자체 서버에 무료로 설치해 무제한으로 사용할 수 있어 대량 자동화에 압도적인 가성비를 자랑합니다. Make는 버블 형태의 직관적인 UI로 비개발자도 쉽게 사용할 수 있고, Zapier 대비 5~10배 저렴합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Zapier 무료 대안에는 어떤 것들이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "대표적인 무료·저가 대안으로는 Make(월 1,000 오퍼레이션 무료), n8n(오픈소스, 자체 서버 설치 시 완전 무료), Activepieces(오픈소스, 온프레미스 가능)가 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "업무 자동화를 처음 시작할 때 어떤 툴이 좋을까요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "코딩 경험이 없는 초보자라면 Make 또는 Zapier로 시작하는 것을 권장합니다. 두 툴 모두 무료 플랜이 있고, 드래그 앤 드롭으로 자동화를 구성할 수 있습니다. 개발 경험이 있다면 n8n이 장기적으로 가장 강력한 선택입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "업무 자동화 도입 시 ROI는 어떻게 계산하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ROI 계산의 핵심은 '절감되는 시간 × 시간당 인건비'입니다. 하루 2시간 반복 업무를 자동화하면 Make나 n8n의 월 비용 2~3만원으로 월 수십만원의 인건비를 절감할 수 있어 ROI가 수천 %에 달합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 에이전트와 일반 워크플로우 자동화의 차이점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "워크플로우 자동화(n8n, Make, Zapier)는 규칙 기반으로 정해진 흐름대로 실행됩니다. AI 에이전트(CrewAI, Lindy, Dify)는 LLM이 상황을 판단해 스스로 도구를 선택하고 실행하는 자율형 자동화입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "사내 데이터 보안이 중요할 때 어떤 자동화 툴을 써야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "민감한 데이터를 다룬다면 온프레미스 설치를 권장합니다. n8n(Self-Hosted), Activepieces(오픈소스), Kestra는 자사 서버나 도커 컨테이너에 직접 설치해 데이터가 외부로 나가지 않게 운영할 수 있습니다."
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W5Q885CWSM"></script>
     <script>

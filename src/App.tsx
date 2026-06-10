@@ -11,6 +11,7 @@ import AIChatBot from "./components/AIChatBot";
 import { Search, SlidersHorizontal, Check, Trash2, ArrowRight, Stars, Globe, Award, ShieldCheck, Cpu, ArrowUpDown } from "lucide-react";
 import PrivacyPolicyModal from "./components/PrivacyPolicyModal";
 import AffiliateBanner from "./components/AffiliateBanner";
+import FaqSection from "./components/FaqSection";
 import { ToastProvider, useToast } from "./components/Toast";
 import { useSeoMeta } from "./hooks/useSeoMeta";
 
@@ -330,6 +331,9 @@ function AppInner() {
 
               </div>
             </div>
+
+            {/* FAQ 섹션 */}
+            <FaqSection />
 
             {/* Catchy Editorial Blog post-like Hub info block (SEO-friendly traffic capture) */}
             <div className="bg-white rounded-3xl border border-slate-200 p-8 space-y-6">
