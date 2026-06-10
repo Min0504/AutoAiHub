@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make vs n8n — 어떤 게 나한테 맞나? 상황별 선택 가이드 (2026) | AutoHub AI</title>
+  <meta name="description" content="Make와 n8n 중 어떤 자동화 툴을 써야 할지 결정하기 어렵다면? 팀 규모, 기술 수준, 예산, 보안 요구사항에 따른 상황별 선택 기준을 정리했습니다." />
+  <meta name="keywords" content="make vs n8n, make n8n 비교, make n8n 차이, 자동화툴 선택, make integromat n8n 비교" />
+  <link rel="canonical" href="https://autohub-ai.vercel.app/blog/make-vs-n8n.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Make vs n8n — 어떤 게 나한테 맞나? 상황별 선택 가이드 (2026)" />
+  <meta property="og:description" content="Make와 n8n 중 상황에 맞는 자동화 툴 선택 가이드." />
+  <meta property="og:url" content="https://autohub-ai.vercel.app/blog/make-vs-n8n.html" />
+  <meta property="og:image" content="https://autohub-ai.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="AutoHub AI" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Make vs n8n — 어떤 게 나한테 맞나? 상황별 선택 가이드 (2026)",
+    "description": "Make와 n8n 중 상황에 맞는 자동화 툴 선택 가이드.",
+    "author": { "@type": "Organization", "name": "AutoHub AI" },
+    "publisher": { "@type": "Organization", "name": "AutoHub AI", "url": "https://autohub-ai.vercel.app" },
+    "datePublished": "2026-06-11",
+    "dateModified": "2026-06-11",
+    "url": "https://autohub-ai.vercel.app/blog/make-vs-n8n.html",
+    "mainEntityOfPage": "https://autohub-ai.vercel.app/blog/make-vs-n8n.html"
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W5Q885CWSM"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-W5Q885CWSM');</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:16px}
+    body{font-family:'Apple SD Gothic Neo','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;line-height:1.85}
+    a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}
+    nav{border-bottom:1px solid #e5e7eb;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;background:#fff;position:sticky;top:0;z-index:100}
+    .nav-logo{font-weight:800;font-size:17px;color:#111;display:flex;align-items:center;gap:6px}
+    .nav-logo .dot{color:#2563eb}
+    .nav-links{display:flex;gap:28px;font-size:14px}
+    .nav-links a{color:#6b7280}.nav-links a:hover{color:#111;text-decoration:none}
+    .nav-cta{background:#111;color:#fff!important;padding:7px 16px;border-radius:7px;font-weight:600;font-size:13px}
+    .wrap{max-width:680px;margin:0 auto;padding:56px 24px 100px}
+    .article-category{font-size:13px;font-weight:600;color:#2563eb;text-transform:uppercase;letter-spacing:.6px;margin-bottom:16px}
+    h1{font-size:clamp(26px,4vw,36px);font-weight:800;color:#111;line-height:1.25;letter-spacing:-.5px;margin-bottom:18px}
+    .lead{font-size:18px;color:#4b5563;line-height:1.7;margin-bottom:24px}
+    .article-meta{display:flex;gap:16px;font-size:13px;color:#9ca3af;padding-bottom:32px;border-bottom:1px solid #e5e7eb;margin-bottom:40px}
+    h2{font-size:22px;font-weight:700;color:#111;margin:52px 0 14px;letter-spacing:-.3px}
+    h3{font-size:17px;font-weight:700;color:#374151;margin:32px 0 10px}
+    p{margin-bottom:20px;color:#374151;font-size:16px}
+    ul,ol{margin:12px 0 24px 20px;color:#374151;font-size:16px}
+    li{margin-bottom:10px;line-height:1.7}
+    strong{color:#111;font-weight:700}
+    .table-wrap{overflow-x:auto;margin:28px 0 36px;border-radius:10px;border:1px solid #e5e7eb}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    thead{background:#f9fafb}
+    th{padding:12px 16px;text-align:left;color:#6b7280;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+    td{padding:13px 16px;border-top:1px solid #f3f4f6;color:#374151;font-size:14px;vertical-align:top}
+    tr:hover td{background:#f9fafb}
+    .g{color:#16a34a;font-weight:600}.y{color:#d97706;font-weight:600}.r{color:#dc2626;font-weight:600}
+    .callout{background:#f0f9ff;border-left:3px solid #2563eb;padding:16px 20px;border-radius:0 8px 8px 0;margin:28px 0}
+    .callout p{color:#1e40af;margin:0;font-size:15px}
+    .scenario{border:1px solid #e5e7eb;border-radius:12px;padding:24px;margin:24px 0}
+    .scenario h3{margin-top:0;color:#111}
+    .scenario .verdict{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600}
+    .verdict-make{background:#eff6ff;color:#1d4ed8}
+    .verdict-n8n{background:#f0fdf4;color:#15803d}
+    blockquote{border-left:3px solid #e5e7eb;padding:4px 20px;margin:24px 0;color:#6b7280;font-style:italic;font-size:15px}
+    hr{border:none;border-top:1px solid #e5e7eb;margin:44px 0}
+    .bottom-cta{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:28px 32px;margin:48px 0 0;text-align:center}
+    .bottom-cta p{color:#374151;margin-bottom:16px;font-size:15px}
+    .bottom-cta a{display:inline-block;background:#111;color:#fff!important;padding:11px 24px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none!important}
+    .related{margin-top:48px;padding-top:32px;border-top:1px solid #e5e7eb;font-size:14px;color:#6b7280}
+    .related a{color:#2563eb}
+    footer{border-top:1px solid #e5e7eb;padding:32px 24px;text-align:center;color:#9ca3af;font-size:13px}
+    footer a{color:#6b7280}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="https://autohub-ai.vercel.app" class="nav-logo">AutoHub<span class="dot">.</span>AI</a>
+  <div class="nav-links">
+    <a href="https://autohub-ai.vercel.app">툴 비교</a>
+    <a href="/blog/">블로그</a>
+    <a href="https://autohub-ai.vercel.app" class="nav-cta">ROI 계산기</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="article-category">상황별 선택 가이드</div>
+  <h1>Make vs n8n<br>어떤 게 나한테 맞나? (2026)</h1>
+  <p class="lead">Zapier 대안으로 Make와 n8n이 자주 언급되는데, 막상 둘 중 하나를 골라야 할 때 어렵습니다. 상황별로 어떤 걸 선택해야 하는지 정리했습니다.</p>
+  <div class="article-meta">
+    <span>AutoHub AI</span>
+    <span>2026년 6월</span>
+    <span>읽기 약 6분</span>
+  </div>
+
+  <p>Make와 n8n은 같은 문제(업무 자동화)를 완전히 다른 방식으로 풉니다. Make는 "누구나 쓸 수 있는" 방향으로, n8n은 "개발자가 원하는 모든 걸 할 수 있는" 방향으로 설계됐습니다.</p>
+
+  <p>어느 쪽이 더 낫다고 말할 수 없습니다. 상황에 따라 다릅니다. 이 글에서는 상황별로 어떤 선택이 맞는지 명확하게 정리하겠습니다.</p>
+
+  <h2>핵심 차이 한눈에 보기</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>항목</th><th>Make</th><th>n8n</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>설치 방식</strong></td><td>클라우드 SaaS</td><td class="g">클라우드 또는 셀프호스팅</td></tr>
+        <tr><td><strong>비용 (무료)</strong></td><td class="g">월 1,000 오퍼레이션</td><td class="g">셀프호스팅 무제한</td></tr>
+        <tr><td><strong>비용 (유료)</strong></td><td class="g">$9/월~</td><td class="y">$20/월~ (클라우드)</td></tr>
+        <tr><td><strong>코딩 없이 사용</strong></td><td class="g">가능</td><td class="y">가능하지만 어려움</td></tr>
+        <tr><td><strong>복잡한 로직</strong></td><td class="y">가능하지만 한계 있음</td><td class="g">매우 강력</td></tr>
+        <tr><td><strong>AI/LLM 연동</strong></td><td class="y">기본 수준</td><td class="g">내장 AI 에이전트</td></tr>
+        <tr><td><strong>연동 앱 수</strong></td><td class="g">1,500+</td><td class="y">400+</td></tr>
+        <tr><td><strong>데이터 보안</strong></td><td class="y">Make 서버 경유</td><td class="g">셀프호스팅 시 내부 보관</td></tr>
+        <tr><td><strong>팀 협업</strong></td><td class="g">좋음</td><td class="y">설정 필요</td></tr>
+        <tr><td><strong>초기 학습 시간</strong></td><td class="g">1~2시간</td><td class="r">수일~1주</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>상황별 선택 기준</h2>
+
+  <div class="scenario">
+    <h3>상황 1: 개발 경험이 없는 팀이 자동화를 도입하려 한다</h3>
+    <p>팀원 중 코딩을 할 줄 아는 사람이 없고, 마케팅이나 영업팀이 직접 자동화를 만들고 관리해야 한다면 n8n의 학습 곡선은 너무 높습니다. Make의 버블 UI는 누구든 30분 안에 첫 자동화를 만들 수 있습니다.</p>
+    <div class="verdict verdict-make">→ Make 선택</div>
+  </div>
+
+  <div class="scenario">
+    <h3>상황 2: 비용을 최소화하고 싶고, 개발 경험이 있다</h3>
+    <p>n8n을 Oracle Cloud Free Tier나 Railway에 셀프호스팅하면 서버 비용을 포함해도 월 $5 미만입니다. 사용량이 아무리 많아도 추가 비용이 없습니다. Make는 오퍼레이션이 늘면 요금이 올라갑니다.</p>
+    <div class="verdict verdict-n8n">→ n8n 선택 (셀프호스팅)</div>
+  </div>
+
+  <div class="scenario">
+    <h3>상황 3: 고객 데이터나 민감한 정보를 처리해야 한다</h3>
+    <p>Make는 모든 데이터가 Make 서버를 거칩니다. n8n을 자사 서버에 설치하면 데이터가 외부로 나가지 않습니다. GDPR, 개인정보보호법 준수가 중요한 의료, 금융, 법무 분야라면 n8n 셀프호스팅이 사실상 필수입니다.</p>
+    <div class="verdict verdict-n8n">→ n8n 선택 (셀프호스팅)</div>
+  </div>
+
+  <div class="scenario">
+    <h3>상황 4: AI 에이전트나 LLM 기반 자동화가 필요하다</h3>
+    <p>GPT-4나 Claude를 워크플로우에 연결해서 "이메일 읽고 요약", "문서 분류", "자동 응답 초안 생성" 같은 작업을 구현하려면 n8n이 압도적으로 유리합니다. LangChain 노드, AI 에이전트 빌더, 벡터 스토어가 기본 내장되어 있습니다.</p>
+    <div class="verdict verdict-n8n">→ n8n 선택</div>
+  </div>
+
+  <div class="scenario">
+    <h3>상황 5: 연동해야 하는 특수한 앱이 있다</h3>
+    <p>쓰려는 앱이 n8n의 400개 기본 연동에 없다면 Make의 1,500개에서 찾을 가능성이 높습니다. 특수한 CRM, 이커머스 플랫폼, 결제 시스템과 연동해야 한다면 Make가 유리할 수 있습니다. (n8n은 커스텀 HTTP 요청 노드로 대부분 API 연동이 가능하긴 합니다.)</p>
+    <div class="verdict verdict-make">→ Make 선택 (연동 앱 확인 후)</div>
+  </div>
+
+  <div class="scenario">
+    <h3>상황 6: 처음 자동화를 시작하는 개인이나 프리랜서</h3>
+    <p>혼자 쓰고, 빠르게 시작하고 싶고, 비용도 아끼고 싶다면 Make 무료 플랜으로 시작하는 게 가장 좋습니다. 월 1,000 오퍼레이션은 개인 업무 자동화에 충분하고, 익숙해지면 n8n으로 넘어가는 선택지도 열려 있습니다.</p>
+    <div class="verdict verdict-make">→ Make로 시작</div>
+  </div>
+
+  <h2>Make와 n8n을 함께 쓰는 경우도 있다</h2>
+
+  <p>실제로 두 툴을 병행 사용하는 팀이 있습니다. 비기술 팀원들은 Make로 간단한 자동화를 만들고, 개발자가 복잡하거나 보안이 중요한 워크플로우는 n8n으로 만드는 방식입니다.</p>
+
+  <p>꼭 하나만 써야 할 필요는 없습니다. 단, 처음 시작할 때는 하나에 집중하는 게 낫습니다.</p>
+
+  <h2>비용 현실적으로 비교</h2>
+
+  <p>월 5,000번 작업을 자동화한다고 가정하면:</p>
+  <ul>
+    <li><strong>Make Core 플랜:</strong> $9/월 (10,000 오퍼레이션 포함)</li>
+    <li><strong>n8n 클라우드 Starter:</strong> $20/월</li>
+    <li><strong>n8n 셀프호스팅:</strong> $5~10/월 (서버비만)</li>
+  </ul>
+
+  <p>작업이 늘어날수록 n8n 셀프호스팅의 이점이 커집니다. Make는 오퍼레이션이 늘면 요금이 계단식으로 올라가지만, n8n 셀프호스팅은 서버 사양만 올리면 됩니다.</p>
+
+  <div class="callout">
+    <p>💡 정확한 비용을 계산하려면 <a href="https://autohub-ai.vercel.app">AutoHub AI ROI 계산기</a>에서 현재 사용량을 입력해보세요.</p>
+  </div>
+
+  <hr>
+
+  <p>요약하면: <strong>팀 전체가 쓰고, 빠르게 시작하고, 기술 문턱을 낮추고 싶다면 Make. 비용이 0에 가깝고, 복잡한 로직이 필요하고, 데이터 보안이 중요하다면 n8n.</strong></p>
+
+  <p>두 툴 모두 무료로 시작해볼 수 있으니, 직접 써보고 결정하는 것도 좋은 방법입니다. <a href="https://autohub-ai.vercel.app/?tool=make">Make 상세 정보</a>와 <a href="https://autohub-ai.vercel.app/?tool=n8n">n8n 상세 정보</a>는 AutoHub AI에서 확인할 수 있습니다.</p>
+
+  <div class="bottom-cta">
+    <p>어떤 툴이 내 상황에 맞는지 AI에게 직접 물어볼 수 있습니다.</p>
+    <a href="https://autohub-ai.vercel.app">AutoHub AI에서 무료 추천 받기 →</a>
+  </div>
+
+  <div class="related">
+    관련 글:
+    <a href="/blog/n8n-vs-make-vs-zapier.html">n8n vs Make vs Zapier 완전 비교</a> ·
+    <a href="/blog/zapier-alternatives.html">Zapier 무료 대안 TOP 5</a> ·
+    <a href="/blog/how-to-start-automation.html">업무 자동화 처음 시작하는 법</a>
+  </div>
+</div>
+<footer>© 2026 <a href="https://autohub-ai.vercel.app">AutoHub AI</a></footer>
+</body>
+</html>

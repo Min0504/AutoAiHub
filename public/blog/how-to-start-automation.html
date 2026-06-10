@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>업무 자동화 처음 시작하는 법 — 코딩 없이 반복 업무 없애기 (2026) | AutoHub AI</title>
+  <meta name="description" content="업무 자동화를 처음 시작하는 분을 위한 단계별 가이드. 어떤 툴을 써야 할지, 첫 자동화를 어떻게 만드는지, 실수하지 않는 법까지 정리했습니다." />
+  <meta name="keywords" content="업무자동화 시작, 노코드 자동화 입문, make 사용법, 자동화 처음, 반복업무 자동화" />
+  <link rel="canonical" href="https://autohub-ai.vercel.app/blog/how-to-start-automation.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="업무 자동화 처음 시작하는 법 — 코딩 없이 반복 업무 없애기 (2026)" />
+  <meta property="og:description" content="업무 자동화를 처음 시작하는 분을 위한 단계별 가이드입니다." />
+  <meta property="og:url" content="https://autohub-ai.vercel.app/blog/how-to-start-automation.html" />
+  <meta property="og:image" content="https://autohub-ai.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="AutoHub AI" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "업무 자동화 처음 시작하는 법 — 코딩 없이 반복 업무 없애기 (2026)",
+    "description": "업무 자동화를 처음 시작하는 분을 위한 단계별 가이드.",
+    "author": { "@type": "Organization", "name": "AutoHub AI" },
+    "publisher": { "@type": "Organization", "name": "AutoHub AI", "url": "https://autohub-ai.vercel.app" },
+    "datePublished": "2026-06-11",
+    "dateModified": "2026-06-11",
+    "url": "https://autohub-ai.vercel.app/blog/how-to-start-automation.html",
+    "mainEntityOfPage": "https://autohub-ai.vercel.app/blog/how-to-start-automation.html"
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W5Q885CWSM"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-W5Q885CWSM');</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:16px}
+    body{font-family:'Apple SD Gothic Neo','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;line-height:1.85}
+    a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}
+    nav{border-bottom:1px solid #e5e7eb;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;background:#fff;position:sticky;top:0;z-index:100}
+    .nav-logo{font-weight:800;font-size:17px;color:#111;display:flex;align-items:center;gap:6px}
+    .nav-logo .dot{color:#2563eb}
+    .nav-links{display:flex;gap:28px;font-size:14px}
+    .nav-links a{color:#6b7280}.nav-links a:hover{color:#111;text-decoration:none}
+    .nav-cta{background:#111;color:#fff!important;padding:7px 16px;border-radius:7px;font-weight:600;font-size:13px}
+    .wrap{max-width:680px;margin:0 auto;padding:56px 24px 100px}
+    .article-category{font-size:13px;font-weight:600;color:#2563eb;text-transform:uppercase;letter-spacing:.6px;margin-bottom:16px}
+    h1{font-size:clamp(26px,4vw,36px);font-weight:800;color:#111;line-height:1.25;letter-spacing:-.5px;margin-bottom:18px}
+    .lead{font-size:18px;color:#4b5563;line-height:1.7;margin-bottom:24px}
+    .article-meta{display:flex;gap:16px;font-size:13px;color:#9ca3af;padding-bottom:32px;border-bottom:1px solid #e5e7eb;margin-bottom:40px}
+    h2{font-size:22px;font-weight:700;color:#111;margin:52px 0 14px;letter-spacing:-.3px}
+    h3{font-size:17px;font-weight:700;color:#374151;margin:32px 0 10px}
+    p{margin-bottom:20px;color:#374151;font-size:16px}
+    ul,ol{margin:12px 0 24px 20px;color:#374151;font-size:16px}
+    li{margin-bottom:10px;line-height:1.7}
+    strong{color:#111;font-weight:700}
+    .callout{background:#f0f9ff;border-left:3px solid #2563eb;padding:16px 20px;border-radius:0 8px 8px 0;margin:28px 0}
+    .callout p{color:#1e40af;margin:0;font-size:15px}
+    .callout.warn{background:#fffbeb;border-left-color:#d97706}
+    .callout.warn p{color:#92400e}
+    blockquote{border-left:3px solid #e5e7eb;padding:4px 20px;margin:24px 0;color:#6b7280;font-style:italic;font-size:15px}
+    hr{border:none;border-top:1px solid #e5e7eb;margin:44px 0}
+    .step{display:flex;gap:16px;margin:28px 0}
+    .step-num{flex-shrink:0;width:32px;height:32px;background:#2563eb;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;margin-top:2px}
+    .step-body h3{margin-top:0;font-size:17px}
+    .step-body p{margin-bottom:8px}
+    .bottom-cta{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:28px 32px;margin:48px 0 0;text-align:center}
+    .bottom-cta p{color:#374151;margin-bottom:16px;font-size:15px}
+    .bottom-cta a{display:inline-block;background:#111;color:#fff!important;padding:11px 24px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none!important}
+    .related{margin-top:48px;padding-top:32px;border-top:1px solid #e5e7eb;font-size:14px;color:#6b7280}
+    .related a{color:#2563eb}
+    footer{border-top:1px solid #e5e7eb;padding:32px 24px;text-align:center;color:#9ca3af;font-size:13px}
+    footer a{color:#6b7280}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="https://autohub-ai.vercel.app" class="nav-logo">AutoHub<span class="dot">.</span>AI</a>
+  <div class="nav-links">
+    <a href="https://autohub-ai.vercel.app">툴 비교</a>
+    <a href="/blog/">블로그</a>
+    <a href="https://autohub-ai.vercel.app" class="nav-cta">ROI 계산기</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="article-category">입문 가이드</div>
+  <h1>업무 자동화 처음 시작하는 법<br>코딩 없이 반복 업무 없애기 (2026)</h1>
+  <p class="lead">매일 반복하는 단순 업무가 있다면 자동화할 수 있습니다. 어떤 툴을 쓸지, 어디서 시작할지, 흔히 하는 실수는 뭔지 — 처음 시작하는 분을 위해 단계별로 정리했습니다.</p>
+  <div class="article-meta">
+    <span>AutoHub AI</span>
+    <span>2026년 6월</span>
+    <span>읽기 약 7분</span>
+  </div>
+
+  <p>"자동화 해보고 싶은데 어디서 시작해야 할지 모르겠다"는 분들이 많습니다. Make니 n8n이니 Zapier니 이름은 들어봤는데, 막상 뭘 해야 하는지 막막하죠.</p>
+
+  <p>결론부터 말하면 생각보다 훨씬 쉽습니다. 특히 코딩이 전혀 없어도 됩니다. 중요한 건 처음에 <strong>"작게 시작하는 것"</strong>입니다. 복잡한 워크플로우부터 만들려다 막히면 포기하게 됩니다.</p>
+
+  <h2>1단계 — 자동화할 업무를 고른다</h2>
+
+  <p>처음 자동화를 시작할 때 가장 흔한 실수는 너무 복잡한 걸 먼저 시도하는 겁니다. 첫 자동화는 <strong>단순하고 반복적인 2단계 작업</strong>으로 시작해야 합니다.</p>
+
+  <p>좋은 첫 자동화 후보:</p>
+  <ul>
+    <li>구글 폼 제출 → 슬랙 채널에 알림</li>
+    <li>이메일 첨부파일 → 구글 드라이브 자동 저장</li>
+    <li>새 Google Sheets 행 추가 → Notion 데이터베이스에 동기화</li>
+    <li>특정 키워드 이메일 → 라벨 자동 분류</li>
+    <li>Typeform 응답 → Airtable 자동 기록</li>
+  </ul>
+
+  <p>공통점이 있습니다. 모두 "A가 발생하면 B를 한다"는 단순한 구조입니다. 조건 분기나 반복 처리가 없어요. 이런 것부터 시작하세요.</p>
+
+  <div class="callout warn">
+    <p>⚠️ 첫 자동화로 피해야 할 것: "조건이 이러면 이렇게 하고, 저러면 저렇게 하고..." — 복잡한 분기가 들어간 작업은 처음엔 건너뜁니다.</p>
+  </div>
+
+  <h2>2단계 — 툴을 고른다</h2>
+
+  <p>코딩 경험이 없고 처음 시작한다면 선택지는 사실상 두 가지입니다.</p>
+
+  <p><strong>Make (월 1,000 오퍼레이션 무료)</strong><br>
+  지금 처음 시작하는 분에게 가장 추천하는 툴입니다. 버블을 연결하는 시각적 인터페이스라 직관적이고, 무료 플랜이 넉넉합니다. 한 달에 몇 백 건 정도 반복 업무라면 무료로 충분합니다.</p>
+
+  <p><strong>Zapier (월 100 작업 무료)</strong><br>
+  UI가 Make보다 더 단순합니다. 7,000개 앱과 연동되어 특수한 앱이 필요할 때 유리합니다. 다만 무료 플랜이 너무 빡빡하고, 유료 전환 시 비용이 큽니다.</p>
+
+  <blockquote>개발 경험이 있다면 n8n 셀프호스팅이 장기적으로 가장 강력합니다. 처음엔 Make로 개념을 익히고, 익숙해지면 n8n으로 넘어가는 경로도 있습니다.</blockquote>
+
+  <h2>3단계 — 첫 자동화를 만든다 (Make 기준)</h2>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h3>Make 계정 만들기</h3>
+      <p><a href="https://www.make.com/?pc=autohubai" target="_blank" rel="noopener">make.com</a>에서 무료 계정을 만듭니다. 신용카드 없이 가입됩니다.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h3>새 시나리오 만들기</h3>
+      <p>대시보드에서 "Create a new scenario" 클릭. 화면에 동그란 노드 하나가 나타납니다. 이게 시작점(트리거)입니다.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h3>트리거 앱 선택</h3>
+      <p>노드를 클릭하면 앱 검색창이 나옵니다. "Google Forms"를 검색하고 "Watch Responses" 트리거를 선택합니다. 구글 계정을 연결하고 어떤 폼을 감시할지 선택합니다.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h3>액션 앱 추가</h3>
+      <p>트리거 노드 오른쪽에 + 버튼을 클릭해서 액션을 추가합니다. "Slack"을 선택하고 "Create a Message"를 고릅니다. 슬랙 워크스페이스를 연결하고, 어떤 채널에 어떤 메시지를 보낼지 설정합니다.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <h3>테스트 후 활성화</h3>
+      <p>"Run once" 버튼으로 테스트합니다. 슬랙에 메시지가 잘 오면 "Scheduling" 버튼을 켜서 자동화를 활성화합니다.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>💡 처음엔 이 5단계가 30분 걸릴 수도 있습니다. 두 번째 자동화는 10분, 세 번째는 5분입니다. 익숙해지면 아주 빠릅니다.</p>
+  </div>
+
+  <h2>자주 하는 실수 3가지</h2>
+
+  <h3>1. 처음부터 너무 복잡하게 만들려는 것</h3>
+  <p>자동화를 배우면서 "이것도 하고 저것도 하고" 욕심이 생깁니다. 조건 분기, 에러 핸들링, 필터, 반복까지 한 번에 넣으려고 하다 막힙니다. 처음엔 단순하게 2~3 노드로 시작하세요. 복잡한 건 기본기를 익힌 다음입니다.</p>
+
+  <h3>2. 한 번에 모든 업무를 자동화하려는 것</h3>
+  <p>업무 자동화는 점진적으로 쌓아가는 겁니다. 처음부터 회사 전체 프로세스를 자동화하겠다고 생각하면 압도됩니다. 하나의 반복 업무를 자동화하고, 잘 돌아가면 하나 더 추가하는 방식으로 진행하세요.</p>
+
+  <h3>3. 에러가 나면 포기하는 것</h3>
+  <p>처음엔 에러가 납니다. 연결이 안 되거나, 데이터 형식이 맞지 않거나, 권한 문제가 생기거나. 이건 자연스러운 과정입니다. Make의 에러 메시지는 대부분 친절하게 원인을 알려주고, 구글에 에러 메시지를 그대로 검색하면 해결 방법이 나옵니다.</p>
+
+  <h2>어떤 업무를 자동화하면 가장 효과적일까?</h2>
+
+  <p>자동화 효과가 큰 업무의 특징은 세 가지입니다.</p>
+  <ul>
+    <li><strong>반복성:</strong> 매일 또는 매주 같은 패턴으로 발생하는 업무</li>
+    <li><strong>규칙성:</strong> "이 조건이면 이렇게"처럼 규칙이 명확한 업무</li>
+    <li><strong>시간 소모:</strong> 한 번에 5분 이상 걸리는 업무 (자동화 ROI가 빠름)</li>
+  </ul>
+
+  <p>업무 자동화로 월 얼마를 아낄 수 있는지 계산하고 싶다면 <a href="https://autohub-ai.vercel.app">AutoHub AI의 ROI 계산기</a>를 써보세요. 반복 시간과 시급을 넣으면 자동으로 계산됩니다.</p>
+
+  <hr>
+
+  <p>자동화는 한 번 배워두면 두고두고 씁니다. 첫 번째 자동화가 잘 돌아가는 걸 보면 "이것도 자동화할 수 있겠다"는 아이디어가 자연스럽게 생기기 시작합니다. 그때부터 진짜 재미있어집니다.</p>
+
+  <div class="bottom-cta">
+    <p>어떤 업무를 자동화할 수 있는지, 어떤 툴을 써야 하는지 AI에게 바로 물어보세요.</p>
+    <a href="https://autohub-ai.vercel.app">AutoHub AI에서 무료로 알아보기 →</a>
+  </div>
+
+  <div class="related">
+    관련 글:
+    <a href="/blog/n8n-vs-make-vs-zapier.html">n8n vs Make vs Zapier 완전 비교 가이드</a> ·
+    <a href="/blog/zapier-alternatives.html">Zapier 무료 대안 TOP 5</a>
+  </div>
+</div>
+<footer>© 2026 <a href="https://autohub-ai.vercel.app">AutoHub AI</a></footer>
+</body>
+</html>
