@@ -12,7 +12,16 @@ const BANNERS = [
     textColor: "text-violet-700",
     badgeColor: "bg-violet-100 text-violet-700",
   },
-  // n8n 제휴 신청 거절됨 (2026-06-09) — 재신청 또는 Zapier 승인 후 추가
+  {
+    key: "dify",
+    name: "Dify",
+    tagline: "AI 에이전트 & LLM 앱 빌더",
+    highlight: "무료 플랜",
+    colorFrom: "from-blue-50",
+    colorTo: "to-indigo-50",
+    textColor: "text-blue-700",
+    badgeColor: "bg-blue-100 text-blue-700",
+  },
 ];
 
 const AD_CONTACT_EMAIL = "chaeminseok00@gmail.com";

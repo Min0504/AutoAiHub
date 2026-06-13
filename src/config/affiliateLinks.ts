@@ -31,7 +31,7 @@ export const AFFILIATE_LINKS: Record<string, string> = {
   pipedream: utm("https://pipedream.com/"),
   crewai: utm("https://crewai.com/"),
   autogen: utm("https://microsoft.github.io/autogen/"),
-  dify: utm("https://dify.ai/"),
+  dify: "https://affiliate.dify.ai/29tpk4sr31xj",
   coze: utm("https://www.coze.com/"),
   "relevance-ai": utm("https://relevanceai.com/"),
   "retool-workflows": utm("https://retool.com/products/workflows"),
