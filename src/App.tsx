@@ -237,6 +237,34 @@ function AppInner() {
                   </div>
                 </div>
 
+                {/* 블로그 가이드 링크 */}
+                <div className="border-t border-slate-150 pt-5">
+                  <p className="text-[10px] text-slate-400 font-black uppercase tracking-wider mb-3">📝 자동화 가이드</p>
+                  <div className="space-y-2">
+                    {[
+                      { href: "/blog/no-code-automation-tools-2026.html", label: "노코드 자동화 툴 TOP 7" },
+                      { href: "/blog/make-vs-n8n.html", label: "Make vs n8n 선택 가이드" },
+                      { href: "/blog/n8n-free-self-hosting-guide.html", label: "n8n 무료 셀프호스팅" },
+                      { href: "/blog/how-to-start-automation.html", label: "자동화 처음 시작하는 법" },
+                    ].map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className="flex items-center gap-2 text-[11.5px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors group"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-indigo-400 shrink-0 transition-colors" />
+                        {item.label}
+                      </a>
+                    ))}
+                    <a
+                      href="/blog/"
+                      className="text-[11px] font-black text-indigo-500 hover:text-indigo-700 transition-colors block mt-1"
+                    >
+                      전체 글 보기 →
+                    </a>
+                  </div>
+                </div>
+
               </aside>
 
               {/* Right Content Area containing Search, active description and tool cards */}
