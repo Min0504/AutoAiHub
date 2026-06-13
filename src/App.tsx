@@ -242,6 +242,8 @@ function AppInner() {
                   <p className="text-[10px] text-slate-400 font-black uppercase tracking-wider mb-3">📝 자동화 가이드</p>
                   <div className="space-y-2">
                     {[
+                      { href: "/blog/make-tutorial-beginners.html", label: "Make 사용법 완전 가이드" },
+                      { href: "/blog/ai-agent-tools-2026.html", label: "AI 에이전트 툴 TOP 5" },
                       { href: "/blog/no-code-automation-tools-2026.html", label: "노코드 자동화 툴 TOP 7" },
                       { href: "/blog/make-vs-n8n.html", label: "Make vs n8n 선택 가이드" },
                       { href: "/blog/n8n-free-self-hosting-guide.html", label: "n8n 무료 셀프호스팅" },
@@ -250,6 +252,8 @@ function AppInner() {
                       <a
                         key={item.href}
                         href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-2 text-[11.5px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors group"
                       >
                         <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-indigo-400 shrink-0 transition-colors" />
@@ -258,6 +262,8 @@ function AppInner() {
                     ))}
                     <a
                       href="/blog/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-[11px] font-black text-indigo-500 hover:text-indigo-700 transition-colors block mt-1"
                     >
                       전체 글 보기 →
