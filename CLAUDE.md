@@ -23,6 +23,14 @@ vercel env ls      # 환경변수 확인
 
 배포 구조·환경변수·제휴 현황 등 상세는 [DEV_NOTES.md](DEV_NOTES.md)가 단일 참조점이다.
 
+## 비용 원칙
+
+**모토: 최저비용 최대수익.**
+
+- 현재 리드 저장에 Supabase를 사용 중이나, 워크스페이스 비용 철학(`/AGENTS.md §13`)에 따라 Firebase Firestore 무료 티어로 교체를 검토한다. Supabase는 Axis 전용.
+- 신규 유료 서비스 도입 전 conductor 승인 필수.
+- 외부 유료 API(Groq 등)는 사용량 제한 + 캐싱 우선 적용.
+
 ## 문서 규칙
 
 - 진행 상황은 [docs/progress.md](docs/progress.md), 문제는 [docs/issues.md](docs/issues.md), 인수인계는 [docs/handoff.md](docs/handoff.md)에 짧게 기록한다.
