@@ -22,3 +22,11 @@
 
 - 도메인 변경 시 `index.html`, `public/sitemap.xml`, `public/robots.txt`, `useSeoMeta.ts` 일괄 수정.
 - 새 툴 추가 시 `public/sitemap.xml` 수동 업데이트 필요.
+
+---
+
+## 역할별 다음 과제
+
+- frontend: FAQ 섹션 추가 (메인 페이지 하단 — "n8n vs Make", "Zapier 무료 대안", "업무 자동화 시작법" 키워드 HTML 텍스트); OG 이미지 `public/og-image.png` 1200×630 제작
+- backend: Activepieces(30% 반복)·Dify(20% 반복) 제휴 신청 준비; 코드 받으면 `src/config/affiliateLinks.ts` + `AffiliateBanner.tsx` 업데이트
+- security: Groq API 키 클라이언트 노출 여부 확인; Supabase service role key 서버 전용 유지 확인; 빌드 최종 확인
