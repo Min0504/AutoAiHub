@@ -1,5 +1,7 @@
 node_modules/
 dist/
+.omc/
+.claude/agent-memory/
 .env
 .env.local
 .env*.local
