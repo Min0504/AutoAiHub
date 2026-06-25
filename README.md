@@ -54,9 +54,10 @@ npm run build
 | 변수 | 용도 |
 |------|------|
 | `GROQ_API_KEY` | AI 엔진 (필수) |
-| `VITE_SUPABASE_URL` | Supabase 프로젝트 URL |
-| `VITE_SUPABASE_ANON_KEY` | Supabase 공개 키 |
-| `SUPABASE_SERVICE_ROLE_KEY` | 서버 측 리드 저장 |
+| `GROQ_MODEL` | AI 모델명 (기본값: `llama-3.3-70b-versatile`) |
+| `SUPABASE_URL` | Supabase 프로젝트 URL |
+| `SUPABASE_SERVICE_KEY` | 서버 측 리드 저장 service role key |
+| `SLACK_WEBHOOK_URL` | 새 리드 Slack 알림 (선택) |
 
 ---
 
