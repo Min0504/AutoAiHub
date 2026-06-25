@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
-    q: "n8n과 Make 중 어떤 자동화 툴을 선택해야 할까요?",
+    q: "n8n vs Make, 어떤 자동화 툴을 선택해야 할까요?",
     a: "워크플로우 복잡도와 기술 수준에 따라 다릅니다. n8n은 개발자 친화적이고 자체 서버에 무료로 설치해 무제한으로 사용할 수 있어 대량 자동화에 압도적인 가성비를 자랑합니다. Make(구 Integromat)는 버블 형태의 직관적인 UI로 비개발자도 쉽게 사용할 수 있고, Zapier 대비 5~10배 저렴합니다. 코딩 경험이 있고 비용을 아끼고 싶다면 n8n, 팀 전체가 쉽게 쓰고 싶다면 Make를 추천합니다.",
   },
   {
@@ -11,7 +11,7 @@ const FAQS = [
     a: "Zapier는 강력하지만 가격이 비싸 대안을 찾는 분들이 많습니다. 대표적인 무료·저가 대안으로는 ① Make (월 1,000 오퍼레이션 무료, 유료도 Zapier 대비 5~10배 저렴), ② n8n (오픈소스, 자체 서버 설치 시 완전 무료), ③ Activepieces (오픈소스, Zapier와 유사한 UI, 온프레미스 가능) 가 있습니다. 연동 앱 수는 Zapier가 7,000개로 최다이지만, 일반적인 업무 자동화라면 Make나 n8n으로 충분히 대체 가능합니다.",
   },
   {
-    q: "업무 자동화를 처음 시작할 때 어떤 툴이 좋을까요?",
+    q: "업무 자동화 시작법: 처음 시작할 때 어떤 툴이 좋을까요?",
     a: "코딩 경험이 없는 초보자라면 Make 또는 Zapier로 시작하는 것을 권장합니다. 두 툴 모두 무료 플랜이 있고, 드래그 앤 드롭으로 자동화를 구성할 수 있습니다. 첫 자동화로는 '구글 폼 제출 → 슬랙 알림', '이메일 첨부파일 → 구글 드라이브 저장' 같은 2단계 자동화부터 시작하면 좋습니다. 개발 경험이 있다면 n8n이 장기적으로 가장 강력한 선택입니다.",
   },
   {
@@ -40,6 +40,9 @@ export default function FaqSection() {
       <h2 className="text-lg font-black text-slate-900 border-b border-slate-100 pb-3">
         자주 묻는 질문 (FAQ)
       </h2>
+      <p className="text-sm font-medium text-slate-500 leading-relaxed">
+        AutoHub AI는 메인 페이지 하단에서 <strong>n8n vs Make</strong>, <strong>Zapier 무료 대안</strong>, <strong>업무 자동화 시작법</strong> 같은 핵심 질문을 바로 확인할 수 있도록 정리합니다.
+      </p>
       <dl className="space-y-2">
         {FAQS.map((faq, idx) => (
           <div key={idx} className="border border-slate-100 rounded-2xl overflow-hidden">

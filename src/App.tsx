@@ -1,19 +1,31 @@
-import { useState, useEffect } from "react";
-import { TOOLS, CATEGORIES, Tool } from "./data/tools";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { CATEGORIES, TOOLS, type Tool } from "./data/tools";
 import Header from "./components/Header";
 import ToolCard from "./components/ToolCard";
-import ToolDetailModal from "./components/ToolDetailModal";
-import CompareSection from "./components/CompareSection";
-import CalculatorSection from "./components/CalculatorSection";
-import AIScenarioBuilder from "./components/AIScenarioBuilder";
-import ConsultingSection from "./components/ConsultingSection";
-import AIChatBot from "./components/AIChatBot";
 import { Search, SlidersHorizontal, Check, Trash2, ArrowRight, Stars, Globe, Award, ShieldCheck, Cpu, ArrowUpDown } from "lucide-react";
-import PrivacyPolicyModal from "./components/PrivacyPolicyModal";
 import AffiliateBanner from "./components/AffiliateBanner";
 import FaqSection from "./components/FaqSection";
 import { ToastProvider, useToast } from "./components/Toast";
 import { useSeoMeta } from "./hooks/useSeoMeta";
+
+const ToolDetailModal = lazy(() => import("./components/ToolDetailModal"));
+const CompareSection = lazy(() => import("./components/CompareSection"));
+const CalculatorSection = lazy(() => import("./components/CalculatorSection"));
+const AIScenarioBuilder = lazy(() => import("./components/AIScenarioBuilder"));
+const ConsultingSection = lazy(() => import("./components/ConsultingSection"));
+const AIChatBot = lazy(() => import("./components/AIChatBot"));
+const PrivacyPolicyModal = lazy(() => import("./components/PrivacyPolicyModal"));
+
+function TabPanelFallback({ label }: { readonly label: string }) {
+  return (
+    <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+      <p className="text-sm font-bold text-slate-700">{label} 로딩 중...</p>
+      <p className="mt-2 text-xs font-medium text-slate-400">
+        필요한 화면 코드만 불러오는 중입니다.
+      </p>
+    </div>
+  );
+}
 
 function AppInner() {
   const { showToast } = useToast();
@@ -407,37 +419,59 @@ function AppInner() {
 
         {/* TAB 2: COMPARE TAB */}
         {activeTab === "compare" && (
-          <CompareSection
-            selectedTools={compareShelf}
-            onRemoveFromCompare={handleToggleCompareShelf}
-          />
+          <Suspense fallback={<TabPanelFallback label="비교 분석기" />}>
+            <CompareSection
+              selectedTools={compareShelf}
+              onRemoveFromCompare={handleToggleCompareShelf}
+            />
+          </Suspense>
         )}
 
         {/* TAB 3: AI SCENARIO GENERATOR TAB */}
-        {activeTab === "ai-builder" && <AIScenarioBuilder />}
+        {activeTab === "ai-builder" && (
+          <Suspense fallback={<TabPanelFallback label="AI 맞춤 시나리오" />}>
+            <AIScenarioBuilder />
+          </Suspense>
+        )}
 
         {/* TAB 4: CALCULATORS TAB */}
-        {activeTab === "calculators" && <CalculatorSection />}
+        {activeTab === "calculators" && (
+          <Suspense fallback={<TabPanelFallback label="통합 계산기" />}>
+            <CalculatorSection />
+          </Suspense>
+        )}
 
         {/* TAB 5: AI CHAT AGENT */}
-        {activeTab === "ai-chat" && <AIChatBot />}
+        {activeTab === "ai-chat" && (
+          <Suspense fallback={<TabPanelFallback label="AI 상담사" />}>
+            <AIChatBot />
+          </Suspense>
+        )}
 
         {/* TAB 6: PREMIUM CONSULTING & LEAD FUNNEL */}
-        {activeTab === "consulting" && <ConsultingSection />}
+        {activeTab === "consulting" && (
+          <Suspense fallback={<TabPanelFallback label="B2B 견적" />}>
+            <ConsultingSection />
+          </Suspense>
+        )}
 
       </main>
 
       {/* 3. Global Details Modal Overlay */}
-      <ToolDetailModal
-        tool={activeModalTool}
-        onClose={() => setActiveModalTool(null)}
-        onAddToCompare={handleToggleCompareShelf}
-        isAddedToCompare={compareShelf.some((ts) => ts.id === (activeModalTool ? activeModalTool.id : ""))}
-      />
+      <Suspense fallback={null}>
+        <ToolDetailModal
+          tool={activeModalTool}
+          onClose={() => setActiveModalTool(null)}
+          onAddToCompare={handleToggleCompareShelf}
+          isAddedToCompare={compareShelf.some((ts) => ts.id === (activeModalTool ? activeModalTool.id : ""))}
+        />
+      </Suspense>
 
       {/* 4. Privacy Policy Modal */}
       {showPrivacyPolicy && (
-        <PrivacyPolicyModal onClose={() => setShowPrivacyPolicy(false)} />
+        <Suspense fallback={null}>
+          <PrivacyPolicyModal onClose={() => setShowPrivacyPolicy(false)} />
+        </Suspense>
       )}
 
       {/* 5. Footer */}
