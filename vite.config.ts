@@ -14,10 +14,9 @@ export default defineConfig(() => {
     server: {
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
-      // Proxy API calls to Express dev server
+      // Proxy API calls to Express dev server (sitemap is static from public/)
       proxy: {
         '/api': 'http://localhost:3001',
-        '/sitemap.xml': 'http://localhost:3001',
       },
     },
   };

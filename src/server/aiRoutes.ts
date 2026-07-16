@@ -4,12 +4,28 @@ import { saveLead } from "./leadStore";
 import { notifyNewLead } from "./notifySlack";
 import {
   BadRequestError,
+  FIELD_LIMITS,
   parseJsonObject,
   readOptionalString,
+  readPrivacyAccepted,
   readRecord,
+  readRequiredEmail,
   readRequiredString,
   readStringArrayMessages,
 } from "./requestParsing";
+
+const ALLOWED_TOOL_IDS = new Set([
+  "n8n",
+  "make",
+  "zapier",
+  "lindy",
+  "relay-app",
+  "gumloop",
+  "activepieces",
+  "pipedream",
+  "crewai",
+  "autogen",
+]);
 
 export function registerAiRoutes(
   app: Express,
@@ -21,7 +37,7 @@ export function registerAiRoutes(
   app.post("/api/recommend", async (req: Request, res: Response) => {
     try {
       const body = readRecord(req.body);
-      const userPrompt = readRequiredString(body, "userPrompt");
+      const userPrompt = readRequiredString(body, "userPrompt", FIELD_LIMITS.long);
       const client = requireGroqClient(groq);
 
       const completion = await client.chat.completions.create({
@@ -36,7 +52,8 @@ export function registerAiRoutes(
       });
 
       const text = completion.choices[0]?.message?.content ?? "{}";
-      res.json(parseJsonObject(text));
+      const parsed = parseJsonObject(text);
+      res.json(normalizeRecommendation(parsed));
     } catch (error: unknown) {
       handleRouteError(error, res, "AI 추천 분석 중 오류가 발생했습니다.");
     }
@@ -46,22 +63,24 @@ export function registerAiRoutes(
   app.post("/api/proposal", async (req: Request, res: Response) => {
     try {
       const body = readRecord(req.body);
-      const companyName = readRequiredString(body, "companyName");
-      const email = readRequiredString(body, "email");
-      const needs = readRequiredString(body, "needs");
-      const budget = readRequiredString(body, "budget");
-      const phone = readOptionalString(body, "phone");
-      const selectedTool = readOptionalString(body, "selectedTool");
-      const businessType = readOptionalString(body, "businessType");
+      const companyName = readRequiredString(body, "companyName", FIELD_LIMITS.short);
+      const email = readRequiredEmail(body, "email");
+      const needs = readRequiredString(body, "needs", FIELD_LIMITS.long);
+      const budget = readRequiredString(body, "budget", FIELD_LIMITS.short);
+      const phone = readOptionalString(body, "phone", FIELD_LIMITS.short);
+      const selectedTool = readOptionalString(body, "selectedTool", FIELD_LIMITS.short);
+      const businessType = readOptionalString(body, "businessType", FIELD_LIMITS.short);
+      readPrivacyAccepted(body);
       const client = requireGroqClient(groq);
 
+      // Do not send raw contact PII (email/phone) to the LLM provider.
       const completion = await client.chat.completions.create({
         model: modelName,
         messages: [
           { role: "system", content: proposalSystemPrompt },
           {
             role: "user",
-            content: `회사명: "${companyName}", 이메일: "${email}", 연락처: "${phone ?? "미기입"}", 업종/목적: "${businessType ?? "미기입"}", 요구사항: "${needs}", 예산: "${budget}", 관심 도구: "${selectedTool ?? "선택없음"}"`,
+            content: `회사명: "${companyName}", 업종/목적: "${businessType || "미기입"}", 요구사항: "${needs}", 예산: "${budget}", 관심 도구: "${selectedTool || "선택없음"}"`,
           },
         ],
         response_format: { type: "json_object" },
@@ -73,7 +92,15 @@ export function registerAiRoutes(
       const parsedData = parseJsonObject(text);
 
       const lead = await saveLead("consulting_proposal", {
-        companyName, email, phone, needs, budget, selectedTool, businessType,
+        companyName,
+        email,
+        phone,
+        needs,
+        budget,
+        selectedTool,
+        businessType,
+        privacyAccepted: true,
+        privacyAcceptedAt: new Date().toISOString(),
         proposal: parsedData,
       });
 
@@ -137,6 +164,18 @@ function requireGroqClient(groq: Groq | null): Groq {
   return groq;
 }
 
+function normalizeRecommendation(
+  data: Readonly<Record<string, unknown>>,
+): Readonly<Record<string, unknown>> {
+  const toolId = typeof data.recommendedToolId === "string"
+    ? data.recommendedToolId.toLowerCase()
+    : "";
+  if (toolId && !ALLOWED_TOOL_IDS.has(toolId)) {
+    return { ...data, recommendedToolId: "n8n" };
+  }
+  return data;
+}
+
 function handleRouteError(error: unknown, res: Response, fallbackMessage: string): void {
   if (error instanceof BadRequestError) {
     res.status(400).json({ error: error.message, fieldName: error.fieldName });
@@ -146,8 +185,22 @@ function handleRouteError(error: unknown, res: Response, fallbackMessage: string
     res.status(503).json({ error: error.message });
     return;
   }
+
+  // Surface provider rate limits / timeouts more clearly
+  if (isProviderRateLimit(error)) {
+    res.status(429).json({ error: "AI 제공자 요청 한도를 초과했습니다. 잠시 후 다시 시도해 주세요." });
+    return;
+  }
+
   console.error("AI route error:", error);
   res.status(500).json({ error: fallbackMessage });
+}
+
+function isProviderRateLimit(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const status = (error as { status?: number; statusCode?: number }).status
+    ?? (error as { statusCode?: number }).statusCode;
+  return status === 429;
 }
 
 // ── 시스템 프롬프트 ──────────────────────────────────────────────────────────

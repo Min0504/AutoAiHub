@@ -29,7 +29,7 @@ const partnerPrograms = [
 
 export function PartnerProgramsPanel() {
   return (
-    <div className="border-t border-slate-150 pt-6 space-y-4">
+    <div className="border-t border-slate-200 pt-6 space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h4 className="text-sm font-black text-slate-900 flex items-center gap-1.5">
@@ -50,7 +50,7 @@ export function PartnerProgramsPanel() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {partnerPrograms.map((program) => (
-          <div key={program.name} className="bg-slate-50 border border-slate-150 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
+          <div key={program.name} className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-black text-indigo-700">{program.name}</span>
@@ -65,7 +65,7 @@ export function PartnerProgramsPanel() {
               href={program.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 bg-indigo-650 hover:bg-slate-900 text-white text-[10px] font-extrabold px-2.5 py-2 rounded-lg transition-all"
+              className="inline-flex items-center justify-center gap-1.5 bg-indigo-600 hover:bg-slate-900 text-white text-[10px] font-extrabold px-2.5 py-2 rounded-lg transition-all"
             >
               {program.cta} <ExternalLink className="w-3 h-3" />
             </a>

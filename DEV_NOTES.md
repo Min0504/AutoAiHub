@@ -1,6 +1,6 @@
 # AutoHub AI — 개발 이어받기 노트
 
-> 마지막 업데이트: 2026-06-09
+> 마지막 업데이트: 2026-07-16
 
 ---
 
@@ -65,13 +65,13 @@ SEO 기반 작업 완료. 구글 색인 생성 대기 중.
 | 파일 경로 | 역할 | 최근 변경 내용 | 다음에 확인할 점 |
 |-----------|------|----------------|-----------------|
 | `server.ts` | Express 앱 엔트리 + Groq 클라이언트 초기화 | Gemini → Groq 전환 | 변경 불필요 |
-| `src/server/aiRoutes.ts` | Groq 기반 AI 라우트 | `/api/chat`, `/api/recommend`, `/api/proposal` | `geminiRoutes.ts` 빈 stub 삭제 가능 |
-| `src/server/leadStore.ts` | 리드 저장 로직 | Supabase 우선, `/tmp` 폴백 | 변경 불필요 |
-| `src/hooks/useSeoMeta.ts` | 동적 SEO 메타태그 훅 | 신규 생성 | 도메인 변경 시 BASE_URL 수정 |
+| `src/server/aiRoutes.ts` | Groq 기반 AI 라우트 | rate limit·PII 최소화·동의 검증 | 쿼터 모니터링 |
+| `src/server/leadStore.ts` | 리드 저장 로직 | Vercel fail-closed, 로컬 JSONL 폴백 | Supabase 키 필수 확인 |
+| `src/hooks/useSeoMeta.ts` | 동적 SEO 메타태그 훅 | 탭 id(`calculators` 등) 정합 | 도메인 변경 시 BASE_URL 수정 |
 | `src/App.tsx` | 앱 루트 + URL 파라미터 처리 | useSeoMeta 연결, URL 딥링크 추가 | 변경 불필요 |
-| `src/components/AffiliateBanner.tsx` | 사이드바 제휴 배너 | Make + 광고 슬롯 (n8n 제거됨) | 새 제휴사 승인 시 카드 추가 |
+| `src/components/AffiliateBanner.tsx` | 사이드바 제휴 배너 | Make·Dify + 광고 슬롯 | 새 제휴사 승인 시 카드 추가 |
 | `src/config/affiliateLinks.ts` | 제휴 링크 관리 | Make: `?pc=autohubai` 적용 | 새 제휴 코드 받으면 추가 |
-| `public/sitemap.xml` | 정적 사이트맵 | 신규 생성 (17개 URL) | 툴 추가 시 수동 업데이트 필요 |
+| `public/sitemap.xml` | 정적 사이트맵 | 26개 URL(블로그 포함) | 툴/블로그 추가 시 수동 업데이트 |
 | `public/robots.txt` | 크롤러 설정 | 도메인 수정 완료 | 변경 불필요 |
 | `index.html` | SEO 메타태그 + GA4 | 도메인 전체 교체 완료 | 도메인 확정 시 재교체 |
 | `build.sh` | Vercel 빌드 스크립트 | 사이트맵 라우팅 제거 | 변경 불필요 |
@@ -83,17 +83,16 @@ SEO 기반 작업 완료. 구글 색인 생성 대기 중.
 ### 🟡 SEO 관련
 - **Google 색인 대기 중**: 요청 제출 완료, 수 시간~수일 내 색인 생성 예상
 - **Sitemaps "가져올 수 없음"**: 신규 사이트 특성상 처리 지연 — 수일 내 자동 해결 예상
-- **OG 이미지 없음**: `/public/og-image.png` 필요 (1200×630px)
+- **OG 이미지**: ✅ `public/og-image.png` (1200×630)
 
 ### 🟡 수익화 관련
-- **제휴사 부족**: Make 1개뿐 — Activepieces, Dify 등 추가 신청 필요
-- **트래픽 0**: 콘텐츠 없으면 제휴 수익도 없음 — FAQ/가이드 콘텐츠 추가 필요
+- **제휴**: Make·Dify 배너 연동 완료 — Activepieces/Zapier 코드 대기
+- **트래픽**: 외부 링크·콘텐츠 확산 필요
 
 ### 🟢 낮은 우선순위
-- `src/server/geminiRoutes.ts` 빈 stub 파일 삭제 가능
 - Slack 리드 알림 미활성 (`SLACK_WEBHOOK_URL` 미설정)
-- 개인정보처리방침 DPO 이메일 플레이스홀더 (`PrivacyPolicyModal.tsx`)
 - 커스텀 도메인 미연결 (`autohub.ai`)
+- 공유 rate-limit 스토어 검토 (현재 인메모리)
 
 ---
 
@@ -197,9 +196,9 @@ curl -s http://localhost:5173/sitemap.xml | head -5
 | 색인 생성 요청 | ✅ `/`, `/?tool=make`, `/?tool=n8n` 요청 완료 |
 | 동적 메타태그 | ✅ 툴/탭별 title·description 자동 변경 |
 | URL 딥링크 | ✅ `?tool=slug` 접속 시 모달 자동 오픈 |
-| OG 이미지 | ❌ 미제작 |
+| OG 이미지 | ✅ `public/og-image.png` |
 | 외부 링크 | ❌ 0개 |
-| FAQ 콘텐츠 | ❌ 미작성 |
+| FAQ 콘텐츠 | ✅ FaqSection + JSON-LD 7문항 |
 
 ---
 

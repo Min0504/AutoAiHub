@@ -25,6 +25,7 @@ export type ConsultingLeadContext = {
   readonly selectedTool: string;
   readonly businessType: string;
   readonly proposalLeadId: string;
+  readonly privacyAccepted: boolean;
 };
 
 export function isProposal(value: unknown): value is Proposal {
