@@ -699,4 +699,4 @@ export const TOOLS: Tool[] = [
 ].map((tool) => ({
   ...tool,
   affiliateUrl: AFFILIATE_LINKS[tool.id] ?? tool.affiliateUrl,
-} as Tool));
+})) as Tool[];

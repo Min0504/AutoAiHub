@@ -17,6 +17,10 @@ const defaultLeadsDir = process.env.VERCEL ? "/tmp/autohub-leads" : path.join(pr
 const leadsDirectory = process.env.LEADS_DIR ?? defaultLeadsDir;
 const leadsFile = process.env.LEADS_FILE ?? path.join(leadsDirectory, "leads.jsonl");
 
+function isVercelRuntime(): boolean {
+  return Boolean(process.env.VERCEL);
+}
+
 function isSupabaseConfigured(): boolean {
   return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY);
 }
@@ -58,11 +62,20 @@ export async function saveLead(
     payload,
   };
 
+  // Production: require durable Supabase storage — never treat /tmp as success.
+  if (isVercelRuntime()) {
+    if (!isSupabaseConfigured()) {
+      throw new Error("프로덕션 리드 저장을 위해 SUPABASE_URL과 SUPABASE_SERVICE_KEY가 필요합니다.");
+    }
+    await saveToSupabase(record);
+    return record;
+  }
+
   if (isSupabaseConfigured()) {
     try {
       await saveToSupabase(record);
     } catch (err) {
-      console.error("[LeadStore] Supabase 저장 실패, JSONL 폴백:", err);
+      console.error("[LeadStore] Supabase 저장 실패, 로컬 JSONL 폴백:", err);
       await saveToFile(record);
     }
   } else {
@@ -70,8 +83,4 @@ export async function saveLead(
   }
 
   return record;
-}
-
-export function getLeadStoragePath(): string {
-  return leadsFile;
 }

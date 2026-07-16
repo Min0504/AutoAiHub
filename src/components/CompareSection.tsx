@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import type { Tool } from "../data/tools";
 import { TOOLS } from "../data/tools";
 import { ShieldAlert, Check, Trophy } from "lucide-react";
@@ -14,6 +14,12 @@ export default function CompareSection({ selectedTools }: CompareSectionProps) {
   const initialToolIds = getInitialToolIds(selectedTools);
   const [toolId1, setToolId1] = useState<string>(initialToolIds.first);
   const [toolId2, setToolId2] = useState<string>(initialToolIds.second);
+
+  useEffect(() => {
+    const ids = getInitialToolIds(selectedTools);
+    setToolId1(ids.first);
+    setToolId2(ids.second);
+  }, [selectedTools]);
 
   // Sync state if coming from external selections
   const finalTool1 = TOOLS.find(t => t.id === toolId1) || TOOLS[0];

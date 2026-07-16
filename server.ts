@@ -1,7 +1,7 @@
 /**
  * Vercel Serverless Function — wraps the Express API app.
- * Handles: /api/*, /sitemap.xml
- * Static frontend is served by Vercel CDN from dist/
+ * Handles: /api/*
+ * Static frontend (incl. sitemap.xml) is served by Vercel CDN from dist/public.
  */
 import Groq from "groq-sdk";
 import dotenv from "dotenv";
@@ -9,7 +9,7 @@ import express from "express";
 import { registerAiRoutes } from "./src/server/aiRoutes";
 import { registerLeadRoutes } from "./src/server/leadRoutes";
 import { registerPartnerRoutes } from "./src/server/partnerRoutes";
-import { registerSitemapRoute } from "./src/server/sitemapRoute";
+import { createRateLimiter } from "./src/server/rateLimit";
 
 // Load .env.local first (local dev), then .env as fallback
 dotenv.config({ path: ".env.local" });
@@ -24,7 +24,24 @@ const groq = process.env.GROQ_API_KEY
 const app = express();
 app.use(express.json({ limit: "64kb" }));
 
-registerSitemapRoute(app);
+// AI routes: 20 req / 15 min per IP (burst abuse protection)
+const aiRateLimit = createRateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  keyPrefix: "ai",
+});
+app.use("/api/chat", aiRateLimit);
+app.use("/api/recommend", aiRateLimit);
+app.use("/api/proposal", aiRateLimit);
+
+// Lead routes: 30 req / 15 min per IP
+const leadRateLimit = createRateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  keyPrefix: "leads",
+});
+app.use("/api/leads", leadRateLimit);
+
 registerLeadRoutes(app);
 registerPartnerRoutes(app);
 registerAiRoutes(app, groq, groqModel);

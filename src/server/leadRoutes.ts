@@ -3,8 +3,11 @@ import { saveLead } from "./leadStore";
 import { notifyNewLead } from "./notifySlack";
 import {
   BadRequestError,
+  FIELD_LIMITS,
   readOptionalString,
+  readPrivacyAccepted,
   readRecord,
+  readRequiredEmail,
   readRequiredString,
 } from "./requestParsing";
 
@@ -12,11 +15,11 @@ export function registerLeadRoutes(app: Express): void {
   app.post("/api/leads/roi-report", async (req: Request, res: Response) => {
     try {
       const body = readRecord(req.body);
-      const email = readRequiredString(body, "email");
+      const email = readRequiredEmail(body, "email");
       const lead = await saveLead("roi_report", {
         email,
-        inputs: body["inputs"] ?? {},
-        results: body["results"] ?? {},
+        inputs: isPlainObject(body["inputs"]) ? body["inputs"] : {},
+        results: isPlainObject(body["results"]) ? body["results"] : {},
       });
 
       void notifyNewLead({ kind: "roi_report", leadId: lead.id, email });
@@ -30,20 +33,24 @@ export function registerLeadRoutes(app: Express): void {
   app.post("/api/leads/consulting-meeting", async (req: Request, res: Response) => {
     try {
       const body = readRecord(req.body);
-      const companyName = readRequiredString(body, "companyName");
-      const email = readRequiredString(body, "email");
-      const needs = readRequiredString(body, "needs");
-      const phone = readOptionalString(body, "phone");
-      const budget = readOptionalString(body, "budget");
+      const companyName = readRequiredString(body, "companyName", FIELD_LIMITS.short);
+      const email = readRequiredEmail(body, "email");
+      const needs = readRequiredString(body, "needs", FIELD_LIMITS.long);
+      const phone = readOptionalString(body, "phone", FIELD_LIMITS.short);
+      const budget = readOptionalString(body, "budget", FIELD_LIMITS.short);
+      readPrivacyAccepted(body);
+
       const lead = await saveLead("consulting_meeting", {
         companyName,
         email,
         phone,
         needs,
         budget,
-        selectedTool: readOptionalString(body, "selectedTool"),
-        businessType: readOptionalString(body, "businessType"),
-        proposalLeadId: readOptionalString(body, "proposalLeadId"),
+        selectedTool: readOptionalString(body, "selectedTool", FIELD_LIMITS.short),
+        businessType: readOptionalString(body, "businessType", FIELD_LIMITS.short),
+        proposalLeadId: readOptionalString(body, "proposalLeadId", FIELD_LIMITS.short),
+        privacyAccepted: true,
+        privacyAcceptedAt: new Date().toISOString(),
       });
 
       void notifyNewLead({
@@ -61,6 +68,10 @@ export function registerLeadRoutes(app: Express): void {
       handleLeadRouteError(error, res);
     }
   });
+}
+
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function handleLeadRouteError(error: unknown, res: Response): void {

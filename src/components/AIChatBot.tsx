@@ -18,20 +18,38 @@ const SUGGESTED_QUESTIONS = [
   "Make vs n8n 월 1만 태스크 기준 비용 비교",
 ];
 
+function isChatMessage(value: unknown): value is ChatMessage {
+  if (typeof value !== "object" || value === null) return false;
+  const msg = value as Record<string, unknown>;
+  return (
+    typeof msg.id === "string" &&
+    (msg.role === "user" || msg.role === "model") &&
+    typeof msg.text === "string"
+  );
+}
+
+function loadChatHistory(): ChatMessage[] {
+  const welcome: ChatMessage = {
+    id: "welcome",
+    role: "model",
+    text: "안녕하세요! 오토가이드 AI 전담 고문입니다.\n\nn8n, Make, Zapier, Lindy, Relay 등 다양한 자동화 플랫폼의 가격 차이, 코딩 난이도, 연동 방식 등 무엇이든 편하게 여쭤보세요. 아래 추천 질문을 클릭하거나 직접 입력해 주세요 😊",
+  };
+
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return [welcome];
+    const parsed: unknown = JSON.parse(saved);
+    if (!Array.isArray(parsed) || !parsed.every(isChatMessage)) {
+      return [welcome];
+    }
+    return parsed.length > 0 ? parsed : [welcome];
+  } catch {
+    return [welcome];
+  }
+}
+
 export default function AIChatBot() {
-  const [messages, setMessages] = useState<ChatMessage[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) return JSON.parse(saved) as ChatMessage[];
-    } catch {}
-    return [
-      {
-        id: "welcome",
-        role: "model",
-        text: "안녕하세요! 오토가이드 AI 전담 고문입니다.\n\nn8n, Make, Zapier, Lindy, Relay 등 다양한 자동화 플랫폼의 가격 차이, 코딩 난이도, 연동 방식 등 무엇이든 편하게 여쭤보세요. 아래 추천 질문을 클릭하거나 직접 입력해 주세요 😊",
-      },
-    ];
-  });
+  const [messages, setMessages] = useState<ChatMessage[]>(() => loadChatHistory());
   const [input, setInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -127,7 +145,7 @@ export default function AIChatBot() {
           💬 AI 자동화 플랫폼 전문 상담사
         </h2>
         <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">
-          Gemini 기반 · 실시간 플랫폼 선택 전문 가이드
+          Groq 기반 · 실시간 플랫폼 선택 전문 가이드
         </p>
       </div>
 
@@ -141,7 +159,7 @@ export default function AIChatBot() {
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-black tracking-wide text-indigo-400">GEMINI POWERED</span>
+            <span className="text-[10px] font-black tracking-wide text-indigo-400">GROQ POWERED</span>
             <button
               onClick={handleClearHistory}
               title="대화 초기화"
@@ -197,7 +215,7 @@ export default function AIChatBot() {
                   className={`p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed border ${
                     isUser
                       ? "bg-indigo-600 border-indigo-700 text-white rounded-tr-none font-medium"
-                      : "bg-white border-slate-150 text-slate-800 rounded-tl-none font-medium shadow-sm"
+                      : "bg-white border-slate-200 text-slate-800 rounded-tl-none font-medium shadow-sm"
                   }`}
                 >
                   {isUser ? (
@@ -217,7 +235,7 @@ export default function AIChatBot() {
               <div className="h-8 w-8 rounded-xl bg-slate-900 text-indigo-400 border border-slate-800 shrink-0 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 animate-spin" />
               </div>
-              <div className="p-3.5 rounded-2xl text-xs bg-white border border-slate-150 text-slate-400 font-bold tracking-wider rounded-tl-none animate-pulse">
+              <div className="p-3.5 rounded-2xl text-xs bg-white border border-slate-200 text-slate-400 font-bold tracking-wider rounded-tl-none animate-pulse">
                 분석 중...
               </div>
             </div>

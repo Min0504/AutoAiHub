@@ -13,12 +13,12 @@ const TAB_META: Record<string, { title: string; description: string }> = {
     description:
       "n8n vs Make, Zapier vs n8n 등 AI 자동화 툴을 기능·가격·난이도로 1:1 직접 비교하세요.",
   },
-  calculator: {
+  calculators: {
     title: "업무 자동화 ROI 계산기 — 비용 절감 분석 | AutoHub AI",
     description:
       "자동화 도입 시 월 인건비 절감액, ROI, 손익분기점을 무료로 계산하세요. Make·n8n·Zapier 비용 비교 포함.",
   },
-  "ai-scenario": {
+  "ai-builder": {
     title: "AI 워크플로우 자동화 시나리오 설계 — AutoHub AI",
     description:
       "업무를 설명하면 AI가 n8n·Make·Zapier 중 최적 툴과 워크플로우 시나리오를 설계해드립니다.",
@@ -28,7 +28,7 @@ const TAB_META: Record<string, { title: string; description: string }> = {
     description:
       "업종·예산에 맞는 AI 자동화 툴 추천과 도입 견적을 무료로 받아보세요.",
   },
-  chat: {
+  "ai-chat": {
     title: "AI 자동화 전문 상담사 — AutoHub AI",
     description:
       "n8n, Make, Zapier 등 자동화 툴 선택부터 구축 방법까지 AI 전문 상담사에게 무료로 물어보세요.",

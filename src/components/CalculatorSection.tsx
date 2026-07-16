@@ -230,7 +230,7 @@ export default function CalculatorSection() {
                 {savingsData.map((data, idx) => (
                   <div key={idx} className="bg-slate-50 p-3 rounded-xl border border-slate-100/80 text-center">
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{data.name}</span>
-                    <p className="mt-1 text-base font-extrabold text-slate-850">${data["월 비용 ($)"]}</p>
+                    <p className="mt-1 text-base font-extrabold text-slate-800">${data["월 비용 ($)"]}</p>
                     <p className="text-[9px] font-medium text-slate-400 mt-1">
                       ≈ {(data["월 비용 ($)"] * 1380).toLocaleString()}원/월
                     </p>
@@ -260,7 +260,7 @@ export default function CalculatorSection() {
                     type="number"
                     value={manualHours}
                     onChange={(e) => setManualHours(Math.max(1, Number(e.target.value)))}
-                    className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-sm font-bold text-slate-800"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -269,7 +269,7 @@ export default function CalculatorSection() {
                     type="number"
                     value={laborCost}
                     onChange={(e) => setLaborCost(Math.max(1000, Number(e.target.value)))}
-                    className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-sm font-bold text-slate-800"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -278,7 +278,7 @@ export default function CalculatorSection() {
                     type="number"
                     value={workingDays}
                     onChange={(e) => setWorkingDays(Math.max(1, Number(e.target.value)))}
-                    className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-sm font-bold text-slate-800"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -287,7 +287,7 @@ export default function CalculatorSection() {
                     type="number"
                     value={toolSubscription}
                     onChange={(e) => setToolSubscription(Math.max(0, Number(e.target.value)))}
-                    className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-sm font-bold text-slate-800"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"
                   />
                 </div>
               </div>
@@ -375,7 +375,7 @@ export default function CalculatorSection() {
                           : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
                       }`}
                     >
-                      초절감 Flash 모델 (Gemini 2.0 Flash)
+                      초절감 Flash 모델 (예: Gemini 2.0 Flash)
                     </button>
                     <button
                       onClick={() => setLlmTier("pro")}
@@ -385,7 +385,7 @@ export default function CalculatorSection() {
                           : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
                       }`}
                     >
-                      고성능 Pro Reasoning (GPT-4o / Gemini Pro)
+                      고성능 Pro Reasoning (예: GPT-4o / Gemini Pro)
                     </button>
                   </div>
                 </div>
@@ -396,7 +396,7 @@ export default function CalculatorSection() {
                     type="number"
                     value={dailyCalls}
                     onChange={(e) => setDailyCalls(Math.max(1, Number(e.target.value)))}
-                    className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-sm font-bold text-slate-800"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -405,7 +405,7 @@ export default function CalculatorSection() {
                     type="number"
                     value={promptTokens}
                     onChange={(e) => setPromptTokens(Math.max(10, Number(e.target.value)))}
-                    className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-sm font-bold text-slate-800"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -414,7 +414,7 @@ export default function CalculatorSection() {
                     type="number"
                     value={completionTokens}
                     onChange={(e) => setCompletionTokens(Math.max(10, Number(e.target.value)))}
-                    className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-sm font-bold text-slate-800"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"
                   />
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { TOOLS, CATEGORIES } from "./data/tools";
 import type { Tool } from "./data/tools";
 import Header from "./components/Header";
 import ToolCard from "./components/ToolCard";
-import { Search, SlidersHorizontal, Check, Trash2, ArrowRight, Stars, Globe, Award, ShieldCheck, Cpu, ArrowUpDown } from "lucide-react";
+import { Search, SlidersHorizontal, Trash2, ArrowRight, Stars, Globe, Award, ShieldCheck, Cpu } from "lucide-react";
 import AffiliateBanner from "./components/AffiliateBanner";
 import FaqSection from "./components/FaqSection";
 import { ToastProvider, useToast } from "./components/Toast";
@@ -56,11 +56,6 @@ function AppInner() {
     toolBestFor: activeModalTool?.bestFor ?? null,
     activeTab,
   });
-
-  // Category change wrapper
-  const handleCategoryChange = (catId: string) => {
-    setSelectedCategory(catId);
-  };
 
   // Toggle compare shelf bindings
   const handleToggleCompareShelf = (tool: Tool) => {
@@ -216,7 +211,7 @@ function AppInner() {
                 <AffiliateBanner />
 
                 {/* Nice launch recommendation box */}
-                <div className="border-t border-slate-150 pt-5">
+                <div className="border-t border-slate-200 pt-5">
                   <div className="p-4 bg-indigo-50/70 border border-indigo-100 rounded-2xl space-y-1.5">
                     <p className="text-xs text-indigo-900 font-black tracking-wide uppercase">⚡ 가이드 픽</p>
                     <p className="text-[11.5px] text-indigo-700 leading-relaxed font-bold">
@@ -224,18 +219,22 @@ function AppInner() {
                     </p>
                     <button
                       onClick={() => {
-                        setSearchQuery("crewai");
-                        setSelectedCategory("AI Agents");
+                        const crewai = TOOLS.find((t) => t.id === "crewai");
+                        const autogen = TOOLS.find((t) => t.id === "autogen");
+                        if (crewai && autogen) {
+                          setCompareShelf([crewai, autogen]);
+                          setActiveTab("compare");
+                        }
                       }}
-                      className="text-[11px] font-black text-indigo-600 hover:text-indigo-850 uppercase tracking-tight block text-left cursor-pointer"
+                      className="text-[11px] font-black text-indigo-600 hover:text-indigo-800 uppercase tracking-tight block text-left cursor-pointer"
                     >
-                      상세 심층 분석 보기 →
+                      1:1 비교 분석 열기 →
                     </button>
                   </div>
                 </div>
 
                 {/* 플랫폼 활용 가이드 카드 */}
-                <div className="border-t border-slate-150 pt-5">
+                <div className="border-t border-slate-200 pt-5">
                   <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
                     <span className="text-[10px] text-indigo-600 font-black uppercase tracking-wider block">💡 플랫폼 활용 팁</span>
                     <p className="text-xs font-extrabold text-slate-800 leading-snug">
@@ -248,7 +247,7 @@ function AppInner() {
                 </div>
 
                 {/* 블로그 가이드 링크 */}
-                <div className="border-t border-slate-150 pt-5">
+                <div className="border-t border-slate-200 pt-5">
                   <p className="text-[10px] text-slate-400 font-black uppercase tracking-wider mb-3">📝 자동화 가이드</p>
                   <div className="space-y-2">
                     {[
@@ -298,7 +297,7 @@ function AppInner() {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="예) n8n, 크롤링, 파이썬, 무료, 장점 등..."
-                      className="w-full rounded-xl border border-slate-250 bg-white py-2.5 pl-10 pr-4 text-sm font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
                     />
                   </div>
 
@@ -344,7 +343,7 @@ function AppInner() {
                 {/* Category Description Panel */}
                 <div className="bg-white border border-slate-200 rounded-2xl px-5 py-4 text-xs sm:text-sm font-semibold text-slate-500 shadow-sm flex items-center justify-between">
                   <div className="max-w-[70%]">
-                    <span className="text-[10px] font-black text-indigo-650 uppercase tracking-widest block mb-0.5">CURRENT SELECTION</span>
+                    <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest block mb-0.5">CURRENT SELECTION</span>
                     <p className="text-slate-800 font-extrabold text-sm">{CATEGORIES.find((c) => c.id === selectedCategory)?.name}</p>
                     <p className="text-xs text-slate-400 font-medium mt-1">{CATEGORIES.find((c) => c.id === selectedCategory)?.desc}</p>
                   </div>

@@ -1,5 +1,6 @@
 import { ExternalLink, Zap, Mail } from "lucide-react";
 import { AFFILIATE_LINKS } from "../config/affiliateLinks";
+import { trackAffiliateClick } from "../lib/analytics";
 
 const BANNERS = [
   {
@@ -39,6 +40,7 @@ export default function AffiliateBanner() {
             href={href}
             target="_blank"
             rel="noopener noreferrer sponsored"
+            onClick={() => trackAffiliateClick(banner.key, banner.name)}
             className={`block bg-gradient-to-br ${banner.colorFrom} ${banner.colorTo} border border-slate-200 rounded-2xl p-4 space-y-2 hover:shadow-md transition-all group`}
           >
             <div className="flex items-center justify-between">

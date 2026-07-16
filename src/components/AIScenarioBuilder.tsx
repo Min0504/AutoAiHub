@@ -22,6 +22,34 @@ interface RecommendedScenario {
   costEstimation: string;
 }
 
+function isStep(value: unknown): value is Step {
+  if (typeof value !== "object" || value === null) return false;
+  const step = value as Record<string, unknown>;
+  return (
+    typeof step.stepNumber === "number" &&
+    typeof step.app === "string" &&
+    typeof step.action === "string" &&
+    typeof step.description === "string"
+  );
+}
+
+function isRecommendedScenario(value: unknown): value is RecommendedScenario {
+  if (typeof value !== "object" || value === null) return false;
+  const data = value as Record<string, unknown>;
+  return (
+    typeof data.scenarioName === "string" &&
+    typeof data.recommendedToolId === "string" &&
+    typeof data.whyThisTool === "string" &&
+    typeof data.difficulty === "string" &&
+    typeof data.estimatedTime === "string" &&
+    Array.isArray(data.steps) &&
+    data.steps.every(isStep) &&
+    typeof data.aiNodeInvolved === "boolean" &&
+    typeof data.aiImplementationTip === "string" &&
+    typeof data.costEstimation === "string"
+  );
+}
+
 export default function AIScenarioBuilder() {
   const [prompt, setPrompt] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,15 +87,19 @@ export default function AIScenarioBuilder() {
         throw new Error("서버 응답 오류가 발생했습니다. 잠시 후 재시도해 주세요.");
       }
 
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
+      const data: unknown = await response.json();
+      if (typeof data === "object" && data !== null && "error" in data && typeof (data as { error: unknown }).error === "string") {
+        throw new Error((data as { error: string }).error);
+      }
+      if (!isRecommendedScenario(data)) {
+        throw new Error("시나리오 응답 형식이 올바르지 않습니다.");
       }
 
       setScenario(data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      setError(err.message || "추천 분석 중 예상치 못한 문제가 발생했습니다.");
+      const message = err instanceof Error ? err.message : "추천 분석 중 예상치 못한 문제가 발생했습니다.";
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -80,11 +112,11 @@ export default function AIScenarioBuilder() {
     <section id="ai-scenario-builder" className="space-y-8">
       
       {/* Intro Banner */}
-      <div className="rounded-3xl border border-indigo-150 bg-gradient-to-tr from-slate-900 via-slate-850 to-slate-950 p-8 text-white relative overflow-hidden shadow-lg">
+      <div className="rounded-3xl border border-indigo-100 bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-950 p-8 text-white relative overflow-hidden shadow-lg">
         <div className="absolute top-0 right-0 h-40 w-40 rounded-full bg-indigo-500/10 blur-3xl" />
         <div className="relative z-10 max-w-3xl">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-black text-indigo-300 border border-indigo-500/30">
-            <Sparkles className="w-3.5 h-3.5 animate-pulse text-indigo-300" /> GEMINI AUTOMATION CO-PILOT
+            <Sparkles className="w-3.5 h-3.5 animate-pulse text-indigo-300" /> GROQ AUTOMATION CO-PILOT
           </span>
           <h2 className="text-2xl font-black mt-4 tracking-tight sm:text-3xl">
             💡 AI 업무 자동화 맞춤 시나리오 설계사
@@ -105,7 +137,7 @@ export default function AIScenarioBuilder() {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="예시) 매일 주식 뉴스를 수집해 워드마크 파일로 요약 후 드롭박스 폴더에 넣고, 중요 수치가 감지되면 라인 알림메세지 발송"
-            className="w-full rounded-2xl border border-slate-250 bg-white p-4 text-sm font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+            className="w-full rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
           />
         </div>
 
@@ -117,7 +149,7 @@ export default function AIScenarioBuilder() {
               <button
                 key={i}
                 onClick={() => handleApplyPreset(preset)}
-                className="text-left text-xs font-semibold text-indigo-650 hover:text-indigo-800 hover:bg-indigo-50/50 p-2.5 rounded-xl border border-indigo-100/40 bg-indigo-50/20 transition-all cursor-pointer truncate"
+                className="text-left text-xs font-semibold text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50/50 p-2.5 rounded-xl border border-indigo-100/40 bg-indigo-50/20 transition-all cursor-pointer truncate"
               >
                 &ldquo;{preset}&rdquo;
               </button>
@@ -131,7 +163,7 @@ export default function AIScenarioBuilder() {
             id="btn-build-scenario"
             disabled={loading || !prompt.trim()}
             onClick={handleBuild}
-            className="flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed transition-all py-3.5 px-6 font-bold text-sm text-white cursor-pointer shadow-sm shadow-indigo-150"
+            className="flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed transition-all py-3.5 px-6 font-bold text-sm text-white cursor-pointer shadow-sm shadow-indigo-100"
           >
             {loading ? (
               <>
@@ -170,7 +202,7 @@ export default function AIScenarioBuilder() {
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center border-b border-slate-200 pb-5">
             <div>
               <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest block">GENERATE ACTIVE WORKFLOW PLATFORM</span>
-              <h3 className="text-2xl font-black text-slate-850">{scenario.scenarioName}</h3>
+              <h3 className="text-2xl font-black text-slate-800">{scenario.scenarioName}</h3>
             </div>
 
             {/* Quick Metrics */}
@@ -203,7 +235,7 @@ export default function AIScenarioBuilder() {
                 <a
                   href={matchedToolObj.affiliateUrl}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer sponsored"
                   onClick={() => trackAffiliateClick(matchedToolObj.id, matchedToolObj.name)}
                   className="mt-4 block w-full rounded-xl bg-slate-900 hover:bg-slate-800 text-white py-2 text-xs font-bold transition-all cursor-pointer"
                 >
