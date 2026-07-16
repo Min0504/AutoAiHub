@@ -29,10 +29,12 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
         <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Logo */}
-          <div
+          <button
             id="brand-logo"
+            type="button"
             className="flex items-center gap-2 cursor-pointer shrink-0"
             onClick={() => handleTabClick("directory")}
+            aria-label="AutoHub AI 홈으로 이동"
           >
             <div className="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,7 +44,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
             <span className="text-lg font-bold tracking-tight text-slate-900">
               AutoHub<span className="text-indigo-600">AI</span>
             </span>
-          </div>
+          </button>
 
           {/* Desktop Tabs */}
           <nav id="nav-tabs" className="hidden lg:flex items-center gap-1 h-full font-medium text-slate-500 overflow-x-auto">

@@ -4,6 +4,7 @@ import { DollarSign, FileText, Sparkles, Building2, User2, MessageSquare } from 
 import { trackProposalSubmit } from "../lib/analytics";
 import { TOOLS } from "../data/tools";
 import { ProposalActions } from "./consulting/ProposalActions";
+import { PartnerProgramsPanel } from "./consulting/PartnerProgramsPanel";
 import { isProposal, type Proposal } from "./consulting/types";
 
 export default function ConsultingSection() {
@@ -26,6 +27,11 @@ export default function ConsultingSection() {
     event.preventDefault();
     if (!companyName.trim() || !email.trim() || !needs.trim()) {
       setError("회사명, 이메일, 그리고 구현하고 싶은 니즈를 작성해 주세요.");
+      return;
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+      setError("올바른 이메일 주소를 입력해 주세요.");
       return;
     }
 
@@ -52,7 +58,8 @@ export default function ConsultingSection() {
           needs,
           budget,
           selectedTool,
-          businessType
+          businessType,
+          privacyAccepted,
         }),
       });
 
@@ -97,7 +104,7 @@ export default function ConsultingSection() {
           <span className="bg-gradient-to-r from-emerald-600 to-indigo-600 bg-clip-text text-transparent">B2B 정밀 기획서와 견적을 즉시 발급받으세요</span>
         </h2>
         <p className="text-sm font-semibold text-slate-500 leading-relaxed max-w-2xl mx-auto">
-          복잡한 외주 기획 단계를 완전 노코드로 단축하세요. 구상하는 시스템 요구 조건과 사내 리소스를 지정하면, <strong>Gemini 인지 두뇌</strong>가 공식 기획 견적서(RFP)를 즉각 편찬합니다.
+          복잡한 외주 기획 단계를 완전 노코드로 단축하세요. 구상하는 시스템 요구 조건과 사내 리소스를 지정하면, <strong>Groq AI</strong>가 공식 기획 견적서(RFP)를 즉각 편찬합니다.
         </p>
       </div>
 
@@ -144,7 +151,7 @@ export default function ConsultingSection() {
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
                   placeholder="예: 주식회사 에이아이텍"
-                  className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
                 />
               </div>
               <div className="space-y-1.5">
@@ -155,7 +162,7 @@ export default function ConsultingSection() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="예: manager@aitech.com"
-                  className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -168,7 +175,7 @@ export default function ConsultingSection() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="예: 010-1234-5678"
-                  className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
                 />
               </div>
               <div className="space-y-1.5">
@@ -176,7 +183,7 @@ export default function ConsultingSection() {
                 <select
                   value={selectedTool}
                   onChange={(e) => setSelectedTool(e.target.value)}
-                  className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2 text-xs font-bold text-slate-800 cursor-pointer focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-800 cursor-pointer focus:border-indigo-500 focus:outline-none"
                 >
                   {TOOLS.map((t) => (
                     <option key={t.id} value={t.id}>
@@ -193,7 +200,7 @@ export default function ConsultingSection() {
               <select
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
-                className="w-full rounded-xl border border-slate-250 bg-white px-3 py-2.5 text-xs font-bold text-slate-800 cursor-pointer focus:border-indigo-500 focus:outline-none animate-pulse-subtle"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-bold text-slate-800 cursor-pointer focus:border-indigo-500 focus:outline-none animate-pulse-subtle"
               >
                 <option value="100만원 이하 (초경량 테스트)">100만원 이하 (초경량 테스트 구축)</option>
                 <option value="100만원 ~ 500만원 (알뜰형 메인 자동화)">100만원 ~ 500만원 (알뜰 실용 핵심 자동화)</option>
@@ -211,7 +218,7 @@ export default function ConsultingSection() {
                 value={needs}
                 onChange={(e) => setNeeds(e.target.value)}
                 placeholder="어느 부서의 어떤 연동이 막히는지, 수작업을 어떻게 대체하고 싶은지 한국어로 구체적일수록 고인지적 견적 기획서가 산출됩니다."
-                className="w-full rounded-2xl border border-slate-250 bg-white p-3.5 text-xs font-semibold text-slate-850 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-2xl border border-slate-200 bg-white p-3.5 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
               />
             </div>
 
@@ -227,7 +234,7 @@ export default function ConsultingSection() {
                       setNeeds(p.label);
                       setBusinessType(p.type === "쇼핑몰/물류" ? "데이터 크롤링/보고서" : p.type === "영업/CRM" ? "B2B 영업/마케팅" : "CS 고객상담/CRM");
                     }}
-                    className="text-left text-[11px] p-2 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-lg text-slate-600 hover:text-indigo-850 font-semibold cursor-pointer truncate"
+                    className="text-left text-[11px] p-2 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-lg text-slate-600 hover:text-indigo-800 font-semibold cursor-pointer truncate"
                   >
                     [{p.type}] {p.label}
                   </button>
@@ -252,7 +259,7 @@ export default function ConsultingSection() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-350 disabled:cursor-not-allowed text-white py-3 font-extrabold text-sm shadow-md transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white py-3 font-extrabold text-sm shadow-md transition-all cursor-pointer"
               >
                 {loading ? (
                   <>
@@ -260,7 +267,7 @@ export default function ConsultingSection() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    <span>Gemini AI가 B2B 견적 초안 생성 중...</span>
+                    <span>Groq AI가 B2B 견적 초안 생성 중...</span>
                   </>
                 ) : (
                   <>
@@ -305,21 +312,21 @@ export default function ConsultingSection() {
               {/* Executive Summary */}
               <div className="space-y-1.5 text-xs">
                 <span className="text-[10px] font-black text-slate-400 tracking-wider block">01. 추진 도면 및 혁신 기대 효과 (EXECUTIVE SUMMARY)</span>
-                <p className="bg-slate-50 border border-slate-150 p-4 rounded-xl leading-relaxed font-semibold text-slate-650">
+                <p className="bg-slate-50 border border-slate-200 p-4 rounded-xl leading-relaxed font-semibold text-slate-600">
                   {proposal.executiveSummary}
                 </p>
               </div>
 
               {/* Tech Stack & Cognitive flow */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-slate-50 border border-slate-150 p-4 rounded-2xl space-y-2 text-xs font-semibold">
+                <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2 text-xs font-semibold">
                   <span className="text-[10px] font-black text-indigo-600 block uppercase tracking-wide">02. 권장 기술 스튜던트 (TECH STACK)</span>
                   <p className="font-extrabold text-slate-800 text-sm">{proposal.recommendedStack}</p>
                   <p className="text-[11px] font-medium text-slate-500 leading-relaxed">자사에서 산출한 가격 편차 대비 최상의 ROI를 실적하는 통합 시스템 결성 스택 추천입니다.</p>
                 </div>
-                <div className="bg-slate-50 border border-slate-150 p-4 rounded-2xl space-y-2 text-xs font-semibold">
+                <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2 text-xs font-semibold">
                   <span className="text-[10px] font-black text-indigo-600 block uppercase tracking-wide">03. 아키텍처 인지 흐름 (COGNITIVE FLOW)</span>
-                  <p className="font-medium text-slate-650 leading-relaxed">{proposal.architectureFlow}</p>
+                  <p className="font-medium text-slate-600 leading-relaxed">{proposal.architectureFlow}</p>
                 </div>
               </div>
 
@@ -332,34 +339,34 @@ export default function ConsultingSection() {
                       <div>
                         <div className="flex items-center gap-1.5">
                           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-[10px] font-extrabold text-white">{sIdx + 1}</span>
-                          <span className="font-extrabold text-slate-850 text-xs">{step.phaseName}</span>
+                          <span className="font-extrabold text-slate-800 text-xs">{step.phaseName}</span>
                         </div>
                         <p className="text-[11px] font-medium text-slate-500 leading-normal mt-1.5 pl-6">산출물: {step.deliverables}</p>
                       </div>
-                      <span className="bg-indigo-50 border border-indigo-150 text-indigo-600 text-[10px] px-2 py-1 rounded-md shrink-0 font-extrabold">{step.duration}</span>
+                      <span className="bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] px-2 py-1 rounded-md shrink-0 font-extrabold">{step.duration}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Costing and ROI Forecast */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-slate-150">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-slate-200">
                 <div className="space-y-1.5 text-xs font-semibold">
                   <span className="text-[10px] font-black text-slate-400 block uppercase tracking-wide">05. 예상 인건 외주 견적 비용 (COSTING)</span>
-                  <p className="bg-slate-50 border border-slate-150 p-3.5 rounded-xl font-extrabold text-indigo-950 leading-relaxed whitespace-pre-line">
+                  <p className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl font-extrabold text-indigo-950 leading-relaxed whitespace-pre-line">
                     {proposal.estimatedDevelopmentCost}
                   </p>
                 </div>
                 <div className="space-y-1.5 text-xs font-semibold">
                   <span className="text-[10px] font-black text-slate-400 block uppercase tracking-wide">06. 공약 절약 ROI 미래상 (ROI FORECAST)</span>
-                  <p className="bg-slate-50 border border-slate-150 p-3.5 rounded-xl font-medium text-slate-650 leading-relaxed">
+                  <p className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl font-medium text-slate-600 leading-relaxed">
                     {proposal.annualROIExpected}
                   </p>
                 </div>
               </div>
 
               {/* Specialist comment & action bar */}
-              <div className="p-4 bg-indigo-50/70 border border-indigo-150 rounded-2xl text-xs font-semibold space-y-1">
+              <div className="p-4 bg-indigo-50/70 border border-indigo-100 rounded-2xl text-xs font-semibold space-y-1">
                 <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest block">Senior Architect Special Review</span>
                 <p className="text-slate-700 leading-relaxed">{proposal.expertMatchingInfo}</p>
               </div>
@@ -374,6 +381,7 @@ export default function ConsultingSection() {
                   selectedTool,
                   businessType,
                   proposalLeadId: proposal.leadId ?? "",
+                  privacyAccepted: true,
                 }}
               />
 
@@ -386,13 +394,14 @@ export default function ConsultingSection() {
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
                   <FileText className="w-6 h-6 animate-pulse" />
                 </div>
-                <h4 className="text-lg font-black text-slate-850">실시간 AI 견적 산출 대기 중</h4>
+                <h4 className="text-lg font-black text-slate-800">실시간 AI 견적 산출 대기 중</h4>
                 <p className="text-xs text-slate-400 font-medium leading-relaxed max-w-sm mx-auto">
                   왼쪽 양식에 회사명과 무엇을 자동화하고 싶은지 상세히 적어주세요.<br />
-                  Gemini 브레인이 구축 난이도, 일정, 설계 단계, 개발 인건비 견적을 시뮬레이션합니다.
+                  Groq AI가 구축 난이도, 일정, 설계 단계, 개발 인건비 견적을 시뮬레이션합니다.
                 </p>
               </div>
 
+              <PartnerProgramsPanel />
             </div>
           )}
 

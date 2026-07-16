@@ -18,6 +18,7 @@ export type ConsultingMeetingLeadPayload = {
   readonly selectedTool: string;
   readonly businessType: string;
   readonly proposalLeadId: string;
+  readonly privacyAccepted: boolean;
 };
 
 export class ApiRequestError extends Error {

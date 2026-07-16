@@ -54,9 +54,10 @@ npm run build
 | 변수 | 용도 |
 |------|------|
 | `GROQ_API_KEY` | AI 엔진 (필수) |
-| `VITE_SUPABASE_URL` | Supabase 프로젝트 URL |
-| `VITE_SUPABASE_ANON_KEY` | Supabase 공개 키 |
-| `SUPABASE_SERVICE_ROLE_KEY` | 서버 측 리드 저장 |
+| `GROQ_MODEL` | Groq 모델 (기본 `llama-3.3-70b-versatile`) |
+| `SUPABASE_URL` | Supabase 프로젝트 URL (서버) |
+| `SUPABASE_SERVICE_KEY` | Supabase service_role 키 (서버 전용) |
+| `SLACK_WEBHOOK_URL` | 리드 Slack 알림 (선택) |
 
 ---
 
@@ -71,16 +72,17 @@ src/
 │   └── affiliateLinks.ts 제휴 링크 관리
 ├── server/
 │   ├── aiRoutes.ts      Groq 기반 AI 라우트 (/api/chat, /api/recommend, /api/proposal)
-│   └── leadStore.ts     리드 저장 (Supabase 우선, /tmp 폴백)
+│   └── leadStore.ts     리드 저장 (Supabase 필수 on Vercel, 로컬 JSONL 폴백)
 server.ts                Express 앱 엔트리
 public/
-├── sitemap.xml          정적 사이트맵 (17개 URL)
+├── sitemap.xml          정적 사이트맵 (26개 URL, 블로그 포함)
+├── og-image.png         OG 이미지 (1200×630)
 └── robots.txt           크롤러 설정
 ```
 
 ---
 
-## 현재 상태 (2026-06-17)
+## 현재 상태 (2026-07-16)
 
 | 항목 | 상태 |
 |------|------|
@@ -90,9 +92,9 @@ public/
 | Google Search Console | ✅ 등록 + 색인 요청 |
 | GA4 연결 | ✅ `G-W5Q885CWSM` |
 | Make 제휴 코드 | ✅ `autohubai` 적용 |
-| SEO 콘텐츠 (FAQ) | 🔄 진행 중 |
-| OG 이미지 | ⏳ 예정 |
-| 추가 제휴사 확장 | ⏳ 예정 |
+| Dify 제휴 링크 | ✅ 배너 연동 |
+| SEO 콘텐츠 (FAQ) | ✅ 완료 |
+| OG 이미지 | ✅ `public/og-image.png` |
 
 ---
 

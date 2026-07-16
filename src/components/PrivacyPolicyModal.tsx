@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { X } from "lucide-react";
 
 type Props = {
@@ -5,9 +6,20 @@ type Props = {
 };
 
 export default function PrivacyPolicyModal({ onClose }: Props) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="privacy-policy-title"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
@@ -15,11 +27,12 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
           <div>
-            <h2 className="text-base font-black text-slate-900">개인정보 처리방침</h2>
+            <h2 id="privacy-policy-title" className="text-base font-black text-slate-900">개인정보 처리방침</h2>
             <p className="text-[10px] text-slate-400 font-medium mt-0.5">시행일: 2026년 6월 8일</p>
           </div>
           <button
             onClick={onClose}
+            aria-label="개인정보 처리방침 닫기"
             className="h-8 w-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-all cursor-pointer"
           >
             <X className="w-4 h-4" />
