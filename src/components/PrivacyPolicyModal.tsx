@@ -87,7 +87,7 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
             <h3 className="text-sm font-black text-slate-800">제6조 (처리 위탁)</h3>
             <div className="bg-slate-50 rounded-xl p-4 space-y-1">
               <p><strong>Supabase Inc.</strong> — 리드 데이터 저장·관리 (미국 소재, Standard Contractual Clauses 적용)</p>
-              <p><strong>Google LLC (Gemini API)</strong> — AI 기획서 생성 처리 (입력 데이터는 처리 후 저장되지 않음)</p>
+              <p><strong>Groq, Inc.</strong> — AI 기획서 생성 처리 (입력 데이터는 처리 후 저장되지 않음)</p>
             </div>
           </section>
 
@@ -119,7 +119,7 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
             <div className="bg-indigo-50 rounded-xl p-4 text-xs font-semibold">
               <p className="font-extrabold text-indigo-900 mb-1">개인정보 보호책임자</p>
               <p>소속: AutoHub AI 운영팀</p>
-              <p>이메일: <span className="text-indigo-700">privacy@autohub.ai (예시 — 실제 이메일로 교체 필요)</span></p>
+              <p>이메일: <span className="text-indigo-700">mins.agents@gmail.com</span></p>
               <p className="mt-2 text-slate-500 text-[11px]">
                 개인정보 침해 관련 신고·상담은 개인정보보호위원회 (privacy.go.kr / 국번없이 182),
                 한국인터넷진흥원 (118)에 문의하실 수 있습니다.

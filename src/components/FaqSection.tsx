@@ -3,16 +3,16 @@ import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
-    q: "n8n과 Make 중 어떤 자동화 툴을 선택해야 할까요?",
-    a: "워크플로우 복잡도와 기술 수준에 따라 다릅니다. n8n은 개발자 친화적이고 자체 서버에 무료로 설치해 무제한으로 사용할 수 있어 대량 자동화에 압도적인 가성비를 자랑합니다. Make(구 Integromat)는 버블 형태의 직관적인 UI로 비개발자도 쉽게 사용할 수 있고, Zapier 대비 5~10배 저렴합니다. 코딩 경험이 있고 비용을 아끼고 싶다면 n8n, 팀 전체가 쉽게 쓰고 싶다면 Make를 추천합니다.",
+    q: "n8n vs Make, 어떤 자동화 툴을 선택해야 할까요?",
+    a: "n8n vs Make 선택은 워크플로우 복잡도와 팀의 기술 수준에 따라 달라집니다. n8n은 개발자 친화적이고 자체 서버에 무료로 설치해 무제한으로 사용할 수 있어 대량 자동화에 압도적인 가성비를 자랑합니다. Make(구 Integromat)는 버블 형태의 직관적인 UI로 비개발자도 쉽게 사용할 수 있고, Zapier 대비 5~10배 저렴합니다. 코딩 경험이 있고 비용을 아끼고 싶다면 n8n, 팀 전체가 쉽게 쓰고 싶다면 Make를 추천합니다.",
   },
   {
     q: "Zapier 무료 대안에는 어떤 것들이 있나요?",
     a: "Zapier는 강력하지만 가격이 비싸 대안을 찾는 분들이 많습니다. 대표적인 무료·저가 대안으로는 ① Make (월 1,000 오퍼레이션 무료, 유료도 Zapier 대비 5~10배 저렴), ② n8n (오픈소스, 자체 서버 설치 시 완전 무료), ③ Activepieces (오픈소스, Zapier와 유사한 UI, 온프레미스 가능) 가 있습니다. 연동 앱 수는 Zapier가 7,000개로 최다이지만, 일반적인 업무 자동화라면 Make나 n8n으로 충분히 대체 가능합니다.",
   },
   {
-    q: "업무 자동화를 처음 시작할 때 어떤 툴이 좋을까요?",
-    a: "코딩 경험이 없는 초보자라면 Make 또는 Zapier로 시작하는 것을 권장합니다. 두 툴 모두 무료 플랜이 있고, 드래그 앤 드롭으로 자동화를 구성할 수 있습니다. 첫 자동화로는 '구글 폼 제출 → 슬랙 알림', '이메일 첨부파일 → 구글 드라이브 저장' 같은 2단계 자동화부터 시작하면 좋습니다. 개발 경험이 있다면 n8n이 장기적으로 가장 강력한 선택입니다.",
+    q: "업무 자동화 시작법은 무엇부터 보면 좋을까요?",
+    a: "업무 자동화 시작법의 핵심은 작은 반복 업무 1개를 고르는 것입니다. 코딩 경험이 없는 초보자라면 Make 또는 Zapier로 시작하는 것을 권장합니다. 두 툴 모두 무료 플랜이 있고, 드래그 앤 드롭으로 자동화를 구성할 수 있습니다. 첫 자동화로는 '구글 폼 제출 → 슬랙 알림', '이메일 첨부파일 → 구글 드라이브 저장' 같은 2단계 자동화부터 시작하면 좋습니다. 개발 경험이 있다면 n8n이 장기적으로 가장 강력한 선택입니다.",
   },
   {
     q: "업무 자동화 도입 시 ROI(투자 대비 수익)는 어떻게 계산하나요?",
@@ -30,23 +30,31 @@ const FAQS = [
     q: "자동화 구축 비용은 얼마나 드나요?",
     a: "툴 구독 비용은 월 0원(무료·오픈소스)부터 수십만 원까지 다양합니다. 간단한 자동화는 Make 무료 플랜($0)이나 n8n 셀프 호스팅(서버 비용 월 5~10달러)으로 시작할 수 있습니다. 복잡한 기업용 자동화 구축을 외주 의뢰할 경우 건당 50~500만원 수준이며, 내부 팀이 직접 구축한다면 툴 사용법 학습 시간(보통 1~2주)이 주된 비용입니다. 장기적으로는 인건비 절감 효과가 초기 구축 비용을 훨씬 상회하는 경우가 대부분입니다.",
   },
-];
+] as const;
 
 export default function FaqSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-4">
-      <h2 className="text-lg font-black text-slate-900 border-b border-slate-100 pb-3">
-        자주 묻는 질문 (FAQ)
-      </h2>
+    <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-5">
+      <div className="border-b border-slate-100 pb-4 space-y-2">
+        <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest">
+          Automation FAQ
+        </span>
+        <h2 className="text-lg sm:text-xl font-black text-slate-900">
+          자주 묻는 질문 (FAQ)
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-500 font-semibold leading-relaxed">
+          n8n vs Make 비교, Zapier 무료 대안, 업무 자동화 시작법처럼 자동화 도입 전에 가장 많이 검색하는 질문을 실무 기준으로 정리했습니다.
+        </p>
+      </div>
       <dl className="space-y-2">
         {FAQS.map((faq, idx) => (
-          <div key={idx} className="border border-slate-100 rounded-2xl overflow-hidden">
+          <div key={faq.q} className="border border-slate-100 rounded-2xl overflow-hidden">
             <dt>
               <button
                 onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left hover:bg-slate-50 transition-colors"
+                className="w-full flex items-center justify-between gap-4 px-4 sm:px-5 py-4 text-left hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition-colors"
                 aria-expanded={openIdx === idx}
               >
                 <span className="text-sm font-bold text-slate-800">{faq.q}</span>
@@ -55,11 +63,15 @@ export default function FaqSection() {
                 />
               </button>
             </dt>
-            {openIdx === idx && (
-              <dd className="px-5 pb-5 text-sm text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
-                {faq.a}
-              </dd>
-            )}
+            <dd
+              className={`px-4 sm:px-5 text-sm text-slate-600 font-medium leading-relaxed border-t border-slate-100 transition-[max-height,padding,opacity] duration-200 ${
+                openIdx === idx
+                  ? "max-h-[32rem] pb-5 pt-4 opacity-100"
+                  : "max-h-0 overflow-hidden py-0 opacity-0"
+              }`}
+            >
+              {faq.a}
+            </dd>
           </div>
         ))}
       </dl>
