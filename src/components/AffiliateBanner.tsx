@@ -24,7 +24,7 @@ const BANNERS = [
   },
 ];
 
-const AD_CONTACT_EMAIL = "chaeminseok00@gmail.com";
+const AD_CONTACT_EMAIL = "mins.agents@gmail.com";
 
 export default function AffiliateBanner() {
   return (

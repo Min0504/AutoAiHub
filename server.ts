@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import express from "express";
 import { registerAiRoutes } from "./src/server/aiRoutes";
 import { registerLeadRoutes } from "./src/server/leadRoutes";
+import { registerPartnerRoutes } from "./src/server/partnerRoutes";
 import { registerSitemapRoute } from "./src/server/sitemapRoute";
 
 // Load .env.local first (local dev), then .env as fallback
@@ -25,6 +26,7 @@ app.use(express.json({ limit: "64kb" }));
 
 registerSitemapRoute(app);
 registerLeadRoutes(app);
+registerPartnerRoutes(app);
 registerAiRoutes(app, groq, groqModel);
 
 // Export for Vercel serverless runtime (no app.listen)
