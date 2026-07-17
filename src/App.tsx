@@ -15,6 +15,7 @@ import {
   Cpu,
 } from "lucide-react";
 import AffiliateBanner from "./components/AffiliateBanner";
+import CookieConsent from "./components/CookieConsent";
 import FaqSection from "./components/FaqSection";
 import { ToastProvider, useToast } from "./components/Toast";
 import { useSeoMeta } from "./hooks/useSeoMeta";
@@ -111,7 +112,7 @@ function AppInner() {
 
       <main className="flex-1 mx-auto max-w-7xl w-full px-4 py-8 sm:px-6 lg:px-8">
         {activeTab === "directory" && (
-          <div id="tab-directory-view" className="space-y-8 animate-fade-in">
+          <div id="tab-directory-view" className="space-y-8">
             <div className="text-center py-6 max-w-3xl mx-auto space-y-4">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700 border border-emerald-100 uppercase tracking-widest">
                 <Globe className="w-3.5 h-3.5" /> Automation Directory
@@ -434,6 +435,8 @@ function AppInner() {
         )}
       </Suspense>
 
+      <CookieConsent />
+
       <footer className="bg-slate-900 text-slate-400 text-xs sm:text-sm py-8 mt-12 border-t border-slate-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left space-y-1">
@@ -451,9 +454,11 @@ function AppInner() {
               개인정보 처리방침
             </button>
           </div>
-          <div className="text-[10px] text-slate-500 font-medium leading-relaxed max-w-md text-center sm:text-right">
-            자동화 툴 비교 포털입니다. 일부 링크는 제휴 링크이며, 가입·결제 시 운영자에게 수수료가
-            발생할 수 있습니다.
+          <div className="text-[10px] text-slate-500 font-medium leading-relaxed max-w-md text-center sm:text-right space-y-1">
+            <p>
+              <strong className="text-slate-400">제휴 고지:</strong> 일부 링크는 제휴(어필리에이트)
+              링크입니다. 가입·결제 시 운영자에게 수수료가 발생할 수 있으며 이용자 추가 비용은 없습니다.
+            </p>
           </div>
         </div>
       </footer>
