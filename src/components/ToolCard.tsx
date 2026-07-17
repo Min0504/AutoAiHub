@@ -103,7 +103,9 @@ export default function ToolCard({
         <button
           id={`btn-compare-toggle-${tool.id}`}
           onClick={() => {
-            trackCompareAdd(tool.id, tool.name);
+            if (!isAddedToCompare) {
+              trackCompareAdd(tool.id, tool.name);
+            }
             onAddToCompare(tool);
           }}
           className={`px-3 py-2 rounded-xl border text-xs font-bold transition-all cursor-pointer shrink-0 ${

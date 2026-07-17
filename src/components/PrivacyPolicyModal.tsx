@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { X } from "lucide-react";
 
 type Props = {
@@ -5,6 +6,14 @@ type Props = {
 };
 
 export default function PrivacyPolicyModal({ onClose }: Props) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
@@ -46,12 +55,24 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
             <h3 className="text-sm font-black text-slate-800">제2조 (수집하는 정보)</h3>
             <p>
               서비스는 <strong>회원가입·상담 폼·이메일 수집을 하지 않습니다.</strong>
-              접속 통계를 위해 Google Analytics 4가 쿠키·기기 식별자 수준의 비식별 이용 기록을 수집할 수 있습니다.
+            </p>
+            <p className="mt-2">
+              이용자가 쿠키 배너에서 <strong>동의한 경우에만</strong> Google Analytics 4가
+              쿠키·기기 식별자 수준의 비식별 이용 기록을 수집할 수 있습니다. 거부 시 분석 스크립트를
+              로드하지 않습니다.
             </p>
           </section>
 
           <section className="space-y-1.5">
-            <h3 className="text-sm font-black text-slate-800">제3조 (제휴 링크)</h3>
+            <h3 className="text-sm font-black text-slate-800">제3조 (이용 목적·보유 기간)</h3>
+            <ul className="list-disc list-inside space-y-1 pl-1">
+              <li>목적: 방문 통계·콘텐츠 개선 (GA4)</li>
+              <li>보유: Google Analytics 기본 설정에 따르며, 동의 철회 시 추가 수집을 중단합니다.</li>
+            </ul>
+          </section>
+
+          <section className="space-y-1.5">
+            <h3 className="text-sm font-black text-slate-800">제4조 (제휴 링크)</h3>
             <p>
               일부 외부 링크는 제휴(어필리에이트) 링크입니다. 해당 사이트에서 가입·결제 시
               운영자에게 수수료가 발생할 수 있으며, 이용자 추가 비용은 없습니다.
@@ -60,17 +81,18 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
           </section>
 
           <section className="space-y-1.5">
-            <h3 className="text-sm font-black text-slate-800">제4조 (처리 위탁)</h3>
+            <h3 className="text-sm font-black text-slate-800">제5조 (처리 위탁)</h3>
             <div className="bg-slate-50 rounded-xl p-4 space-y-1">
               <p><strong>Vercel, Inc.</strong> — 웹 호스팅</p>
-              <p><strong>Google LLC</strong> — GA4 이용 통계</p>
+              <p><strong>Google LLC</strong> — GA4 이용 통계 (동의 시에만)</p>
             </div>
           </section>
 
           <section className="space-y-1.5">
-            <h3 className="text-sm font-black text-slate-800">제5조 (문의)</h3>
+            <h3 className="text-sm font-black text-slate-800">제6조 (이용자 권리)</h3>
             <p>
-              개인정보 관련 문의:{" "}
+              쿠키 동의는 브라우저 저장값을 지우거나 문의로 철회를 요청할 수 있습니다.
+              관련 문의:{" "}
               <span className="text-indigo-700 font-semibold">mins.agents@gmail.com</span>
             </p>
           </section>

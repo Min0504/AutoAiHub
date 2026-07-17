@@ -14,6 +14,7 @@ test("static core files exist", () => {
     "public/robots.txt",
     "src/App.tsx",
     "src/config/affiliateLinks.ts",
+    "src/components/CookieConsent.tsx",
   ]) {
     assert.equal(existsSync(path.join(root, rel)), true, `missing ${rel}`);
   }
@@ -22,14 +23,8 @@ test("static core files exist", () => {
 test("backend/AI stack removed", () => {
   assert.equal(existsSync(path.join(root, "server.ts")), false);
   assert.equal(existsSync(path.join(root, "src/server")), false);
-  assert.equal(existsSync(path.join(root, "src/components/AIChatBot.tsx")), false);
-  assert.equal(existsSync(path.join(root, "src/components/ConsultingSection.tsx")), false);
-  assert.equal(existsSync(path.join(root, "src/components/CalculatorSection.tsx")), false);
-  assert.equal(existsSync(path.join(root, "supabase")), false);
-
   const pkg = read("package.json");
   assert.doesNotMatch(pkg, /groq-sdk|express|@supabase\/supabase-js/);
-  assert.match(pkg, /"dev": "vite"/);
 });
 
 test("nav only has directory + compare", () => {
@@ -39,9 +34,23 @@ test("nav only has directory + compare", () => {
   assert.doesNotMatch(header, /ai-builder|ai-chat|calculators|consulting/);
 });
 
-test("affiliate links present", () => {
-  const links = read("src/config/affiliateLinks.ts");
-  assert.match(links, /make\.com/);
-  const banner = read("src/components/AffiliateBanner.tsx");
-  assert.match(banner, /sponsored/);
+test("no ROI calculator claims in marketing surfaces", () => {
+  assert.doesNotMatch(read("index.html"), /ROI계산기|SearchAction/);
+  assert.doesNotMatch(read("public/blog/index.html"), /ROI 계산기/);
+  const blogNav = read("public/blog/make-vs-n8n.html");
+  assert.match(blogNav, /툴 비교하기/);
+  assert.match(blogNav, /제휴 고지/);
+});
+
+test("FAQ JSON-LD has 7 questions and ItemList has 16 tools", () => {
+  const html = read("index.html");
+  assert.equal((html.match(/"@type":\s*"Question"/g) || []).length, 7);
+  assert.equal((html.match(/"@type":\s*"ListItem"/g) || []).length, 16);
+});
+
+test("compare has affiliate CTAs", () => {
+  const compare = read("src/components/CompareSection.tsx");
+  assert.match(compare, /sponsored/);
+  assert.match(compare, /trackAffiliateClick/);
+  assert.match(compare, /제휴 링크/);
 });

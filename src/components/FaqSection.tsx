@@ -49,13 +49,18 @@ export default function FaqSection() {
         </p>
       </div>
       <dl className="space-y-2">
-        {FAQS.map((faq, idx) => (
+        {FAQS.map((faq, idx) => {
+          const panelId = `faq-panel-${idx}`;
+          const buttonId = `faq-button-${idx}`;
+          return (
           <div key={faq.q} className="border border-slate-100 rounded-2xl overflow-hidden">
             <dt>
               <button
+                id={buttonId}
                 onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
                 className="w-full flex items-center justify-between gap-4 px-4 sm:px-5 py-4 text-left hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition-colors"
                 aria-expanded={openIdx === idx}
+                aria-controls={panelId}
               >
                 <span className="text-sm font-bold text-slate-800">{faq.q}</span>
                 <ChevronDown
@@ -64,6 +69,9 @@ export default function FaqSection() {
               </button>
             </dt>
             <dd
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
               className={`px-4 sm:px-5 text-sm text-slate-600 font-medium leading-relaxed border-t border-slate-100 transition-[max-height,padding,opacity] duration-200 ${
                 openIdx === idx
                   ? "max-h-[32rem] pb-5 pt-4 opacity-100"
@@ -73,7 +81,8 @@ export default function FaqSection() {
               {faq.a}
             </dd>
           </div>
-        ))}
+          );
+        })}
       </dl>
     </section>
   );
