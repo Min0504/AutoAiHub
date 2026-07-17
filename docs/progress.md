@@ -4,12 +4,16 @@
 
 ## 한 줄 요약
 
-정적 재설계 + 후속 점검 항목 전부 반영 (블로그 ROI 잔재 제거, 제휴 고지, GA 동의, 비교 CTA, SEO 정합).
+정적 재설계 머지 완료. 프로덕션은 아직 구버전 — Vercel 재배포 필요(CLI 토큰/Git 연동 미동작).
 
-## 검증
+## 완료
 
-```bash
-npm run lint   # ✅
-npm run test   # ✅
-npm run build  # ✅
-```
+- PR #4 → `master` 머지 (`e5b8a98`)
+- 최종 검증: lint/test/build ✅
+- 재배포 트리거 푸시 (`eddc4c5`) — 라이브 미반영 확인
+
+## 배포 블로커
+
+이 환경에 `VERCEL_TOKEN` 없음. Git push만으로는 https://autohub-ai.vercel.app 미갱신(타이틀에 ROI 계산기 잔존).
+
+PM: Vercel 대시보드에서 Production Redeploy, 또는 `VERCEL_TOKEN` 제공 후 `npx vercel --prod`.
