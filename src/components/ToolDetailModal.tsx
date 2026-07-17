@@ -210,7 +210,7 @@ export default function ToolDetailModal({
             <a
               href={tool.affiliateUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer sponsored"
               onClick={() => trackAffiliateClick(tool.id, tool.name)}
               className="flex items-center gap-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 transition-colors px-6 py-2.5 text-xs font-extrabold text-white cursor-pointer shadow-sm shadow-indigo-100"
             >
