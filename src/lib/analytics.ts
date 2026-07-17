@@ -21,15 +21,3 @@ export function trackToolDetailView(toolId: string, toolName: string): void {
 export function trackCompareAdd(toolId: string, toolName: string): void {
   track("compare_add", { tool_id: toolId, tool_name: toolName });
 }
-
-export function trackScenarioGenerate(): void {
-  track("scenario_generate");
-}
-
-export function trackProposalSubmit(budget: string, businessType: string): void {
-  track("proposal_submit", { budget, business_type: businessType });
-}
-
-export function trackLeadSubmit(leadType: string): void {
-  track("lead_submit", { lead_type: leadType });
-}

@@ -16,7 +16,7 @@ const FAQS = [
   },
   {
     q: "업무 자동화 도입 시 ROI(투자 대비 수익)는 어떻게 계산하나요?",
-    a: "ROI 계산의 핵심은 '절감되는 시간 × 시간당 인건비'입니다. 예를 들어 하루 2시간씩 반복 업무를 처리하는 직원의 시급이 20,000원이라면 월 88만원의 인건비가 낭비됩니다. n8n이나 Make를 도입해 이 업무를 자동화하면 월 툴 비용 2~3만원으로 월 88만원을 절감할 수 있어 ROI가 수천 %에 달합니다. 위의 ROI 계산기 탭에서 정확한 수치를 무료로 계산해볼 수 있습니다.",
+    a: "ROI 계산의 핵심은 '절감되는 시간 × 시간당 인건비'입니다. 예를 들어 하루 2시간씩 반복 업무를 처리하는 직원의 시급이 20,000원이라면 월 88만원의 인건비가 낭비됩니다. n8n이나 Make를 도입해 이 업무를 자동화하면 월 툴 비용 2~3만원으로 월 88만원을 절감할 수 있어 ROI가 수천 %에 달하는 경우가 많습니다.",
   },
   {
     q: "AI 에이전트와 일반 워크플로우 자동화의 차이점은 무엇인가요?",
@@ -49,13 +49,18 @@ export default function FaqSection() {
         </p>
       </div>
       <dl className="space-y-2">
-        {FAQS.map((faq, idx) => (
+        {FAQS.map((faq, idx) => {
+          const panelId = `faq-panel-${idx}`;
+          const buttonId = `faq-button-${idx}`;
+          return (
           <div key={faq.q} className="border border-slate-100 rounded-2xl overflow-hidden">
             <dt>
               <button
+                id={buttonId}
                 onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
                 className="w-full flex items-center justify-between gap-4 px-4 sm:px-5 py-4 text-left hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition-colors"
                 aria-expanded={openIdx === idx}
+                aria-controls={panelId}
               >
                 <span className="text-sm font-bold text-slate-800">{faq.q}</span>
                 <ChevronDown
@@ -64,6 +69,9 @@ export default function FaqSection() {
               </button>
             </dt>
             <dd
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
               className={`px-4 sm:px-5 text-sm text-slate-600 font-medium leading-relaxed border-t border-slate-100 transition-[max-height,padding,opacity] duration-200 ${
                 openIdx === idx
                   ? "max-h-[32rem] pb-5 pt-4 opacity-100"
@@ -73,7 +81,8 @@ export default function FaqSection() {
               {faq.a}
             </dd>
           </div>
-        ))}
+          );
+        })}
       </dl>
     </section>
   );

@@ -15,7 +15,6 @@ export interface Tool {
     starter: string;
     pro: string;
     pricingModel: string;
-    taskCostFactor: number; // For cost calculator
   };
   difficulty: "쉬움" | "보통" | "어려움";
   difficultyLevel: number; // 1 to 5
@@ -53,7 +52,6 @@ export const TOOLS: Tool[] = [
       starter: "Cloud Starter: €20/월, 연간 결제 기준 2,500 workflow executions/월, 단계 무제한",
       pro: "Cloud Pro: €50/월, 연간 결제 기준 10,000 workflow executions/월, 단계 무제한",
       pricingModel: "실행 횟수(Execution) 단위 과금 (워크플로우가 끝까지 실행되는 1회가 비용 1 단위)",
-      taskCostFactor: 0.008
     },
     difficulty: "보통",
     difficultyLevel: 3,
@@ -95,8 +93,7 @@ export const TOOLS: Tool[] = [
       free: "Free Plan: $0 (월 1,000 오퍼레이션 제공, 동시 활성 시나리오 2개)",
       starter: "Core Plan: $9/월 (월 10,000 오퍼레이션 제공, 시나리오 무제한)",
       pro: "Pro Plan: $16/월 (월 10,000 오퍼레이션 + 고급 분석 및 에러 복구 기능)",
-      pricingModel: "단계 실행(Operation, Ops) 단위 과금 (노드를 하나 통과할 때마다 1 Ops 차감)",
-      taskCostFactor: 0.0009 // $9에 10000 ops = ops당 $0.0009
+      pricingModel: "단계 실행(Operation, Ops) 단위 과금 (노드를 하나 통과할 때마다 1 Ops 차감)", // $9에 10000 ops = ops당 $0.0009
     },
     difficulty: "보통",
     difficultyLevel: 2,
@@ -120,7 +117,7 @@ export const TOOLS: Tool[] = [
     bestFor: "비즈니스 기획자, 마케터, 개인 사업자 중 Zapier가 지나치게 비싸 가성비 대체재를 찾으면서 정교함을 놓치고 싶지 않은 분",
     aiIntegration: "OpenAI, Anthropic 등 주요 AI 노드를 완벽히 커버합니다. PDF Parsing, AI 이미지 프로세싱, 텍스트 요약을 손쉽게 다단계 흐름에 주입할 수 있으며 가동 피드백이 시각적으로 명확해 AI API 결과값을 정밀 조율하기 편합니다.",
     affiliateUrl: "https://www.make.com/",
-    alternatives: ["n8n", "zapier", "relay"]
+    alternatives: ["n8n", "zapier", "relay-app"]
   },
   {
     id: "zapier",
@@ -136,8 +133,7 @@ export const TOOLS: Tool[] = [
       free: "Free Plan: $0 (월 100 태스크, 기본 2단계 워크플로우 한정)",
       starter: "Starter Plan: $19.99/월 (월 750 태스크, 프리미엄 앱 사용 제한)",
       pro: "Professional: $49/월 (월 2,000 태스크, 무제한 조건부 분기 logic, 자동 실패 복구)",
-      pricingModel: "태스크 완료(Task) 단위 과금 (트리거를 만족한 후 실제 후속 작동 완료 수 기준)",
-      taskCostFactor: 0.024 // $49에 2000 tasks = task당 $0.0245 (매우 비쌈)
+      pricingModel: "태스크 완료(Task) 단위 과금 (트리거를 만족한 후 실제 후속 작동 완료 수 기준)", // $49에 2000 tasks = task당 $0.0245 (매우 비쌈)
     },
     difficulty: "쉬움",
     difficultyLevel: 1,
@@ -161,7 +157,7 @@ export const TOOLS: Tool[] = [
     bestFor: "코딩이나 복잡한 툴 공부 시간이 बिल्कुल(전혀) 없으며, 오직 1등 검증된 인프라에서 수천 권의 리스트를 편하게 이어 붙이고 싶은 대기업 및 HR 부서, 1인 창업가",
     aiIntegration: "AI 기틀이 잘 마련되어 있습니다. 'AI Copilot'이 워크플로우를 한 문장의 요청만으로 뚝딱 구성해주고, GPT-4o를 이용한 챗봇 임베드 및 사내 데이터 요약 도구를 클릭 세 번으로 탑재하는 특혜를 지녔습니다.",
     affiliateUrl: "https://zapier.com/",
-    alternatives: ["make", "n8n", "relay"]
+    alternatives: ["make", "n8n", "relay-app"]
   },
   {
     id: "lindy",
@@ -177,8 +173,7 @@ export const TOOLS: Tool[] = [
       free: "가입 시 기본 무료 토큰 크레딧 한시적 제공",
       starter: "Starter: $29/월 (기본 AI 에이전트 액티브 가동 및 충분한 크레딧)",
       pro: "Pro Plan: $99/월 (팀 도메인 연동 및 고속 무제한 태스크 수행)",
-      pricingModel: "에이전트 수 및 백엔드 LLM 추론 토큰(Credit) 소모량 형태 과금",
-      taskCostFactor: 0.01 // 추론 당 대략 $0.01
+      pricingModel: "에이전트 수 및 백엔드 LLM 추론 토큰(Credit) 소모량 형태 과금", // 추론 당 대략 $0.01
     },
     difficulty: "쉬움",
     difficultyLevel: 1,
@@ -202,12 +197,12 @@ export const TOOLS: Tool[] = [
     bestFor: "전형적인 매뉴얼 노코드 블록 연결조차 머리가 아픈 비디자이너, AI가 똑똑하게 이메일 고객 응대나 시장 정보 브리핑을 알아서 큐레이션 하길 바라는 1인 기업",
     aiIntegration: "태생이 'LLM 자율 주행' 에이전트입니다. 정해진 단계대로 물 흐르듯 가기보단 '상황에 따라 다른 API를 호출하고 임의로 메일을 써서 수신자에게 보내는' 상위 자율지능을 결합했습니다.",
     affiliateUrl: "https://lindy.ai/",
-    alternatives: ["crewai", "gumloop", "relay"]
+    alternatives: ["crewai", "gumloop", "relay-app"]
   },
   {
     id: "relay-app",
     name: "Relay.app",
-    slug: "relay",
+    slug: "relay-app",
     category: "No-Code Automation",
     badge: "인간 개입(Human-In-The-Loop)",
     slogan: "가장 협업다운 자동화, 인간의 승인 절차를 자연스럽게 담은 워크플로우",
@@ -218,8 +213,7 @@ export const TOOLS: Tool[] = [
       free: "Free: $0 (월 100 runs 무료 탑재, 무제한 원클립 멤버 공동 협업)",
       starter: "Starter: $9/월 (월 1,000 runs 제공, 프리미엄 노드 전원 개방)",
       pro: "Team: $29/월 (월 3,000 runs 제공, 다자 승인 워크플로우 기능 추가)",
-      pricingModel: "성공적으로 완수된 워크플로우 통과 호출(Run) 단위 과금 (매우 가성비 높음)",
-      taskCostFactor: 0.009 // $9에 1000 Runs = run당 $0.009
+      pricingModel: "성공적으로 완수된 워크플로우 통과 호출(Run) 단위 과금 (매우 가성비 높음)", // $9에 1000 Runs = run당 $0.009
     },
     difficulty: "쉬움",
     difficultyLevel: 1,
@@ -259,8 +253,7 @@ export const TOOLS: Tool[] = [
       free: "Free Plan: 기본 무료 크레딧 제공, 브라우저 상의 직접 간이 파싱 테스트 가능",
       starter: "Starter: $25/월 (자체 클라우드 크롤링 백엔드 배용 크레딧 두둑히 공급)",
       pro: "Growth: $150/월 (API 전용 앤드포인트 배포 및 동시 웹 스크래핑 대량 실행 가속)",
-      pricingModel: "크랩/LLM 추론 복잡도 대비 수치로 산출되는 Credit 차감 과금",
-      taskCostFactor: 0.015 // 전처리 루틴당 약 $0.015
+      pricingModel: "크랩/LLM 추론 복잡도 대비 수치로 산출되는 Credit 차감 과금", // 전처리 루틴당 약 $0.015
     },
     difficulty: "보통",
     difficultyLevel: 3,
@@ -300,8 +293,7 @@ export const TOOLS: Tool[] = [
       free: "Self-Host Open-Source: GitHub를 통해 다운로드 및 전원 로컬 구동 시 완벽 무료",
       starter: "Cloud Starter: $15/월 (월 1,000 tasks 제공 및 글로벌 프리미엄 라이선스 오픈)",
       pro: "Cloud Pro: $49/월 (월 5,000 tasks 및 협업 Workspace 권한 공유)",
-      pricingModel: "단계 통과 횟수(Task) 단위 과금 (Self-Host는 제한 없음)",
-      taskCostFactor: 0.015 // task당 약 $0.015
+      pricingModel: "단계 통과 횟수(Task) 단위 과금 (Self-Host는 제한 없음)", // task당 약 $0.015
     },
     difficulty: "쉬움",
     difficultyLevel: 2,
@@ -341,8 +333,7 @@ export const TOOLS: Tool[] = [
       free: "Free Plan: 1일 333 크레딧 할당 무료 제공 (동시에 여러 워크플로우 활성 가능)",
       starter: "Starter: $19/월 (월 5,000 Credits, 30초 런타임 제한으로 강화)",
       pro: "Advanced: $49/월 (월 20,000 Credits, 최대 120초 런타임 및 무제한 메모리 확장)",
-      pricingModel: "크레딧(Credit) 시스템으로 동작 (워크플로우 1회 완수 및 Node/Python 코드 분기에 따라 청구)",
-      taskCostFactor: 0.0038 // $19 / 5000 = $0.0038 per credit
+      pricingModel: "크레딧(Credit) 시스템으로 동작 (워크플로우 1회 완수 및 Node/Python 코드 분기에 따라 청구)", // $19 / 5000 = $0.0038 per credit
     },
     difficulty: "어려움",
     difficultyLevel: 4,
@@ -382,8 +373,7 @@ export const TOOLS: Tool[] = [
       free: "Open-Source Python Framework: 완전 무료 제공 (로컬 LLM 혹은 자사 API Key 소모)",
       starter: "CrewAI Enterprise / Cloud Host: 정식 출시 예정 및 API 호출에 맞춘 크레딧 스레스홀드",
       pro: "대기업 특화 사설 격리 클라우드 협상형 커스텀 빌링 시스템",
-      pricingModel: "로컬에서 실행은 100% 무료. LLM 서비스 호출 시 OpenAI/Anthropic/Gemini에 지불하는 API 토큰 요금이 주과금",
-      taskCostFactor: 0.02 // 에이전트 추론 당 평균 소모비 대략 산출
+      pricingModel: "로컬에서 실행은 100% 무료. LLM 서비스 호출 시 OpenAI/Anthropic/Gemini에 지불하는 API 토큰 요금이 주과금", // 에이전트 추론 당 평균 소모비 대략 산출
     },
     difficulty: "어려움",
     difficultyLevel: 5,
@@ -423,8 +413,7 @@ export const TOOLS: Tool[] = [
       free: "MIT 라이선스 기반의 완전 무료 오픈소스 프로젝트",
       starter: "별도 요금제 없음, 기업 자체 호스팅(Azure, AWS, 온프레미스 Docker) 구동",
       pro: "대기업 전용 Azure AI 인프라 연계 통합 빌링 구성",
-      pricingModel: "소프트웨어 사용 비용 무료, LLM API 호출 토큰 및 인프라 서버 비용만 별도 발생",
-      taskCostFactor: 0.025 // LLM 복합 연동 시 대략 계산
+      pricingModel: "소프트웨어 사용 비용 무료, LLM API 호출 토큰 및 인프라 서버 비용만 별도 발생", // LLM 복합 연동 시 대략 계산
     },
     difficulty: "어려움",
     difficultyLevel: 5,
@@ -465,7 +454,6 @@ export const TOOLS: Tool[] = [
       starter: "Cloud Basic: $59.99/월 (연동 메시지 및 고성능 인덱싱 추가 제공)",
       pro: "Cloud Professional: $179.99/월 (강력한 전용 벡터 DB 및 RAG 데이터 보존)",
       pricingModel: "Cloud 모델은 활성 에이전트 수 및 백엔드 지식 스토리지 크기 기준 과금 (로컬 시 인프라 비용만 발생)",
-      taskCostFactor: 0.005
     },
     difficulty: "보통",
     difficultyLevel: 3,
@@ -506,7 +494,6 @@ export const TOOLS: Tool[] = [
       starter: "Premium Plan: $19/월 (최신 상용 모델 우선 추론 크레딧 및 커스텀 도메인 매핑)",
       pro: "Enterprise: 별도 문의 (SLA 보장, 백엔드 프라이빗 클라우드 구축, 대량 세그먼트 전산망)",
       pricingModel: "기본 배포 채널 자체는 무료이나 프리미엄 LLM 추론 시 크레딧(Credit/Token) 가감제 차등 적용",
-      taskCostFactor: 0.008
     },
     difficulty: "쉬움",
     difficultyLevel: 2,
@@ -547,7 +534,6 @@ export const TOOLS: Tool[] = [
       starter: "Starter: $19/월 (월 2,000 runs, 동시 다중 태스크 처리, 무제한 스토리지)",
       pro: "Business: $199/월 (AI 사원 무제한 고용, 고성능 RAG 병렬 백엔드)",
       pricingModel: "고용한 'AI 직원(Agent)' 수 및 이메일 수신, 크롤링 등의 백그라운드 태스크 완수 횟수 비례 과금",
-      taskCostFactor: 0.01
     },
     difficulty: "보통",
     difficultyLevel: 3,
@@ -588,7 +574,6 @@ export const TOOLS: Tool[] = [
       starter: "Team Plan: $10/유저/월 (워크플로우 월 1,000회 실행 기본 탑재, 이력 보존 30일)",
       pro: "Business: $50/유저/월 (에러 트랙킹 툴 연동, 화이트라벨링 브랜딩, 스테이징 디버거 분리)",
       pricingModel: "워크플로우가 실제로 가동된 초(Duration) 및 연동 DB 트래픽 소모량을 바탕으로 하는 합산식",
-      taskCostFactor: 0.005
     },
     difficulty: "어려움",
     difficultyLevel: 4,
@@ -629,7 +614,6 @@ export const TOOLS: Tool[] = [
       starter: "Kestra Cloud: 대규모 팀 프로젝트, IAM 클라우드 권한 제어, 24/7 SLA 모범 지원 별도 견적",
       pro: "엔터프라이즈 사설 테넌드 맞춤형 빌링",
       pricingModel: "오픈소스 가동 무료. 엔터프라이즈는 처리하는 파이프라인 스텝 수 또는 연동 서버 크기에 따라 과금",
-      taskCostFactor: 0.002
     },
     difficulty: "어려움",
     difficultyLevel: 4,
@@ -670,7 +654,6 @@ export const TOOLS: Tool[] = [
       starter: "Premium User: $15/사용자/월 (클라우드 클립 연동, 자사 흐름 자동 공유 및 실시간 가상 봇 백그라운드 운용)",
       pro: "Process Plan: $150/봇/월 (무감독 자동화, 프론트 없이 온전히 가상 컨테이너에서 24시간 작동)",
       pricingModel: "사용자당 라이선스 청구 및 무감독으로 돌릴 가상 런타임 봇 개수 세분화 과금",
-      taskCostFactor: 0.015
     },
     difficulty: "보통",
     difficultyLevel: 2,

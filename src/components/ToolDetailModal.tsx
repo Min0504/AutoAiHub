@@ -1,5 +1,6 @@
 import { Tool } from "../data/tools";
-import { X, CheckCircle2, AlertCircle, Sparkles, HandMetal, Heart, ArrowUpRight, ShieldEllipsis } from "lucide-react";
+import { useEffect } from "react";
+import { X, CheckCircle2, AlertCircle, Sparkles, Heart, ArrowUpRight } from "lucide-react";
 import { trackAffiliateClick } from "../lib/analytics";
 
 interface ToolDetailModalProps {
@@ -15,6 +16,15 @@ export default function ToolDetailModal({
   onAddToCompare,
   isAddedToCompare,
 }: ToolDetailModalProps) {
+  useEffect(() => {
+    if (!tool) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [tool, onClose]);
+
   if (!tool) return null;
 
   return (
@@ -47,6 +57,7 @@ export default function ToolDetailModal({
             <button
               id="btn-close-modal"
               type="button"
+              aria-label="상세 모달 닫기"
               className="rounded-full p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors cursor-pointer"
               onClick={onClose}
             >
@@ -58,7 +69,7 @@ export default function ToolDetailModal({
           <div className="overflow-y-auto px-6 py-6 space-y-6 flex-1 bg-slate-50/50">
             
             {/* Slogan banner */}
-            <div className="bg-gradient-to-r from-indigo-50/50 via-slate-50 to-indigo-50/10 p-5 rounded-2xl border border-slate-150 relative overflow-hidden">
+            <div className="bg-gradient-to-r from-indigo-50/50 via-slate-50 to-indigo-50/10 p-5 rounded-2xl border border-slate-200 relative overflow-hidden">
               <p className="text-base font-bold text-slate-800 leading-relaxed text-indigo-950 relative z-10">
                 &ldquo;{tool.slogan}&rdquo;
               </p>
@@ -88,7 +99,7 @@ export default function ToolDetailModal({
                 <span className="mt-1.5 text-lg font-bold text-amber-500 flex items-center gap-1">
                   ★ {tool.rating.toFixed(1)} <span className="text-xs font-semibold text-slate-400">/ 5.0</span>
                 </span>
-                <p className="text-[10px] font-medium text-slate-400 mt-2">사용자 피드백 종합 평점</p>
+                <p className="text-[10px] font-medium text-slate-400 mt-2">편집 기준 참고 점수</p>
               </div>
               <div className="bg-white p-4 rounded-xl border border-slate-200/70 shadow-sm flex flex-col justify-center">
                 <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">서드파티 대체 서비스</span>
@@ -114,17 +125,17 @@ export default function ToolDetailModal({
                     <span className="font-bold text-emerald-800">무료 라이선스</span>
                     <span className="text-slate-600 leading-snug text-right max-w-[150px] font-medium">{tool.pricingDetails.free}</span>
                   </div>
-                  <div className="flex justify-between p-2 rounded-lg bg-indigo-50/50 border border-indigo-150">
+                  <div className="flex justify-between p-2 rounded-lg bg-indigo-50/50 border border-indigo-100">
                     <span className="font-bold text-indigo-800">스타터 Plan</span>
                     <span className="text-slate-600 leading-snug text-right max-w-[150px] font-medium">{tool.pricingDetails.starter}</span>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between p-2 rounded-lg bg-orange-50/30 border border-orange-100/30">
-                    <span className="font-bold text-orange-850">비즈니스 Pro</span>
+                    <span className="font-bold text-orange-700">비즈니스 Pro</span>
                     <span className="text-slate-600 leading-snug text-right max-w-[150px] font-medium">{tool.pricingDetails.pro}</span>
                   </div>
-                  <div className="flex flex-col p-2 rounded-lg bg-slate-50 border border-slate-250">
+                  <div className="flex flex-col p-2 rounded-lg bg-slate-50 border border-slate-200">
                     <span className="font-extrabold text-slate-700">과금 메커니즘 기준</span>
                     <span className="text-slate-500 font-medium mt-1 leading-tight">{tool.pricingDetails.pricingModel}</span>
                   </div>
@@ -177,7 +188,7 @@ export default function ToolDetailModal({
 
               {/* Cons */}
               <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-                <h4 className="text-xs font-extrabold text-rose-650 uppercase tracking-widest flex items-center gap-1.5 border-b border-slate-100 pb-2">
+                <h4 className="text-xs font-extrabold text-rose-600 uppercase tracking-widest flex items-center gap-1.5 border-b border-slate-100 pb-2">
                   <AlertCircle className="h-4.5 w-4.5 text-rose-500 shrink-0" /> 운영 시 한계/단점 (CONS)
                 </h4>
                 <ul className="space-y-2">
@@ -210,7 +221,7 @@ export default function ToolDetailModal({
             <a
               href={tool.affiliateUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer sponsored"
               onClick={() => trackAffiliateClick(tool.id, tool.name)}
               className="flex items-center gap-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 transition-colors px-6 py-2.5 text-xs font-extrabold text-white cursor-pointer shadow-sm shadow-indigo-100"
             >
