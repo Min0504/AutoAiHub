@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, Menu, X } from "lucide-react";
+import { ArrowRightLeft, Menu, X } from "lucide-react";
 
 interface HeaderProps {
   activeTab: string;
@@ -7,13 +7,9 @@ interface HeaderProps {
 }
 
 const tabs = [
-  { id: "directory", label: "🛠️ 자동화 디렉토리" },
-  { id: "compare", label: "🔄 1:1 비교 분석기" },
-  { id: "ai-builder", label: "💡 AI 맞춤 시나리오" },
-  { id: "calculators", label: "🧮 통합 계산기" },
-  { id: "ai-chat", label: "🤖 AI 상담사" },
-  { id: "consulting", label: "💰 Premium 견적" },
-];
+  { id: "directory", label: "자동화 디렉토리" },
+  { id: "compare", label: "1:1 비교" },
+] as const;
 
 export default function Header({ activeTab, setActiveTab }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -27,12 +23,12 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
     <>
       <header id="app-header" className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm">
         <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-
-          {/* Logo */}
-          <div
+          <button
             id="brand-logo"
+            type="button"
             className="flex items-center gap-2 cursor-pointer shrink-0"
             onClick={() => handleTabClick("directory")}
+            aria-label="AutoHub AI 홈으로 이동"
           >
             <div className="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,16 +38,16 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
             <span className="text-lg font-bold tracking-tight text-slate-900">
               AutoHub<span className="text-indigo-600">AI</span>
             </span>
-          </div>
+          </button>
 
-          {/* Desktop Tabs */}
-          <nav id="nav-tabs" className="hidden lg:flex items-center gap-1 h-full font-medium text-slate-500 overflow-x-auto">
+          <nav id="nav-tabs" className="hidden lg:flex items-center gap-1 h-full font-medium text-slate-500">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   id={`tab-button-${tab.id}`}
+                  type="button"
                   onClick={() => handleTabClick(tab.id)}
                   className={`h-full border-b-2 py-4 px-4 font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap text-sm ${
                     isActive
@@ -65,7 +61,6 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
             })}
           </nav>
 
-          {/* Right Actions */}
           <div className="flex items-center gap-2 shrink-0">
             <a
               href="/blog/"
@@ -73,19 +68,20 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
               rel="noopener noreferrer"
               className="hidden sm:flex items-center text-slate-500 hover:text-slate-900 text-xs font-semibold px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors"
             >
-              📝 블로그
+              블로그
             </a>
             <button
-              id="btn-nav-ai-builder"
-              onClick={() => handleTabClick("ai-builder")}
+              id="btn-nav-compare"
+              type="button"
+              onClick={() => handleTabClick("compare")}
               className="hidden sm:flex bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-sm items-center gap-1.5 cursor-pointer"
             >
-              <Sparkles className="w-3 h-3 fill-white/20 animate-pulse" />
-              AI 설계사
+              <ArrowRightLeft className="w-3 h-3" />
+              비교 시작
             </button>
 
-            {/* Mobile Hamburger */}
             <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden flex items-center justify-center w-9 h-9 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
               aria-label="메뉴 열기"
@@ -96,23 +92,22 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
         </div>
       </header>
 
-      {/* Mobile Drawer Overlay */}
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
-          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
-          {/* Drawer Panel */}
           <div className="relative ml-auto w-72 bg-white h-full shadow-2xl flex flex-col">
             <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
               <span className="font-extrabold text-slate-900 text-sm">
                 AutoHub<span className="text-indigo-600">AI</span> 메뉴
               </span>
               <button
+                type="button"
                 onClick={() => setMobileOpen(false)}
                 className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                aria-label="메뉴 닫기"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -123,6 +118,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                 return (
                   <button
                     key={tab.id}
+                    type="button"
                     onClick={() => handleTabClick(tab.id)}
                     className={`w-full text-left px-4 py-3 rounded-xl text-sm font-semibold mb-1 transition-all cursor-pointer ${
                       isActive
@@ -142,13 +138,14 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                 rel="noopener noreferrer"
                 className="w-full border border-slate-200 text-slate-700 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors"
               >
-                📝 블로그
+                블로그
               </a>
               <button
-                onClick={() => handleTabClick("ai-builder")}
+                type="button"
+                onClick={() => handleTabClick("compare")}
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4" /> AI 워크플로우 설계사
+                <ArrowRightLeft className="w-4 h-4" /> 1:1 비교
               </button>
             </div>
           </div>
