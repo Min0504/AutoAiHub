@@ -1,8 +1,9 @@
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import type { Tool } from "../data/tools";
 import { TOOLS } from "../data/tools";
-import { ShieldAlert, Check, Trophy } from "lucide-react";
+import { ShieldAlert, Check, Trophy, ExternalLink } from "lucide-react";
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, Legend } from "recharts";
+import { trackAffiliateClick } from "../lib/analytics";
 
 interface CompareSectionProps {
   selectedTools: Tool[];
@@ -14,6 +15,12 @@ export default function CompareSection({ selectedTools }: CompareSectionProps) {
   const initialToolIds = getInitialToolIds(selectedTools);
   const [toolId1, setToolId1] = useState<string>(initialToolIds.first);
   const [toolId2, setToolId2] = useState<string>(initialToolIds.second);
+
+  useEffect(() => {
+    const ids = getInitialToolIds(selectedTools);
+    setToolId1(ids.first);
+    setToolId2(ids.second);
+  }, [selectedTools]);
 
   // Sync state if coming from external selections
   const finalTool1 = TOOLS.find(t => t.id === toolId1) || TOOLS[0];
@@ -270,8 +277,8 @@ export default function CompareSection({ selectedTools }: CompareSectionProps) {
             <thead>
               <tr className="border-b border-slate-200 bg-slate-100/50">
                 <th className="px-6 py-3.5 font-bold text-slate-600 text-xs uppercase">비교 속성 항목</th>
-                <th className="px-6 py-3.5 font-bold text-indigo-750 text-xs">{finalTool1.name}</th>
-                <th className="px-6 py-3.5 font-bold text-blue-750 text-xs">{finalTool2.name}</th>
+                <th className="px-6 py-3.5 font-bold text-indigo-700 text-xs">{finalTool1.name}</th>
+                <th className="px-6 py-3.5 font-bold text-blue-700 text-xs">{finalTool2.name}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -284,36 +291,64 @@ export default function CompareSection({ selectedTools }: CompareSectionProps) {
 
               <tr>
                 <td className="px-6 py-4 font-bold text-slate-700 bg-slate-50/40">무료 플랜 혜택</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool1.pricingDetails.free}</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool2.pricingDetails.free}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool1.pricingDetails.free}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool2.pricingDetails.free}</td>
               </tr>
 
               <tr>
                 <td className="px-6 py-4 font-bold text-slate-700 bg-slate-50/40">스타터 플랜 구성</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool1.pricingDetails.starter}</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool2.pricingDetails.starter}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool1.pricingDetails.starter}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool2.pricingDetails.starter}</td>
               </tr>
 
               <tr>
                 <td className="px-6 py-4 font-bold text-slate-700 bg-slate-50/40">과금 메커니즘 모델</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool1.pricingDetails.pricingModel}</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool2.pricingDetails.pricingModel}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool1.pricingDetails.pricingModel}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool2.pricingDetails.pricingModel}</td>
               </tr>
 
               <tr>
                 <td className="px-6 py-4 font-bold text-slate-700 bg-slate-50/40">인공지능(AI) 구현 전술</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool1.aiIntegration}</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool2.aiIntegration}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool1.aiIntegration}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool2.aiIntegration}</td>
               </tr>
 
               <tr>
                 <td className="px-6 py-4 font-bold text-slate-700 bg-slate-50/40">대상 추천 수혜자</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool1.bestFor}</td>
-                <td className="px-6 py-4 font-medium text-slate-550 leading-relaxed text-xs">{finalTool2.bestFor}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool1.bestFor}</td>
+                <td className="px-6 py-4 font-medium text-slate-600 leading-relaxed text-xs">{finalTool2.bestFor}</td>
               </tr>
 
             </tbody>
           </table>
+        </div>
+      </div>
+
+      {/* Affiliate CTAs */}
+      <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+        <div>
+          <h3 className="text-base font-black text-slate-900">공식 사이트에서 시작하기</h3>
+          <p className="text-xs font-medium text-slate-500 mt-1">
+            아래 링크는 제휴 링크일 수 있습니다. 가입·결제 시 운영자에게 수수료가 발생할 수 있으며 이용자 추가 비용은 없습니다.
+          </p>
+          <p className="text-[11px] text-slate-400 font-medium mt-1">
+            위 레이더/승자 표시는 편집 기준의 참고 점수이며 공식 벤치마크가 아닙니다.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[finalTool1, finalTool2].map((tool) => (
+            <a
+              key={tool.id}
+              href={tool.affiliateUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              onClick={() => trackAffiliateClick(tool.id, tool.name)}
+              className="flex items-center justify-between gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 text-sm font-bold transition-colors"
+            >
+              <span>{tool.name} 공식 사이트</span>
+              <ExternalLink className="w-4 h-4 shrink-0" />
+            </a>
+          ))}
         </div>
       </div>
 
