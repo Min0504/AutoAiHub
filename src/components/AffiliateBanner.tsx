@@ -1,10 +1,20 @@
 import { ExternalLink, Zap, Mail } from "lucide-react";
-import { AFFILIATE_LINKS } from "../config/affiliateLinks";
+import { AFFILIATE_LINKS, MONETIZED_AFFILIATE_KEYS } from "../config/affiliateLinks";
 import { trackAffiliateClick } from "../lib/analytics";
 
-const BANNERS = [
+const BANNER_COPY: Record<
+  string,
   {
-    key: "make",
+    name: string;
+    tagline: string;
+    highlight: string;
+    colorFrom: string;
+    colorTo: string;
+    textColor: string;
+    badgeColor: string;
+  }
+> = {
+  make: {
     name: "Make",
     tagline: "드래그 앤 드롭으로 업무 자동화",
     highlight: "무료로 시작",
@@ -13,8 +23,7 @@ const BANNERS = [
     textColor: "text-violet-700",
     badgeColor: "bg-violet-100 text-violet-700",
   },
-  {
-    key: "dify",
+  dify: {
     name: "Dify",
     tagline: "AI 에이전트 & LLM 앱 빌더",
     highlight: "무료 플랜",
@@ -23,17 +32,39 @@ const BANNERS = [
     textColor: "text-blue-700",
     badgeColor: "bg-blue-100 text-blue-700",
   },
-];
+  // 제휴 코드 확보 후 MONETIZED_AFFILIATE_KEYS에 추가하면 자동 노출
+  zapier: {
+    name: "Zapier",
+    tagline: "앱 연동 수 최다 노코드 자동화",
+    highlight: "바로 시작",
+    colorFrom: "from-orange-50",
+    colorTo: "to-amber-50",
+    textColor: "text-orange-700",
+    badgeColor: "bg-orange-100 text-orange-700",
+  },
+  activepieces: {
+    name: "Activepieces",
+    tagline: "오픈소스 노코드 자동화",
+    highlight: "오픈소스",
+    colorFrom: "from-emerald-50",
+    colorTo: "to-teal-50",
+    textColor: "text-emerald-700",
+    badgeColor: "bg-emerald-100 text-emerald-700",
+  },
+};
 
 const AD_CONTACT_EMAIL = "mins.agents@gmail.com";
 
 export default function AffiliateBanner() {
+  const banners = MONETIZED_AFFILIATE_KEYS.map((key) => ({
+    key,
+    ...BANNER_COPY[key],
+  })).filter((b) => b.name && AFFILIATE_LINKS[b.key]);
+
   return (
     <div className="space-y-3">
-      {/* 제휴 배너 카드 */}
-      {BANNERS.map((banner) => {
+      {banners.map((banner) => {
         const href = AFFILIATE_LINKS[banner.key];
-        if (!href) return null;
         return (
           <a
             key={banner.key}
@@ -65,7 +96,6 @@ export default function AffiliateBanner() {
         );
       })}
 
-      {/* 광고 슬롯 배너 */}
       <a
         href={`mailto:${AD_CONTACT_EMAIL}?subject=AutoHub AI 배너 광고 문의`}
         className="block bg-white border-2 border-dashed border-slate-200 rounded-2xl p-4 space-y-2 hover:border-indigo-300 hover:bg-indigo-50/30 transition-all group"

@@ -1,10 +1,11 @@
-# AutoAiHub — 작업 프롬프트 (정적 사이트)
+# AutoHub AI — 작업 프롬프트 (정적 사이트)
 
 > 형태: **비교 + 제휴** 정적 Vite SPA. 서버/AI/DB/리드 **금지**.
 
 ## 제품
 
 - URL: https://autohub-ai.vercel.app
+- 브랜드: AutoHub AI
 - 남김: 툴 디렉토리, 1:1 비교, 제휴 링크(Make·Dify 등), FAQ, 블로그, SEO
 - 제거됨(되살리지 말 것): Groq, Express, Supabase, AI 채팅/시나리오/견적, 계산기, 리드 폼
 

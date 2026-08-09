@@ -52,6 +52,10 @@ function AppInner() {
       const found = TOOLS.find((t) => t.slug === slugFromUrl);
       if (found) setActiveModalTool(found);
     }
+    const tabFromUrl = params.get("tab");
+    if (tabFromUrl === "compare") {
+      setActiveTab("compare");
+    }
   }, []);
 
   useSeoMeta({

@@ -1,4 +1,4 @@
-# AutoAiHub
+# AutoHub AI
 
 > 한국어 업무 자동화 도구 비교·제휴 포털 — n8n, Make, Zapier 등을 비교하고 제휴 링크로 바로 시작한다.
 
@@ -15,7 +15,7 @@
 | 기능 | 설명 |
 |------|------|
 | **툴 디렉토리** | 16종 자동화 플랫폼 + 상세 모달 |
-| **1:1 비교** | 기능·가격·난이도 비교 |
+| **1:1 비교** | 기능·가격·난이도 비교 (`/?tab=compare`) |
 | **제휴 링크** | Make(`autohubai`), Dify 등 — 주 수입원 |
 | **FAQ·블로그** | SEO용 정적 콘텐츠 |
 | **SEO** | sitemap, robots, OG, 툴별 메타 |
@@ -26,7 +26,7 @@
 |--------|------|
 | Framework | React 19 + TypeScript + Vite |
 | 호스팅 | Vercel (정적) |
-| 분석 | Google Analytics 4 |
+| 분석 | Google Analytics 4 (쿠키 동의 후) |
 
 > 의도적으로 Express / Groq / Supabase / 리드 수집을 사용하지 않는다.
 

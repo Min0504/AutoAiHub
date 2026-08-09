@@ -1,19 +1,22 @@
 # 진행상황
 
-마지막 갱신: 2026-07-17
+마지막 갱신: 2026-08-09
 
 ## 한 줄 요약
 
-정적 재설계 머지 완료. 프로덕션은 아직 구버전 — Vercel 재배포 필요(CLI 토큰/Git 연동 미동작).
+정적 재설계 라이브 반영 완료. 감사 후속(sitemap slug·compare URL·가격·문서) 패치 적용.
 
 ## 완료
 
 - PR #4 → `master` 머지 (`e5b8a98`)
-- 최종 검증: lint/test/build ✅
-- 재배포 트리거 푸시 (`eddc4c5`) — 라이브 미반영 확인
+- 프로덕션 https://autohub-ai.vercel.app — 정적 비교·제휴 타이틀 확인됨
+- sitemap `relay` → `relay-app` 수정, `?tab=compare` 추가
+- Make/Zapier 가격 문구 갱신, 제휴 링크 단일 소스화
+- smoke: slug↔sitemap·affiliate·compare URL 검증 추가
 
-## 배포 블로커
+## 남은 것 (코드 밖 / PM)
 
-이 환경에 `VERCEL_TOKEN` 없음. Git push만으로는 https://autohub-ai.vercel.app 미갱신(타이틀에 ROI 계산기 잔존).
-
-PM: Vercel 대시보드에서 Production Redeploy, 또는 `VERCEL_TOKEN` 제공 후 `npx vercel --prod`.
+- Zapier·Activepieces 제휴 코드 확보 시 `affiliateLinks.ts`의 `MONETIZED_AFFILIATE_KEYS` + 링크만 교체
+- Vercel 옛 env(`GROQ_*`/`SUPABASE_*`/`SLACK_*`) 정리(선택)
+- AutoHub용 Supabase 프로젝트 삭제 여부
+- Search Console 색인·백링크, 쿠키 동의 후 GA4 로드 프로덕션 확인
