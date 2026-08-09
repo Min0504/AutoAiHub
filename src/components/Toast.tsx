@@ -1,9 +1,16 @@
-import { useState, useEffect, useCallback, createContext, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  createContext,
+  useContext,
+  type ReactNode,
+} from "react";
 import { CheckCircle2, XCircle, Info, X } from "lucide-react";
 
 type ToastType = "success" | "error" | "info";
 
-interface ToastItem {
+interface ToastData {
   id: string;
   type: ToastType;
   message: string;
@@ -15,8 +22,8 @@ interface ToastContextValue {
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-export function ToastProvider({ children }: { children: React.ReactNode }) {
-  const [toasts, setToasts] = useState<ToastItem[]>([]);
+export function ToastProvider({ children }: { children: ReactNode }) {
+  const [toasts, setToasts] = useState<ToastData[]>([]);
 
   const showToast = useCallback((message: string, type: ToastType = "info") => {
     const id = `toast-${Date.now()}`;
@@ -33,14 +40,14 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {children}
       <div className="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 max-w-sm w-full pointer-events-none">
         {toasts.map((toast) => (
-          <ToastItem key={toast.id} toast={toast} onDismiss={dismiss} />
+          <ToastCard key={toast.id} toast={toast} onDismiss={dismiss} />
         ))}
       </div>
     </ToastContext.Provider>
   );
 }
 
-function ToastItem({ toast, onDismiss }: { toast: ToastItem; onDismiss: (id: string) => void }) {
+function ToastCard({ toast, onDismiss }: { toast: ToastData; onDismiss: (id: string) => void }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

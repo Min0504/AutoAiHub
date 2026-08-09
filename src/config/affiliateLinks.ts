@@ -1,11 +1,10 @@
 /**
- * 제휴 링크 중앙 관리 파일
+ * 제휴 링크 중앙 관리 — 툴 CTA·배너가 모두 이 파일만 본다.
  *
- * 실제 제휴 코드 발급 후 아래 TODO 주석을 실제 링크로 교체하세요.
- *
- * Make 제휴 신청: https://www.make.com/en/affiliate  (커미션 35%, 12개월 / Make 계정 있으면 바로 신청 가능)
+ * Make 제휴 신청: https://www.make.com/en/affiliate  (커미션 35%, 12개월)
  * n8n 제휴:      ❌ 거절됨 (2026-06-09) — 재신청 또는 다른 제휴사 검토
  * Zapier 파트너:  https://zapier.com/l/partners/
+ * Activepieces:   파트너 코드 확보 후 아래 주석 해제
  */
 
 const UTM = "utm_source=autohub&utm_medium=referral&utm_campaign=tool_directory";
@@ -15,19 +14,26 @@ function utm(base: string): string {
   return `${base}${sep}${UTM}`;
 }
 
+/** 실제 수익이 나는 제휴 키 — AffiliateBanner에 노출 */
+export const MONETIZED_AFFILIATE_KEYS = ["make", "dify"] as const;
+
 export const AFFILIATE_LINKS: Record<string, string> = {
-  // ❌ n8n 제휴 거절됨 — 배너에서 제외, 일반 UTM 링크만 유지
+  // ❌ n8n 제휴 거절됨 — 일반 UTM 링크만 유지
   n8n: utm("https://n8n.io/"),
 
   make: utm("https://www.make.com/?pc=autohubai"),
 
+  // 파트너 코드 확보 후 referral 파라미터로 교체
   zapier: utm("https://zapier.com/"),
-  // TODO zapier: utm("https://zapier.com/?referral=YOUR_CODE"),
+  // zapier: utm("https://zapier.com/?referral=YOUR_CODE"),
 
   lindy: utm("https://lindy.ai/"),
   "relay-app": utm("https://relay.app/"),
   gumloop: utm("https://gumloop.com/"),
+
+  // 파트너 코드 확보 후 제휴 URL로 교체 + MONETIZED_AFFILIATE_KEYS / AffiliateBanner에 추가
   activepieces: utm("https://www.activepieces.com/"),
+
   pipedream: utm("https://pipedream.com/"),
   crewai: utm("https://crewai.com/"),
   autogen: utm("https://microsoft.github.io/autogen/"),

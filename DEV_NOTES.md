@@ -1,13 +1,13 @@
 # AutoHub AI — 개발 노트
 
-> 마지막 업데이트: 2026-07-17 · 정적 재설계
+> 마지막 업데이트: 2026-08-09 · 정적 재설계 유지
 
 ## 현재 상태
 
 | 항목 | 상태 |
 |------|------|
 | 형태 | 정적 Vite SPA (서버/AI/DB 없음) |
-| 프로덕션 | https://autohub-ai.vercel.app |
+| 프로덕션 | https://autohub-ai.vercel.app (반영됨) |
 | 핵심 | 툴 디렉토리 + 1:1 비교 + 제휴 링크 |
 | 제거됨 | Groq, Express, Supabase 리드, AI 채팅/시나리오/견적, 계산기 |
 
@@ -26,12 +26,13 @@ Vercel이 `vite build`로 정적 산출물을 배포. 커스텀 `build.sh`/서�
 
 ## 제휴
 
-- Make: `?pc=autohubai` (`src/config/affiliateLinks.ts`)
-- Dify: 배너·링크 연동
-- 코드 추가 시 `affiliateLinks.ts` + `AffiliateBanner.tsx`만 수정
+- 단일 소스: `src/config/affiliateLinks.ts`
+- Make: `?pc=autohubai` / Dify: 배너·링크 연동 (`MONETIZED_AFFILIATE_KEYS`)
+- Zapier·Activepieces: 코드 확보 후 링크 + monetized 키만 추가
 
 ## SEO
 
 - `public/sitemap.xml`, `robots.txt`, `og-image.png`
-- `useSeoMeta` — 툴/`compare` 탭 메타
+- `useSeoMeta` — 툴(`?tool=`), 비교(`?tab=compare`) 메타·canonical
 - 블로그: `public/blog/*`
+- 가격 데이터 점검일: 2026-08-09 (n8n·Make·Zapier)

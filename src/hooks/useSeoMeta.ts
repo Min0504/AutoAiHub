@@ -20,6 +20,23 @@ function setMeta(selector: string, attr: string, value: string) {
   if (el) el.setAttribute(attr, value);
 }
 
+function syncUrl(params: { toolSlug?: string | null; activeTab: string }) {
+  const url = new URL(window.location.href);
+  url.search = "";
+
+  if (params.toolSlug) {
+    url.searchParams.set("tool", params.toolSlug);
+  } else if (params.activeTab === "compare") {
+    url.searchParams.set("tab", "compare");
+  }
+
+  const next = `${url.pathname}${url.search}`;
+  const current = `${window.location.pathname}${window.location.search}`;
+  if (next !== current) {
+    window.history.replaceState({}, "", next);
+  }
+}
+
 interface SeoOptions {
   toolSlug?: string | null;
   toolName?: string | null;
@@ -53,6 +70,9 @@ export function useSeoMeta({
     } else if (activeTab !== "directory" && TAB_META[activeTab]) {
       title = TAB_META[activeTab].title;
       description = TAB_META[activeTab].description;
+      if (activeTab === "compare") {
+        canonical = `${BASE_URL}/?tab=compare`;
+      }
     }
 
     document.title = title;
@@ -64,12 +84,6 @@ export function useSeoMeta({
     setMeta('meta[name="twitter:title"]', "content", title);
     setMeta('meta[name="twitter:description"]', "content", description);
 
-    if (toolSlug) {
-      const url = new URL(window.location.href);
-      url.searchParams.set("tool", toolSlug);
-      window.history.replaceState({}, "", `${url.pathname}${url.search}`);
-    } else if (new URLSearchParams(window.location.search).has("tool")) {
-      window.history.replaceState({}, "", "/");
-    }
+    syncUrl({ toolSlug, activeTab });
   }, [toolSlug, toolName, toolSlogan, toolBestFor, activeTab]);
 }

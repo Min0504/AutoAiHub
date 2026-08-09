@@ -1,8 +1,8 @@
-# AGENTS.md — AutoAiHub
+# AGENTS.md — AutoHub AI
 
 ## 프로젝트
 
-- 이름: AutoAiHub
+- 이름: AutoHub AI
 - **정적** 비교 + 제휴 사이트 (Vite SPA)
 - **서버/AI/Supabase/리드 없음** — 되살리지 않음
 - PM만 최종 승인과 배포

@@ -36,7 +36,7 @@ export const CATEGORIES = [
   { id: "Developer Automation", name: "개발자 자동화", desc: "코드 제어력이 강하고 API 지향적인 엔지니어 전용 최적 플랫폼" },
 ];
 
-export const TOOLS: Tool[] = [
+const RAW_TOOLS: Omit<Tool, "affiliateUrl">[] = [
   {
     id: "n8n",
     name: "n8n",
@@ -76,7 +76,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "비용 부담 없이 대량의 복잡한 비즈니스 자동화를 장기적으로 운영하고 싶은 개발자, 기술 스타트업, AI 엔지니어",
     aiIntegration: "LangChain 생태계를 고스란히 드래그 앤 드롭으로 이식했습니다. OpenAI, Anthropic, Gemini 연결 후 메모리 노드지정, Vector DB(Pinecone 등) 연결을 코딩 한 줄 없이 완벽하게 커스텀 구성 할 수 있어 워크플로우 기반 AI 혁신에 극강의 퍼포먼스를 보입니다.",
-    affiliateUrl: "https://n8n.io/",
     alternatives: ["make", "zapier", "activepieces"]
   },
   {
@@ -88,12 +87,12 @@ export const TOOLS: Tool[] = [
     slogan: "동그란 버블을 연결하듯, 세상에서 가장 직관적인 대시보드 오토메이션",
     logoColor: "bg-purple-600",
     logoTextColor: "text-white",
-    priceInfo: "기본 무료 / Core $9/월 (10,000 ops)부터",
+    priceInfo: "기본 무료 / Core $9/월 (10,000 credits)부터",
     pricingDetails: {
-      free: "Free Plan: $0 (월 1,000 오퍼레이션 제공, 동시 활성 시나리오 2개)",
-      starter: "Core Plan: $9/월 (월 10,000 오퍼레이션 제공, 시나리오 무제한)",
-      pro: "Pro Plan: $16/월 (월 10,000 오퍼레이션 + 고급 분석 및 에러 복구 기능)",
-      pricingModel: "단계 실행(Operation, Ops) 단위 과금 (노드를 하나 통과할 때마다 1 Ops 차감)", // $9에 10000 ops = ops당 $0.0009
+      free: "Free Plan: $0 (월 1,000 credits, 동시 활성 시나리오 2개, 최소 15분 간격)",
+      starter: "Core Plan: $9/월 연간 결제 기준 (월 10,000 credits, 시나리오 무제한)",
+      pro: "Pro Plan: $16/월 연간 결제 기준 (월 10,000 credits + 우선 실행·커스텀 변수·로그 검색)",
+      pricingModel: "Credit 단위 과금 (표준 모듈 실행 1회 ≈ 1 credit; AI 기능은 추가 소모 가능)",
     },
     difficulty: "보통",
     difficultyLevel: 2,
@@ -111,12 +110,11 @@ export const TOOLS: Tool[] = [
       "과거 어느 부분에서 에러가 발생했는지 로그와 데이터를 한눈에 대조해 디버깅하는 능력이 1위"
     ],
     cons: [
-      "루프를 많이 도는 긴 워크플로우의 경우 Operation(Ops) 소비 가속화로 급격한 추가 청구가 생길 위험",
+      "루프를 많이 도는 긴 워크플로우의 경우 credit 소비 가속화로 급격한 추가 청구가 생길 위험",
       "Array/Collection 등 개발적 요소에 해당되는 개념(Iterator, Aggregator)을 능숙하게 다루려면 약간의 공부 필요"
     ],
     bestFor: "비즈니스 기획자, 마케터, 개인 사업자 중 Zapier가 지나치게 비싸 가성비 대체재를 찾으면서 정교함을 놓치고 싶지 않은 분",
     aiIntegration: "OpenAI, Anthropic 등 주요 AI 노드를 완벽히 커버합니다. PDF Parsing, AI 이미지 프로세싱, 텍스트 요약을 손쉽게 다단계 흐름에 주입할 수 있으며 가동 피드백이 시각적으로 명확해 AI API 결과값을 정밀 조율하기 편합니다.",
-    affiliateUrl: "https://www.make.com/",
     alternatives: ["n8n", "zapier", "relay-app"]
   },
   {
@@ -128,18 +126,18 @@ export const TOOLS: Tool[] = [
     slogan: "쉽고 간결하게 모든 것을 자동화, No-Code 오토메이션의 글로벌 표준",
     logoColor: "bg-orange-500",
     logoTextColor: "text-white",
-    priceInfo: "기본 무료 / Starter $19.99/월 (750 tasks)부터",
+    priceInfo: "기본 무료 / Professional $19.99/월 (750 tasks, 연간)부터",
     pricingDetails: {
-      free: "Free Plan: $0 (월 100 태스크, 기본 2단계 워크플로우 한정)",
-      starter: "Starter Plan: $19.99/월 (월 750 태스크, 프리미엄 앱 사용 제한)",
-      pro: "Professional: $49/월 (월 2,000 태스크, 무제한 조건부 분기 logic, 자동 실패 복구)",
-      pricingModel: "태스크 완료(Task) 단위 과금 (트리거를 만족한 후 실제 후속 작동 완료 수 기준)", // $49에 2000 tasks = task당 $0.0245 (매우 비쌈)
+      free: "Free Plan: $0 (월 100 태스크, 2단계 Zap 한정)",
+      starter: "Professional: $19.99/월 연간 결제 기준 (월 750 태스크, 멀티스텝·프리미엄 앱)",
+      pro: "Professional: $49/월 연간 결제 기준 (월 2,000 태스크) / Team은 2,000 태스크부터",
+      pricingModel: "태스크(Task) 단위 과금 (Zap 성공 스텝마다 1 task; 플랜 레벨 + 태스크 티어 조합)",
     },
     difficulty: "쉬움",
     difficultyLevel: 1,
     rating: 4.7,
     features: [
-      "7,000개 이상의 압도적인 글로벌 서드파티 앱 공식 지원 리스트",
+      "9,000개 이상의 압도적인 글로벌 서드파티 앱 공식 지원 리스트",
       "자연어 질문으로 Zap(자동화)을 설계하는 최신 AI Copilot 탑재",
       "자체적인 간이 데이터베이스 기능인 'Zapier Tables' 제공",
       "웹폼 생성 도구인 'Zapier Interfaces' 통합 서비스",
@@ -154,9 +152,8 @@ export const TOOLS: Tool[] = [
       "감히 맞서기 힘든 무시무시하게 비싼 단가. 트래픽이나 복잡한 동적 액션이 조금만 늘어나도 매월 수백 달러 폭탄 가능성",
       "경쟁사 대비 정밀하고 유연한 코딩적 배열 가공(Data parsing) 분기가 제약적임"
     ],
-    bestFor: "코딩이나 복잡한 툴 공부 시간이 बिल्कुल(전혀) 없으며, 오직 1등 검증된 인프라에서 수천 권의 리스트를 편하게 이어 붙이고 싶은 대기업 및 HR 부서, 1인 창업가",
+    bestFor: "코딩이나 복잡한 툴 공부 시간이 전혀 없으며, 오직 1등 검증된 인프라에서 수천 권의 리스트를 편하게 이어 붙이고 싶은 대기업 및 HR 부서, 1인 창업가",
     aiIntegration: "AI 기틀이 잘 마련되어 있습니다. 'AI Copilot'이 워크플로우를 한 문장의 요청만으로 뚝딱 구성해주고, GPT-4o를 이용한 챗봇 임베드 및 사내 데이터 요약 도구를 클릭 세 번으로 탑재하는 특혜를 지녔습니다.",
-    affiliateUrl: "https://zapier.com/",
     alternatives: ["make", "n8n", "relay-app"]
   },
   {
@@ -196,7 +193,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "전형적인 매뉴얼 노코드 블록 연결조차 머리가 아픈 비디자이너, AI가 똑똑하게 이메일 고객 응대나 시장 정보 브리핑을 알아서 큐레이션 하길 바라는 1인 기업",
     aiIntegration: "태생이 'LLM 자율 주행' 에이전트입니다. 정해진 단계대로 물 흐르듯 가기보단 '상황에 따라 다른 API를 호출하고 임의로 메일을 써서 수신자에게 보내는' 상위 자율지능을 결합했습니다.",
-    affiliateUrl: "https://lindy.ai/",
     alternatives: ["crewai", "gumloop", "relay-app"]
   },
   {
@@ -236,7 +232,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "자동화의 급격한 오류 폭주를 막기 위해 사람이 '최종 결제 승인' 및 '메일 내용 검수'한 후 다음 자동화를 재개하는 다단계 사무 프로세스를 지향하는 팀",
     aiIntegration: "AI Copilot 메커니즘을 내장해 드래그 앤 드롭 단계 사이에 'AI 요약문 검수' 마커를 얹고, 승인 요원이 검토한 다음 API로 이어서 올리는 흐름을 무척 정갈하게 해결합니다.",
-    affiliateUrl: "https://relay.app/",
     alternatives: ["make", "zapier", "lindy"]
   },
   {
@@ -276,7 +271,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "경쟁사 트렌드 감시, 일일 주식 보고서 크롤링 요약, 콜드 메일 발송용 잠재고객 DB 수집 등 '웹 정보 긁기 + AI 가공' 결합을 다루는 마케터 및 성장 데이터 전문가",
     aiIntegration: "AI 스크래핑에 집중화되어 있습니다. 크롤링한 웹문서가 수천 자에 달해도 GPT-4, Gemini Pro 등을 매끄럽게 교차 호출해 원스톱으로 원하는 JSON Schema 규격서 포맷으로 오목조목 정렬해 뱉어내는데 독성적인 우위를 점합니다.",
-    affiliateUrl: "https://gumloop.com/",
     alternatives: ["lindy", "n8n", "pipedream"]
   },
   {
@@ -316,7 +310,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "고객 개인정보나 금융 거래 이력이 절대 외부 해외 클라우드 SaaS 서버로 빠져나가면 안 되어 사내 온프레미스 서버에 자동화 시스템을 폐쇄망으로 가두고 싶은 보안 기업 및 IT 연구원",
     aiIntegration: "깔끔하고 세련된 OpenAI 및 Anthropic 기본 컴포넌트들을 빌려와 텍스트 유효성 판별이나 비정형 데이터 추출을 자사 전용 AI 보안 모델과 믹싱해 독립 운영하는 구성에 최고로 일조합니다.",
-    affiliateUrl: "https://www.activepieces.com/",
     alternatives: ["n8n", "make", "zapier"]
   },
   {
@@ -356,7 +349,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "일단 코딩을 할 수 있으나 인프라 관리나 OAuth 연합, 실시간 Webhook 서버 파이프라인 개발이 매번 귀찮아서 '스마트 캐시 레이어'처럼 고속 연동하고 싶은 백엔드 & 풀스택 웹 개발자",
     aiIntegration: "코드 기반 AI 활용에 최고입니다. 자체 Node.js 블록에 OpenAI, Gemini SDK 패키지를 직관적으로 올려 복잡한 정규식, Dynamic JSON Generation 스키마에 즉석 주입하고 후속 DB 액션을 순식간에 커스텀 코드로 엮어 가동합니다.",
-    affiliateUrl: "https://pipedream.com/",
     alternatives: ["n8n", "gumloop", "crewai"]
   },
   {
@@ -396,7 +388,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "AI 에이전트 간의 정형화된 시퀀셜 협업 구조를 직접 Python 소스코드로 정밀 제어하면서 고차원 RAG 비즈니스 인텔리전스를 빌드하려는 소프트웨어 엔지니어 및 AI 테크 스타트업",
     aiIntegration: "그 자체가 완벽한 'AI 에이전트 협업 생태계'입니다. 모델별 파라미터 튜닝은 물론, 개별 역할부여(Persona)와 메모리 관리 기법들을 복합 설계하여 업무 완성도를 일반 챗봇 대비 5배 이상 높은 지점으로 끌어올립니다.",
-    affiliateUrl: "https://crewai.com/",
     alternatives: ["autogen", "lindy", "gumloop"]
   },
   {
@@ -436,7 +427,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "인공지능의 자율 코드 생성 및 실행 샌드박스 기능이 절대적으로 담겨야 하며, 복잡하고 유동적인 AI 기반 지능형 연구 플랫폼 및 다이나믹 대화형 시뮬레이터를 개발하려 하는 전문 수석 엔지니어",
     aiIntegration: "AI 연동성의 극한점입니다. GPT, Gemini 등 상용 고지능 하이브리드 세팅 과 로컬 오프라인 사내 거대 멀티 모델(Llama 등)을 한 팀으로 결성시켜 로직 조율과 에이전트 대화 오케스트라를 정수 수준으로 펼쳐냅니다.",
-    affiliateUrl: "https://microsoft.github.io/autogen/",
     alternatives: ["crewai", "pipedream", "lindy"]
   },
   {
@@ -476,7 +466,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "사내 데이터(노션, PDF, 위키)가 많아 임직원용 커스텀 RAG 챗봇 및 업무 도우미 에이전트를 저렴하고 세력 있게 빌드해 사내 웹사이트에 즉시 이식하고 싶은 테크 기반 중소/중견기업",
     aiIntegration: "Dify는 AI 그 자체에 초점을 맞추고 탄생했습니다. 프롬프트 에디터, 시스템 지시사항 조절, 멀티 라운드 히스토리 및 RAG 하이브리드 검색 설정을 클릭 몇 번으로 완수하여 고도화된 AI 맞춤 에이전트를 직관적으로 배포할 수 있습니다.",
-    affiliateUrl: "https://dify.ai/",
     alternatives: ["coze", "crewai", "lindy"]
   },
   {
@@ -516,7 +505,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "자체 비즈니스 앱이나 소셜 미디어(디스코드, 슬랙, 카카오톡 대체) 메신저 환경에 1등급 지능을 가진 AI 챗봇 비서를 가장 짧은 시간에 멋지게 심어 마케팅/CS를 자동화하려는 기획팀 및 마케터",
     aiIntegration: "최신 플러그인 연계 능력이 세계 1위 수준입니다. 플러그인 허브에서 'Google Search', 'DALL-E 3', 'Translation' 등을 장바구니 담듯 더한 후 에이전트에게 지정하면 사내 지식 DB와 인터넷 검색 결과를 자동으로 비교 추론하여 풍부한 답안을 산출합니다.",
-    affiliateUrl: "https://www.coze.com/",
     alternatives: ["dify", "lindy", "crewai"]
   },
   {
@@ -556,7 +544,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "영업 이메일 작성, 경쟁사 모니터링, 고객 CRM 관리를 자동으로 수행하는 '24시간 무기한 상주 AI 마케터 / 영업 사원'을 두고 싶은 글로벌 B2B 서비스 및 이커머스 기업 대표님",
     aiIntegration: "단독 지시를 완수하는 비서(Assistant)의 단계를 넘어섭니다. 스스로 이메일을 열고, 새로운 바이어를 찾아내고, 제안서를 작성한 다음, 메일을 보내는 전 과정을 AI가 하나의 거대한 백그라운드 태스크로 연쇄 수행하여 완벽한 에이전트다운 업무 수행 능력을 뽐냅니다.",
-    affiliateUrl: "https://relevanceai.com/",
     alternatives: ["lindy", "crewai", "coze"]
   },
   {
@@ -596,7 +583,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "회사의 기존 핵심 DB(PostgreSQL 등)에 직접 접근하여 매일 아침 통계 배치 작업을 가동하고, 이 통계치를 세련된 사내 직원용 대시보드 UI에 시각화해 띄우고 싶은 IT/스타트업 CTO 및 전산 유지 보수팀",
     aiIntegration: "자체 LLM 지원 및 Retool AI 모듈을 제공합니다. 데이터베이스의 지저분한 유입 레코드를 AI 벡터 임베딩 처리하고, 사내 Q&A를 정교하게 해결하려는 RAG 엔진을 자사 UI 캔버스에 직접 얹어 신속한 AI 어드민 툴을 창조할 수 있습니다.",
-    affiliateUrl: "https://retool.com/products/workflows",
     alternatives: ["pipedream", "n8n", "zapier"]
   },
   {
@@ -636,7 +622,6 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "데이터 사이언티스트, 대형 백엔드 아키텍처 엔지니어링 사우, 서버리스 AI 파이프라인의 엄청난 트래픽과 신뢰성을 비용 허비 없이 무제한으로 관리하고 싶은 인프라 매니저",
     aiIntegration: "빅데이터 및 AI 에이전트 인프라스트럭처 제어 특화. 대량 수집한 사용자 후기 뭉치를 OpenAI Embedding 노드로 끌어올려 데이터베이스에 배치하고, 벡터 연산을 가쳐 맞춤 보고서 작성 시퀀스를 완벽한 하이레벨 YAML 명령어로 가공해줍니다.",
-    affiliateUrl: "https://kestra.io/",
     alternatives: ["pipedream", "autogen", "crewai"]
   },
   {
@@ -676,10 +661,14 @@ export const TOOLS: Tool[] = [
     ],
     bestFor: "대형 은행, 지자체 공무 단위, 정밀 제조업 등 사내 사설 인메모리 포털이나 옛날 윈도우 전용 ERP, 대용량 한글 엑셀 파일을 매일 아침 열고 클릭을 반복해야 하는 전통 대기업 사무 요원 및 CFO 재무 관리부",
     aiIntegration: "Copilot Studio 연계 및 AI OCR 학습(Document Processing) 기능에 특화되었습니다. 영수증 원본 이미지 파일을 AI 모델이 자동 파싱하여 MS Dataverse 데이터베이스로 밀어 넣거나 메일 회신 초안을 아웃룩 아키텍처 상에 자동으로 임베딩 해줍니다.",
-    affiliateUrl: "https://powerautomate.microsoft.com/",
     alternatives: ["zapier", "make", "relay-app"]
   }
-].map((tool) => ({
-  ...tool,
-  affiliateUrl: AFFILIATE_LINKS[tool.id] ?? tool.affiliateUrl,
-} as Tool));
+];
+
+export const TOOLS: Tool[] = RAW_TOOLS.map((tool) => {
+  const affiliateUrl = AFFILIATE_LINKS[tool.id];
+  if (!affiliateUrl) {
+    throw new Error(`Missing AFFILIATE_LINKS entry for tool id: ${tool.id}`);
+  }
+  return { ...tool, affiliateUrl } as Tool;
+});
