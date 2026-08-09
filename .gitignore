@@ -1,14 +1,28 @@
 node_modules/
 dist/
-.omc/
-.context/
-.claude/agent-memory/
+
+# env / local
 .env
 .env.local
 .env*.local
-/data/
 *.DS_Store
 .DS_Store
+
+# deploy / tooling (local only)
 .vercel/
-*.cjs.map
 .vercel
+.repowise/
+.codegraph
+.codebase-memory/
+
+# agent / IDE scaffolding
+.claude/
+.conductor/
+.omc/
+.omo/
+.context/
+.cursor/
+
+# misc
+/data/
+*.cjs.map
