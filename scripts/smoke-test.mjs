@@ -20,11 +20,34 @@ test("static core files exist", () => {
   }
 });
 
-test("backend/AI stack removed", () => {
+test("frontend stays static: no server SDKs or secrets in client bundle", () => {
+  // 서버 코드는 server/ 워크스페이스에만 존재한다. 프론트 번들은 정적 유지.
   assert.equal(existsSync(path.join(root, "server.ts")), false);
   assert.equal(existsSync(path.join(root, "src/server")), false);
   const pkg = read("package.json");
-  assert.doesNotMatch(pkg, /groq-sdk|express|@supabase\/supabase-js/);
+  assert.doesNotMatch(pkg, /groq-sdk|express|@supabase\/supabase-js|jsonwebtoken/);
+  // API 키/시크릿이 클라이언트 코드에 하드코딩되면 안 된다
+  const apiClient = read("src/lib/apiClient.ts");
+  assert.doesNotMatch(apiClient, /JWT_SECRET|api[_-]?key/i);
+  assert.match(apiClient, /VITE_API_URL/);
+});
+
+test("backend workspace exists with its own dependency boundary", () => {
+  for (const rel of [
+    "server/package.json",
+    "server/tsconfig.json",
+    "server/src/index.ts",
+    "server/src/app.ts",
+    "server/src/db/migrations.ts",
+    "server/src/openapi/openapi.ts",
+    "server/Dockerfile",
+    ".github/workflows/ci.yml",
+  ]) {
+    assert.equal(existsSync(path.join(root, rel)), true, `missing ${rel}`);
+  }
+  const serverPkg = read("server/package.json");
+  assert.match(serverPkg, /"express"/);
+  assert.match(serverPkg, /"zod"/);
 });
 
 test("nav only has directory + compare", () => {
