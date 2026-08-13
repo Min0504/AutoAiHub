@@ -1,14 +1,30 @@
 node_modules/
 dist/
-.omc/
-.context/
-.claude/agent-memory/
+
+# env & secrets
 .env
 .env.local
 .env*.local
+
+# backend runtime data (SQLite)
 /data/
+server/data/
+*.db
+*.db-wal
+*.db-shm
+
+# local AI/agent tooling caches (커밋 대상 아님)
+.omc/
+.context/
+.claude/
+.conductor/
+.repowise/
+.mcp.json
+.vscode/
+
+# os / misc
 *.DS_Store
 .DS_Store
 .vercel/
-*.cjs.map
 .vercel
+*.cjs.map
