@@ -1,0 +1,24 @@
+# 백엔드 API 로컬/운영 구동용.
+#   docker compose up --build api
+# 필수 환경변수는 루트 .env에서 주입된다 (JWT_SECRET 없으면 기동 거부).
+services:
+  api:
+    build: ./server
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_PATH: /app/data/autohub.db
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set in .env}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    volumes:
+      # SQLite 파일을 named volume에 두어 컨테이너 재생성 시에도 데이터가 유지된다.
+      - api-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  api-data:

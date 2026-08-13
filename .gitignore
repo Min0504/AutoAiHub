@@ -8,6 +8,13 @@ dist/
 *.DS_Store
 .DS_Store
 
+# backend runtime data (SQLite)
+/data/
+server/data/
+*.db
+*.db-wal
+*.db-shm
+
 # deploy / tooling (local only)
 .vercel/
 .vercel
@@ -22,7 +29,8 @@ dist/
 .omo/
 .context/
 .cursor/
+.mcp.json
+.vscode/
 
 # misc
-/data/
 *.cjs.map
